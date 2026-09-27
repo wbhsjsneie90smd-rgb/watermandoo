@@ -25,32 +25,50 @@
             pointer-events: none; overflow: hidden; z-index: 0;
         }
         .bubble {
-            position: absolute; bottom: -50px;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(216, 180, 254, 0.3));
+            position: absolute; bottom: -80px;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(216, 180, 254, 0.4));
             border-radius: 50%;
-            box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.7), 0 0 10px rgba(168, 85, 247, 0.2);
-            animation: floatUp 8s infinite ease-in-out; opacity: 0.6;
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.8), 0 0 15px rgba(168, 85, 247, 0.3);
+            animation: floatUp 8s infinite ease-in-out; opacity: 0.7;
         }
         @keyframes floatUp {
             0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
-            20% { opacity: 0.7; }
-            80% { opacity: 0.7; }
-            100% { transform: translateY(-110vh) translateX(50px) scale(1.1); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { transform: translateY(-110vh) translateX(60px) scale(1.15); opacity: 0; }
         }
+
+        /* Celebration popping bubble particles */
+        .pop-particle {
+            position: fixed; border-radius: 50%; pointer-events: none; z-index: 2000;
+            animation: popOut 0.8s forwards ease-out;
+        }
+        @keyframes popOut {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+
         .top-nav {
             position: fixed; top: 0; left: 0; width: 100%; padding: 15px 30px;
             display: flex; justify-content: space-between; align-items: center; z-index: 100;
-            background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(233, 213, 255, 0.5);
         }
         .nav-logo {
-            font-size: 20px; font-weight: 700; color: #581c87; cursor: pointer; display: flex; align-items: center; gap: 6px;
+            font-size: 18px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px;
         }
-        .nav-logo span { color: #d946ef; }
+        .nav-logo span.mul { color: #a855f7; }
+        .nav-logo span.mandu { color: #d946ef; }
+        .nav-logo-icon {
+            width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+        }
+        .nav-right-area {
+            display: flex; align-items: center; gap: 12px;
+        }
         .nav-profile-btn {
             width: 42px; height: 42px; border-radius: 50%; overflow: hidden;
             border: 2px solid #d8b4fe; cursor: pointer; background-color: #faf5ff;
-            display: flex; align-items: center; justify-content: center; font-size: 20px;
+            display: flex; align-items: center; justify-content: center; font-size: 18px;
             transition: transform 0.2s, box-shadow 0.2s;
         }
         .nav-profile-btn:hover {
@@ -71,7 +89,7 @@
         
         .form-group { margin-bottom: 16px; }
         .form-group label { display: block; font-size: 13px; font-weight: 500; color: #6b21a8; margin-bottom: 6px; }
-        .form-group input, .form-group textarea {
+        .form-group input, .form-group textarea, .form-group select {
             width: 100%; padding: 12px 16px; background-color: #faf5ff;
             border: 1px solid #e9d5ff; border-radius: 12px; color: #4a5568; font-size: 14px; outline: none;
         }
@@ -118,12 +136,22 @@
 
     <div class="top-nav">
         <div class="nav-logo" onclick="goHome()">
-            🥟 물<span>만두</span>
+            <div class="nav-logo-icon">
+                <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 30C15 27.2386 17.2386 25 20 25H42L52 35H80C82.7614 35 85 37.2386 85 40V75C85 77.7614 82.7614 80 80 80H20C17.2386 80 15 77.7614 15 75V30Z" fill="#E9D5FF" stroke="#A855F7" stroke-width="4"/>
+                    <path d="M15 45H85V75C85 77.7614 82.7614 80 80 80H20C17.2386 80 15 77.7614 15 75V45Z" fill="#F3E8FF" stroke="#A855F7" stroke-width="4"/>
+                    <circle cx="50" cy="57" r="18" fill="white" stroke="#D946EF" stroke-width="3"/>
+                    <path d="M40 54C45 50 55 50 60 54" stroke="#D946EF" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div><span class="mul">물</span><span class="mandu">만두</span></div>
         </div>
-        <div id="nav-profile-container" class="hidden">
-            <div class="nav-profile-btn" onclick="openPortfolioForm()" title="프로필 및 포트폴리오 수정">
-                <span id="nav-profile-emoji" style="font-size: 18px;">👤</span>
-                <img id="nav-profile-img" src="" alt="" style="display:none; width:100%; height:100%; object-fit:cover;">
+        <div class="nav-right-area">
+            <div id="nav-profile-container" class="hidden">
+                <div class="nav-profile-btn" onclick="openPortfolioForm()" title="프로필 및 포트폴리오 수정">
+                    <span id="nav-profile-emoji" style="font-size: 18px;">🥟</span>
+                    <img id="nav-profile-img" src="" alt="" style="display:none; width:100%; height:100%; object-fit:cover;">
+                </div>
             </div>
         </div>
     </div>
@@ -188,8 +216,21 @@
             <h2 style="font-size: 20px; color: #581c87; margin-bottom: 16px; text-align: center;">📝 커리어 포트폴리오 작성</h2>
             <form onsubmit="handleSavePortfolio(event)">
                 <div class="form-group">
-                    <label>프로필 사진 (이미지 URL 또는 이모지)</label>
-                    <input type="text" id="pf-image" placeholder="예: https://... 또는 🥟">
+                    <label>프로필 사진 (컴퓨터 파일 선택)</label>
+                    <input type="file" id="pf-image-file" accept="image/*" onchange="previewImageFile(event)">
+                    <input type="hidden" id="pf-image-base64">
+                    <div style="margin-top: 8px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 12px; color: #7e22ce;">또는 아바타 이모지 선택:</span>
+                        <select id="pf-emoji-select" onchange="selectEmojiAvatar(this.value)" style="width: auto; padding: 6px 10px;">
+                            <option value="">이모지 선택</option>
+                            <option value="🥟">🥟 만두</option>
+                            <option value="🐱">🐱 고양이</option>
+                            <option value="🐶">🐶 강아지</option>
+                            <option value="🦊">🦊 여우</option>
+                            <option value="🐼">🐼 판다</option>
+                            <option value="⭐">⭐ 별</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>이름</label>
@@ -261,17 +302,69 @@
     <script>
         function initBubbles() {
             const container = document.getElementById('bubble-container');
-            for (let i = 0; i < 15; i++) {
+            container.innerHTML = '';
+            for (let i = 0; i < 18; i++) {
                 const bubble = document.createElement('div');
                 bubble.classList.add('bubble');
-                const size = Math.random() * 40 + 15;
+                const size = Math.random() * 60 + 35; // Larger size: 35px ~ 95px
                 bubble.style.width = `${size}px`;
                 bubble.style.height = `${size}px`;
                 bubble.style.left = `${Math.random() * 100}%`;
-                bubble.style.animationDuration = `${Math.random() * 6 + 6}s`;
+                bubble.style.animationDuration = `${Math.random() * 6 + 7}s`;
+                bubble.style.animationDelay = `${Math.random() * 5}s`;
                 container.appendChild(bubble);
             }
         }
+
+        // Celebration bubble burst effect
+        function triggerBubbleBurst(event) {
+            const clientX = event ? event.clientX : window.innerWidth / 2;
+            const clientY = event ? event.clientY : window.innerHeight / 2;
+            
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('pop-particle');
+                const size = Math.random() * 16 + 8;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${clientX}px`;
+                particle.style.top = `${clientY}px`;
+                
+                const colors = ['#c084fc', '#e879f9', '#a855f7', '#d8b4fe', '#f472b6', '#fb7185'];
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 200 + 50;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                
+                particle.style.setProperty('--tx', `${tx}px`);
+                particle.style.setProperty('--ty', `${ty}px`);
+                
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), 800);
+            }
+        }
+
+        function previewImageFile(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('pf-image-base64').value = e.target.result;
+                    document.getElementById('pf-emoji-select').value = "";
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function selectEmojiAvatar(emoji) {
+            if (emoji) {
+                document.getElementById('pf-image-base64').value = emoji;
+                document.getElementById('pf-image-file').value = "";
+            }
+        }
+
         function goHome() {
             const user = localStorage.getItem('mulmandu_logged_in');
             if (user) { checkUserSession(JSON.parse(user)); } else { switchView('login'); }
@@ -298,7 +391,7 @@
             const emojiEl = document.getElementById('nav-profile-emoji');
             
             if (p && p.image) {
-                if (p.image.startsWith('http') || p.image.startsWith('data:')) {
+                if (p.image.startsWith('data:')) {
                     imgEl.src = p.image;
                     imgEl.style.display = 'block';
                     emojiEl.style.display = 'none';
@@ -308,7 +401,7 @@
                     imgEl.style.display = 'none';
                 }
             } else {
-                emojiEl.innerText = '👤';
+                emojiEl.innerText = '🥟';
                 emojiEl.style.display = 'block';
                 imgEl.style.display = 'none';
             }
@@ -364,6 +457,9 @@
         function openPortfolioFormWithBubbleEffect() {
             const user = JSON.parse(localStorage.getItem('mulmandu_logged_in'));
             if (user) document.getElementById('pf-name').value = user.name || '';
+            document.getElementById('pf-image-base64').value = '';
+            document.getElementById('pf-image-file').value = '';
+            document.getElementById('pf-emoji-select').value = '';
             switchView('form');
         }
         function openPortfolioForm() {
@@ -371,7 +467,7 @@
             if (!user) { switchView('login'); return; }
             const p = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}')[user.id];
             if (p) {
-                document.getElementById('pf-image').value = p.image || '';
+                document.getElementById('pf-image-base64').value = p.image || '';
                 document.getElementById('pf-name').value = p.name || '';
                 document.getElementById('pf-job').value = p.job || '';
                 document.getElementById('pf-contact').value = p.contact || '';
@@ -393,8 +489,11 @@
         function handleSavePortfolio(e) {
             e.preventDefault();
             const user = JSON.parse(localStorage.getItem('mulmandu_logged_in'));
+            const existingImage = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}')?.[user.id]?.image || '🥟';
+            const newImage = document.getElementById('pf-image-base64').value.trim() || existingImage;
+            
             const data = {
-                image: document.getElementById('pf-image').value.trim(),
+                image: newImage,
                 name: document.getElementById('pf-name').value.trim(),
                 job: document.getElementById('pf-job').value.trim(),
                 contact: document.getElementById('pf-contact').value.trim(),
@@ -408,13 +507,15 @@
             portfolios[user.id] = data;
             localStorage.setItem('mulmandu_portfolios', JSON.stringify(portfolios));
             updateTopNavProfile(user);
-            showModal('포트폴리오가 저장되었습니다! ✨', () => { renderPortfolio(data); switchView('portfolio-view'); });
+            
+            triggerBubbleBurst(e);
+            showModal('포트폴리오가 성공적으로 저장되었습니다! 🎉', () => { renderPortfolio(data); switchView('portfolio-view'); });
         }
         function renderPortfolio(p) {
             const img = document.getElementById('view-profile-img');
             const emojiFallback = document.getElementById('view-profile-emoji-fallback');
             if (p.image) {
-                if (p.image.startsWith('http') || p.image.startsWith('data:')) {
+                if (p.image.startsWith('data:')) {
                     img.src = p.image; img.style.display = 'block';
                     emojiFallback.style.display = 'none';
                 } else {
