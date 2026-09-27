@@ -16,26 +16,68 @@
             font-family: 'Noto Sans KR', sans-serif;
             background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 50%, #f3e8ff 100%);
             color: #4a5568;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 몽글몽글 비눗방울 애니메이션 배경 스타일 */
+        .bubble-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -50px;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(216, 180, 254, 0.3));
+            border-radius: 50%;
+            box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.7), 0 0 10px rgba(168, 85, 247, 0.2);
+            animation: floatUp 8s infinite ease-in-out;
+            opacity: 0.6;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.7;
+            }
+            80% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-110vh) translateX(50px) scale(1.1);
+                opacity: 0;
+            }
         }
 
         .brand-container {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            z-index: 10;
             animation: fadeInDown 0.8s ease-out;
         }
 
         .brand-container h1 {
-            font-size: 52px;
+            font-size: 48px;
             font-weight: 700;
             color: #581c87;
             letter-spacing: -1px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-shadow: 0 2px 10px rgba(168, 85, 247, 0.15);
         }
 
@@ -44,23 +86,38 @@
         }
 
         .brand-container p {
-            font-size: 16px;
+            font-size: 15px;
             color: #7e22ce;
             font-weight: 400;
         }
 
         .card {
             width: 100%;
-            max-width: 440px;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 35px 40px;
+            max-width: 460px;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            padding: 35px;
             border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.08);
-            border: 1px solid rgba(233, 213, 255, 0.6);
+            box-shadow: 0 12px 35px rgba(168, 85, 247, 0.1);
+            border: 1px solid rgba(233, 213, 255, 0.7);
             animation: fadeInUp 0.8s ease-out;
+            z-index: 10;
             position: relative;
+        }
+
+        .card.wide {
+            max-width: 750px;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .card.wide::-webkit-scrollbar {
+            width: 6px;
+        }
+        .card.wide::-webkit-scrollbar-thumb {
+            background-color: #d8b4fe;
+            border-radius: 10px;
         }
 
         .form-group {
@@ -75,19 +132,25 @@
             margin-bottom: 6px;
         }
 
-        .form-group input {
+        .form-group input, .form-group textarea, .form-group select {
             width: 100%;
-            padding: 13px 16px;
+            padding: 12px 16px;
             background-color: #faf5ff;
             border: 1px solid #e9d5ff;
             border-radius: 12px;
             color: #4a5568;
-            font-size: 15px;
+            font-size: 14px;
             outline: none;
             transition: all 0.25s ease;
+            font-family: 'Noto Sans KR', sans-serif;
         }
 
-        .form-group input:focus {
+        .form-group textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
             border-color: #c084fc;
             background-color: #ffffff;
             box-shadow: 0 0 0 4px rgba(192, 132, 252, 0.15);
@@ -103,9 +166,9 @@
 
         .btn {
             width: 100%;
-            padding: 14px;
+            padding: 13px;
             border-radius: 12px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             border: none;
@@ -116,7 +179,7 @@
             background: linear-gradient(135deg, #c084fc 0%, #e879f9 100%);
             color: #ffffff;
             margin-top: 8px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             box-shadow: 0 4px 15px rgba(192, 132, 252, 0.3);
         }
 
@@ -136,9 +199,20 @@
             border-color: #d8b4fe;
         }
 
+        .btn-accent {
+            background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+        }
+
         .divider {
             text-align: center;
-            margin: 18px 0;
+            margin: 16px 0;
             color: #a855f7;
             font-size: 13px;
             position: relative;
@@ -149,7 +223,7 @@
             content: "";
             position: absolute;
             top: 50%;
-            width: 38%;
+            width: 36%;
             height: 1px;
             background-color: #e9d5ff;
         }
@@ -158,9 +232,10 @@
         .divider::after { right: 0; }
 
         .hidden {
-            display: none;
+            display: none !important;
         }
 
+        /* 커스텀 모달 디자인 */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -222,20 +297,83 @@
             background: #9333ea;
         }
 
-        .dashboard {
-            text-align: center;
+        /* 포트폴리오 뷰 카테고리별 가독성 높은 디자인 */
+        .portfolio-view {
+            text-align: left;
         }
 
-        .dashboard h2 {
-            font-size: 24px;
+        .portfolio-header {
+            border-bottom: 2px solid #f3e8ff;
+            padding-bottom: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .portfolio-header h2 {
+            font-size: 26px;
             color: #581c87;
-            margin-bottom: 10px;
+            font-weight: 700;
         }
 
-        .dashboard p {
-            color: #7e22ce;
-            margin-bottom: 24px;
+        .portfolio-header .role {
             font-size: 15px;
+            color: #d946ef;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .portfolio-header .intro {
+            font-size: 14px;
+            color: #64748b;
+            margin-top: 6px;
+        }
+
+        .section-box {
+            background: #faf5ff;
+            border: 1px solid #e9d5ff;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .section-box h3 {
+            font-size: 15px;
+            color: #7e22ce;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .section-box p, .section-box ul {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .tag {
+            background: #f3e8ff;
+            color: #7e22ce;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .portfolio-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
         }
 
         @keyframes fadeInDown {
@@ -250,6 +388,8 @@
     </style>
 </head>
 <body>
+
+    <div class="bubble-container" id="bubble-container"></div>
 
     <div class="brand-container">
         <h1>물<span>만두</span></h1>
@@ -305,12 +445,108 @@
             <button type="button" class="btn btn-secondary" onclick="switchView('login')">로그인하기</button>
         </div>
 
-        <!-- 로그인 성공 대시보드 뷰 -->
-        <div id="dashboard-section" class="hidden dashboard">
-            <h2>환영합니다! 🎉</h2>
-            <p id="welcome-msg">물만두 아카이브에 로그인되었습니다.</p>
-            <button type="button" class="btn btn-secondary" onclick="handleLogout()">로그아웃</button>
+        <!-- 로그인 직후 포트폴리오 미작성 상태 뷰 -->
+        <div id="welcome-portfolio-section" class="hidden" style="text-align: center;">
+            <h2 style="font-size: 22px; color: #581c87; margin-bottom: 10px;" id="welcome-title">환영합니다! 🎉</h2>
+            <p style="color: #7e22ce; margin-bottom: 24px; font-size: 14px;">아직 등록된 나만의 포트폴리오가 없습니다.<br>나만의 멋진 커리어 아카이브를 만들어보세요!</p>
+            <button type="button" class="btn btn-accent" onclick="openPortfolioFormWithBubbleEffect()" style="padding: 16px; font-size: 16px;">✨ 나만의 포트폴리오 생성하기</button>
+            <div style="margin-top: 16px;">
+                <button type="button" class="btn btn-secondary" onclick="handleLogout()">로그아웃</button>
+            </div>
         </div>
+
+        <!-- 포트폴리오 작성/수정 폼 뷰 -->
+        <div id="portfolio-form-section" class="hidden">
+            <h2 style="font-size: 20px; color: #581c87; margin-bottom: 16px; text-align: center;">📝 커리어 포트폴리오 작성</h2>
+            <form onsubmit="handleSavePortfolio(event)">
+                <div class="form-group">
+                    <label for="pf-name">이름</label>
+                    <input type="text" id="pf-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="pf-job">직업 / 포지션</label>
+                    <input type="text" id="pf-job" placeholder="예: 프론트엔드 개발자, UI/UX 디자이너" required>
+                </div>
+                <div class="form-group">
+                    <label for="pf-contact">연락처 / 이메일</label>
+                    <input type="text" id="pf-contact" placeholder="예: email@example.com / 010-0000-0000" required>
+                </div>
+                <div class="form-group">
+                    <label for="pf-intro">한줄 소개</label>
+                    <input type="text" id="pf-intro" placeholder="자신을 한 문장으로 소개해 주세요" required>
+                </div>
+                <div class="form-group">
+                    <label for="pf-skills">보유 기술 및 스택 (쉼표로 구분)</label>
+                    <input type="text" id="pf-skills" placeholder="예: JavaScript, React, Figma, Python" required>
+                </div>
+                <div class="form-group">
+                    <label for="pf-experience">경력 사항</label>
+                    <textarea id="pf-experience" placeholder="회사명, 직무, 주요 업무 및 성과를 적어주세요"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="pf-education">학력 및 교육</label>
+                    <textarea id="pf-education" placeholder="학교명, 전공, 졸업 여부 또는 수료 과정을 적어주세요"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="pf-projects">주요 프로젝트</label>
+                    <textarea id="pf-projects" placeholder="프로젝트 명, 설명, 링크 및 기여도를 적어주세요"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="pf-links">소셜 및 링크 (GitHub, 블로그 등)</label>
+                    <input type="text" id="pf-links" placeholder="예: https://github.com/username">
+                </div>
+
+                <button type="submit" class="btn btn-primary">포트폴리오 저장하기</button>
+                <button type="button" class="btn btn-secondary" onclick="cancelPortfolioForm()" style="margin-top: 6px;">취소</button>
+            </form>
+        </div>
+
+        <!-- 완성된 포트폴리오 뷰 -->
+        <div id="portfolio-view-section" class="hidden portfolio-view">
+            <div class="portfolio-header">
+                <div>
+                    <h2 id="view-name">홍길동</h2>
+                    <div class="role" id="view-job">UI/UX 디자이너</div>
+                    <div class="intro" id="view-intro">사용자 중심의 경험을 디자인하는 크리에이터입니다.</div>
+                </div>
+                <button type="button" class="btn btn-secondary" onclick="handleLogout()" style="width: auto; padding: 8px 14px; font-size: 13px;">로그아웃</button>
+            </div>
+
+            <div class="section-box">
+                <h3>📞 연락처</h3>
+                <p id="view-contact">-</p>
+            </div>
+
+            <div class="section-box">
+                <h3>💡 보유 기술 및 스택</h3>
+                <div class="tag-list" id="view-skills-tags"></div>
+            </div>
+
+            <div class="section-box">
+                <h3>💼 경력 사항</h3>
+                <p id="view-experience">-</p>
+            </div>
+
+            <div class="section-box">
+                <h3>🎓 학력 및 교육</h3>
+                <p id="view-education">-</p>
+            </div>
+
+            <div class="section-box">
+                <h3>🚀 주요 프로젝트</h3>
+                <p id="view-projects">-</p>
+            </div>
+
+            <div class="section-box">
+                <h3>🔗 소셜 및 링크</h3>
+                <p id="view-links">-</p>
+            </div>
+
+            <div class="portfolio-actions">
+                <button type="button" class="btn btn-secondary" onclick="openPortfolioForm()">수정하기</button>
+            </div>
+        </div>
+
     </div>
 
     <div class="modal-overlay" id="custom-modal">
@@ -321,7 +557,24 @@
     </div>
 
     <script>
-        // 커스텀 모달 알림창 함수
+        // 배경 비눗방울 생성 함수 (몽글몽글 효과)
+        function initBubbles() {
+            const container = document.getElementById('bubble-container');
+            const bubbleCount = 18;
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                const size = Math.random() * 45 + 15; // 15px ~ 60px
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.left = `${Math.random() * 100}%`;
+                bubble.style.animationDuration = `${Math.random() * 6 + 6}s`; // 6초 ~ 12초
+                bubble.style.animationDelay = `${Math.random() * 5}s`;
+                container.appendChild(bubble);
+            }
+        }
+
+        // 커스텀 모달 알림창
         function showModal(message, callback) {
             const modal = document.getElementById('custom-modal');
             const msgEl = document.getElementById('modal-msg');
@@ -340,66 +593,81 @@
             }
         }
 
-        // 화면 전환 함수
-        function switchView(view) {
+        // 화면 전환 관리
+        function switchView(viewName) {
             const loginSec = document.getElementById('login-section');
             const signupSec = document.getElementById('signup-section');
-            const dashSec = document.getElementById('dashboard-section');
+            const welcomeSec = document.getElementById('welcome-portfolio-section');
+            const formSec = document.getElementById('portfolio-form-section');
+            const viewSec = document.getElementById('portfolio-view-section');
+            const mainCard = document.getElementById('main-card');
 
             loginSec.classList.add('hidden');
             signupSec.classList.add('hidden');
-            dashSec.classList.add('hidden');
+            welcomeSec.classList.add('hidden');
+            formSec.classList.add('hidden');
+            viewSec.classList.add('hidden');
+            mainCard.classList.remove('wide');
 
-            if (view === 'login') {
+            if (viewName === 'login') {
                 loginSec.classList.remove('hidden');
-            } else if (view === 'signup') {
+            } else if (viewName === 'signup') {
                 signupSec.classList.remove('hidden');
-            } else if (view === 'dashboard') {
-                dashSec.classList.remove('hidden');
+            } else if (viewName === 'welcome') {
+                welcomeSec.classList.remove('hidden');
+            } else if (viewName === 'form') {
+                formSec.classList.remove('hidden');
+                mainCard.classList.add('wide');
+            } else if (viewName === 'portfolio-view') {
+                viewSec.classList.remove('hidden');
+                mainCard.classList.add('wide');
             }
         }
 
-        // 로컬스토리지에서 사용자 목록 불러오기
+        // 로컬스토리지 데이터 관리
         function getUsers() {
             const users = localStorage.getItem('mulmandu_users');
             return users ? JSON.parse(users) : [];
         }
 
-        // 로컬스토리지에 사용자 목록 저장하기
         function saveUsers(users) {
             localStorage.setItem('mulmandu_users', JSON.stringify(users));
         }
 
-        // 회원가입 처리 및 유효성 검사
+        function getPortfolios() {
+            const portfolios = localStorage.getItem('mulmandu_portfolios');
+            return portfolios ? JSON.parse(portfolios) : {};
+        }
+
+        function savePortfolios(portfolios) {
+            localStorage.setItem('mulmandu_portfolios', JSON.stringify(portfolios));
+        }
+
+        // 회원가입 처리 (아이디 9~15자 영문+숫자, 비번 9~15자 영문+숫자+특수문자, 중복검사)
         function handleSignup(event) {
             event.preventDefault();
             const id = document.getElementById('signup-id').value.trim();
             const pw = document.getElementById('signup-pw').value.trim();
             const name = document.getElementById('signup-name').value.trim();
 
-            // 아이디 유효성 검사: 영문 + 숫자, 9~15자
             const idRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{9,15}$/;
             if (!idRegex.test(id)) {
                 showModal('아이디는 영문과 숫자를 조합하여 9자~15자 사이로 입력해야 합니다.');
                 return;
             }
 
-            // 비밀번호 유효성 검사: 영문 + 숫자 + 특수문자, 9~15자
             const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+\\\|\[\]{};:\'",.<>/?])[A-Za-z\d!@#$%^&*()\-_=+\\\|\[\]{};:\'",.<>/?]{9,15}$/;
             if (!pwRegex.test(pw)) {
                 showModal('비밀번호는 영문, 숫자, 특수문자를 모두 포함하여 9자~15자 사이로 입력해야 합니다.');
                 return;
             }
 
-            // 아이디 중복 체크
             const users = getUsers();
-            const existingUser = users.find(u => u.id === id);
-            if (existingUser) {
+            if (users.some(u => u.id === id)) {
                 showModal('이미 존재하는 아이디입니다. 다른 아이디를 입력해주세요.');
                 return;
             }
 
-            // 계정 정보 저장
             users.push({ id, pw, name });
             saveUsers(users);
 
@@ -425,18 +693,136 @@
                 return;
             }
 
-            // 세션 저장 및 대시보드 표시
             localStorage.setItem('mulmandu_logged_in', JSON.stringify(user));
-            openDashboard(user);
+            checkUserSession(user);
         }
 
-        // 대시보드 열기
-        function openDashboard(user) {
-            document.getElementById('welcome-msg').innerText = `${user.name} (${user.id}) 님, 물만두 아카이브에 오신 것을 환영합니다!`;
-            switchView('dashboard');
+        // 세션 및 포트폴리오 유무 체크
+        function checkUserSession(user) {
+            const portfolios = getPortfolios();
+            const userPortfolio = portfolios[user.id];
+
+            if (userPortfolio) {
+                renderPortfolio(userPortfolio);
+                switchView('portfolio-view');
+            } else {
+                document.getElementById('welcome-title').innerText = `${user.name} 님, 환영합니다! 🎉`;
+                switchView('welcome');
+            }
         }
 
-        // 로그아웃 처리
+        // "나만의 포트폴리오 생성하기" 버튼 클릭 시 몽글몽글 버블 효과와 함께 폼 열기
+        function openPortfolioFormWithBubbleEffect() {
+            // 버튼 클릭 시 화면 전체에 버블을 동적으로 더 피어오르게 함
+            const container = document.getElementById('bubble-container');
+            for (let i = 0; i < 10; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                const size = Math.random() * 60 + 20;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.left = `${Math.random() * 100}%`;
+                bubble.style.animationDuration = `4s`;
+                container.appendChild(bubble);
+                setTimeout(() => bubble.remove(), 4000);
+            }
+
+            const currentUser = JSON.parse(localStorage.getItem('mulmandu_logged_in'));
+            if (currentUser) {
+                document.getElementById('pf-name').value = currentUser.name || '';
+            }
+            switchView('form');
+        }
+
+        function openPortfolioForm() {
+            const currentUser = JSON.parse(localStorage.getItem('mulmandu_logged_in'));
+            if (!currentUser) return;
+
+            const portfolios = getPortfolios();
+            const p = portfolios[currentUser.id];
+
+            if (p) {
+                document.getElementById('pf-name').value = p.name || '';
+                document.getElementById('pf-job').value = p.job || '';
+                document.getElementById('pf-contact').value = p.contact || '';
+                document.getElementById('pf-intro').value = p.intro || '';
+                document.getElementById('pf-skills').value = p.skills || '';
+                document.getElementById('pf-experience').value = p.experience || '';
+                document.getElementById('pf-education').value = p.education || '';
+                document.getElementById('pf-projects').value = p.projects || '';
+                document.getElementById('pf-links').value = p.links || '';
+            }
+            switchView('form');
+        }
+
+        function cancelPortfolioForm() {
+            const currentUser = JSON.parse(localStorage.getItem('mulmandu_logged_in'));
+            const portfolios = getPortfolios();
+            if (currentUser && portfolios[currentUser.id]) {
+                renderPortfolio(portfolios[currentUser.id]);
+                switchView('portfolio-view');
+            } else if (currentUser) {
+                switchView('welcome');
+            } else {
+                switchView('login');
+            }
+        }
+
+        // 포트폴리오 저장 처리
+        function handleSavePortfolio(event) {
+            event.preventDefault();
+            const currentUser = JSON.parse(localStorage.getItem('mulmandu_logged_in'));
+            if (!currentUser) return;
+
+            const portfolioData = {
+                name: document.getElementById('pf-name').value.trim(),
+                job: document.getElementById('pf-job').value.trim(),
+                contact: document.getElementById('pf-contact').value.trim(),
+                intro: document.getElementById('pf-intro').value.trim(),
+                skills: document.getElementById('pf-skills').value.trim(),
+                experience: document.getElementById('pf-experience').value.trim(),
+                education: document.getElementById('pf-education').value.trim(),
+                projects: document.getElementById('pf-projects').value.trim(),
+                links: document.getElementById('pf-links').value.trim()
+            };
+
+            const portfolios = getPortfolios();
+            portfolios[currentUser.id] = portfolioData;
+            savePortfolios(portfolios);
+
+            showModal('나만의 멋진 포트폴리오가 성공적으로 생성되었습니다! ✨', () => {
+                renderPortfolio(portfolioData);
+                switchView('portfolio-view');
+            });
+        }
+
+        // 포트폴리오 렌더링
+        function renderPortfolio(p) {
+            document.getElementById('view-name').innerText = p.name || '이름 없음';
+            document.getElementById('view-job').innerText = p.job || '포지션 미입력';
+            document.getElementById('view-intro').innerText = p.intro || '한줄 소개가 없습니다.';
+            document.getElementById('view-contact').innerText = p.contact || '미입력';
+            document.getElementById('view-experience').innerText = p.experience || '등록된 경력 사항이 없습니다.';
+            document.getElementById('view-education').innerText = p.education || '등록된 학력 사항이 없습니다.';
+            document.getElementById('view-projects').innerText = p.projects || '등록된 프로젝트가 없습니다.';
+            document.getElementById('view-links').innerText = p.links || '등록된 링크가 없습니다.';
+
+            const tagsContainer = document.getElementById('view-skills-tags');
+            tagsContainer.innerHTML = '';
+            if (p.skills) {
+                const skillsArr = p.skills.split(',');
+                skillsArr.forEach(skill => {
+                    const tag = document.createElement('span');
+                    tag.classList.add('tag');
+                    tag.innerText = skill.trim();
+                    tagsContainer.appendChild(tag);
+                });
+            } else {
+                tagsContainer.innerHTML = '<span style="font-size: 13px; color: #94a3b8;">등록된 스킬이 없습니다.</span>';
+            }
+        }
+
+        // 로그아웃
         function handleLogout() {
             localStorage.removeItem('mulmandu_logged_in');
             document.getElementById('login-id').value = '';
@@ -444,16 +830,20 @@
             switchView('login');
         }
 
-        // 페이지 로드 시 기존 로그인 세션 확인
+        // 페이지 로드 시 초기화 및 세션 체크
         window.onload = function() {
+            initBubbles();
             const loggedInUser = localStorage.getItem('mulmandu_logged_in');
             if (loggedInUser) {
                 try {
                     const user = JSON.parse(loggedInUser);
-                    openDashboard(user);
+                    checkUserSession(user);
                 } catch(e) {
                     localStorage.removeItem('mulmandu_logged_in');
+                    switchView('login');
                 }
+            } else {
+                switchView('login');
             }
         };
     </script>
