@@ -37,20 +37,38 @@
             80% { opacity: 0.7; }
             100% { transform: translateY(-110vh) translateX(50px) scale(1.1); opacity: 0; }
         }
-        .brand-container { text-align: center; margin-bottom: 25px; z-index: 10; cursor: pointer; }
-        .brand-container h1 { font-size: 48px; font-weight: 700; color: #581c87; letter-spacing: -1px; margin-bottom: 6px; }
-        .brand-container h1 span { color: #d946ef; }
-        .brand-container p { font-size: 15px; color: #7e22ce; font-weight: 400; }
+        .top-nav {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 15px 30px;
+            display: flex; justify-content: space-between; align-items: center; z-index: 100;
+            background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 213, 255, 0.5);
+        }
+        .nav-logo {
+            font-size: 20px; font-weight: 700; color: #581c87; cursor: pointer; display: flex; align-items: center; gap: 6px;
+        }
+        .nav-logo span { color: #d946ef; }
+        .nav-profile-btn {
+            width: 42px; height: 42px; border-radius: 50%; overflow: hidden;
+            border: 2px solid #d8b4fe; cursor: pointer; background-color: #faf5ff;
+            display: flex; align-items: center; justify-content: center; font-size: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-profile-btn:hover {
+            transform: scale(1.05); box-shadow: 0 0 12px rgba(192, 132, 252, 0.5);
+        }
+        .nav-profile-btn img { width: 100%; height: 100%; object-fit: cover; }
+
         .card {
-            width: 100%; max-width: 460px;
+            width: 100%; max-width: 460px; margin-top: 40px;
             background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(14px); padding: 35px; border-radius: 24px;
             box-shadow: 0 12px 35px rgba(168, 85, 247, 0.1);
             border: 1px solid rgba(233, 213, 255, 0.7); z-index: 10; position: relative;
         }
-        .card.wide { max-width: 750px; max-height: 85vh; overflow-y: auto; }
+        .card.wide { max-width: 750px; max-height: 82vh; overflow-y: auto; }
         .card.wide::-webkit-scrollbar { width: 6px; }
         .card.wide::-webkit-scrollbar-thumb { background-color: #d8b4fe; border-radius: 10px; }
+        
         .form-group { margin-bottom: 16px; }
         .form-group label { display: block; font-size: 13px; font-weight: 500; color: #6b21a8; margin-bottom: 6px; }
         .form-group input, .form-group textarea {
@@ -66,11 +84,13 @@
         .btn-primary { background: linear-gradient(135deg, #c084fc 0%, #e879f9 100%); color: #ffffff; margin-top: 8px; margin-bottom: 10px; }
         .btn-secondary { background-color: #ffffff; color: #7e22ce; border: 1px solid #e9d5ff; }
         .btn-accent { background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%); color: white; }
+        
         .divider { text-align: center; margin: 16px 0; color: #a855f7; font-size: 13px; position: relative; opacity: 0.7; }
         .divider::before, .divider::after { content: ""; position: absolute; top: 50%; width: 36%; height: 1px; background-color: #e9d5ff; }
         .divider::before { left: 0; }
         .divider::after { right: 0; }
         .hidden { display: none !important; }
+        
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; z-index: 1000;
@@ -80,6 +100,7 @@
         .modal-card { background: #ffffff; width: 90%; max-width: 340px; padding: 24px; border-radius: 20px; text-align: center; }
         .modal-message { font-size: 15px; color: #334155; margin-bottom: 20px; line-height: 1.5; }
         .modal-btn { background: #a855f7; color: white; border: none; padding: 10px 24px; border-radius: 10px; font-weight: 600; cursor: pointer; width: 100%; }
+        
         .portfolio-view { text-align: left; }
         .portfolio-header { border-bottom: 2px solid #f3e8ff; padding-bottom: 16px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
         .profile-flex { display: flex; align-items: center; gap: 16px; }
@@ -95,13 +116,25 @@
 
     <div class="bubble-container" id="bubble-container"></div>
 
-    <div class="brand-container" onclick="goHome()">
-        <h1>물<span>만두</span></h1>
-        <p>나만의 색깔로 물들이는 커리어 아카이브</p>
+    <div class="top-nav">
+        <div class="nav-logo" onclick="goHome()">
+            🥟 물<span>만두</span>
+        </div>
+        <div id="nav-profile-container" class="hidden">
+            <div class="nav-profile-btn" onclick="openPortfolioForm()" title="프로필 및 포트폴리오 수정">
+                <span id="nav-profile-emoji" style="font-size: 18px;">👤</span>
+                <img id="nav-profile-img" src="" alt="" style="display:none; width:100%; height:100%; object-fit:cover;">
+            </div>
+        </div>
     </div>
 
     <div class="card" id="main-card">
+        <!-- Login Section -->
         <div id="login-section">
+            <div style="text-align: center; margin-bottom: 24px;">
+                <h2 style="font-size: 24px; font-weight: 700; color: #581c87; margin-bottom: 6px;">로그인</h2>
+                <p style="font-size: 13px; color: #7e22ce;">나만의 색깔로 물들이는 커리어 아카이브</p>
+            </div>
             <form onsubmit="handleLogin(event)">
                 <div class="form-group">
                     <label>아이디</label>
@@ -117,7 +150,11 @@
             <button type="button" class="btn btn-secondary" onclick="switchView('signup')">회원가입하기</button>
         </div>
 
+        <!-- Signup Section -->
         <div id="signup-section" class="hidden">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h2 style="font-size: 22px; font-weight: 700; color: #581c87;">회원가입</h2>
+            </div>
             <form onsubmit="handleSignup(event)">
                 <div class="form-group">
                     <label>아이디</label>
@@ -138,6 +175,7 @@
             <button type="button" class="btn btn-secondary" onclick="switchView('login')" style="margin-top: 10px;">로그인으로 돌아가기</button>
         </div>
 
+        <!-- Welcome Section -->
         <div id="welcome-portfolio-section" class="hidden" style="text-align: center;">
             <h2 id="welcome-title" style="font-size: 22px; color: #581c87; margin-bottom: 10px;">환영합니다! 🎉</h2>
             <p style="color: #7e22ce; margin-bottom: 24px; font-size: 14px;">아직 등록된 포트폴리오가 없습니다. 나만의 커리어를 채워보세요!</p>
@@ -145,12 +183,13 @@
             <button type="button" class="btn btn-secondary" onclick="handleLogout()" style="margin-top: 12px;">로그아웃</button>
         </div>
 
+        <!-- Portfolio Form Section -->
         <div id="portfolio-form-section" class="hidden">
             <h2 style="font-size: 20px; color: #581c87; margin-bottom: 16px; text-align: center;">📝 커리어 포트폴리오 작성</h2>
             <form onsubmit="handleSavePortfolio(event)">
                 <div class="form-group">
-                    <label>프로필 사진 (이미지 URL)</label>
-                    <input type="text" id="pf-image" placeholder="예: https://example.com/photo.jpg">
+                    <label>프로필 사진 (이미지 URL 또는 이모지)</label>
+                    <input type="text" id="pf-image" placeholder="예: https://... 또는 🥟">
                 </div>
                 <div class="form-group">
                     <label>이름</label>
@@ -189,10 +228,12 @@
             </form>
         </div>
 
+        <!-- Portfolio View Section -->
         <div id="portfolio-view-section" class="hidden portfolio-view">
             <div class="portfolio-header">
                 <div class="profile-flex">
                     <img id="view-profile-img" src="" alt="" class="profile-img-preview" style="display:none;">
+                    <div id="view-profile-emoji-fallback" style="display:none; font-size:45px; width:70px; height:70px; display:flex; align-items:center; justify-content:center; background:#faf5ff; border:2px solid #d8b4fe; border-radius:50%;"></div>
                     <div>
                         <h2 id="view-name"></h2>
                         <div id="view-job" style="color:#d946ef; font-weight:600; margin-top:2px;"></div>
@@ -206,7 +247,7 @@
             <div class="section-box"><h3>💼 경력 사항</h3><p id="view-experience"></p></div>
             <div class="section-box"><h3>🎓 학력 및 교육</h3><p id="view-education"></p></div>
             <div class="section-box"><h3>🚀 프로젝트</h3><p id="view-projects"></p></div>
-            <button type="button" class="btn btn-secondary" onclick="openPortfolioForm()" style="margin-top:10px;">수정하기</button>
+            <button type="button" class="btn btn-secondary" onclick="openPortfolioForm()" style="margin-top:10px;">✏️ 포트폴리오 수정하기</button>
         </div>
     </div>
 
@@ -244,6 +285,34 @@
             document.getElementById('custom-modal').classList.remove('active');
             if (window.modalCallback) { window.modalCallback(); window.modalCallback = null; }
         }
+        function updateTopNavProfile(user) {
+            const navProfile = document.getElementById('nav-profile-container');
+            if (!user) {
+                navProfile.classList.add('hidden');
+                return;
+            }
+            navProfile.classList.remove('hidden');
+            const portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
+            const p = portfolios[user.id];
+            const imgEl = document.getElementById('nav-profile-img');
+            const emojiEl = document.getElementById('nav-profile-emoji');
+            
+            if (p && p.image) {
+                if (p.image.startsWith('http') || p.image.startsWith('data:')) {
+                    imgEl.src = p.image;
+                    imgEl.style.display = 'block';
+                    emojiEl.style.display = 'none';
+                } else {
+                    emojiEl.innerText = p.image;
+                    emojiEl.style.display = 'block';
+                    imgEl.style.display = 'none';
+                }
+            } else {
+                emojiEl.innerText = '👤';
+                emojiEl.style.display = 'block';
+                imgEl.style.display = 'none';
+            }
+        }
         function switchView(name) {
             ['login-section', 'signup-section', 'welcome-portfolio-section', 'portfolio-form-section', 'portfolio-view-section'].forEach(id => {
                 document.getElementById(id).classList.add('hidden');
@@ -255,6 +324,9 @@
             else if (name === 'welcome') document.getElementById('welcome-portfolio-section').classList.remove('hidden');
             else if (name === 'form') { document.getElementById('portfolio-form-section').classList.remove('hidden'); card.classList.add('wide'); }
             else if (name === 'portfolio-view') { document.getElementById('portfolio-view-section').classList.remove('hidden'); card.classList.add('wide'); }
+            
+            const user = localStorage.getItem('mulmandu_logged_in');
+            updateTopNavProfile(user ? JSON.parse(user) : null);
         }
         function handleSignup(e) {
             e.preventDefault();
@@ -284,6 +356,7 @@
             checkUserSession(user);
         }
         function checkUserSession(user) {
+            updateTopNavProfile(user);
             const portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
             if (portfolios[user.id]) { renderPortfolio(portfolios[user.id]); switchView('portfolio-view'); }
             else { document.getElementById('welcome-title').innerText = `${user.name} 님 환영합니다! 🎉`; switchView('welcome'); }
@@ -295,6 +368,7 @@
         }
         function openPortfolioForm() {
             const user = JSON.parse(localStorage.getItem('mulmandu_logged_in'));
+            if (!user) { switchView('login'); return; }
             const p = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}')[user.id];
             if (p) {
                 document.getElementById('pf-image').value = p.image || '';
@@ -306,6 +380,8 @@
                 document.getElementById('pf-experience').value = p.experience || '';
                 document.getElementById('pf-education').value = p.education || '';
                 document.getElementById('pf-projects').value = p.projects || '';
+            } else {
+                document.getElementById('pf-name').value = user.name || '';
             }
             switchView('form');
         }
@@ -331,11 +407,26 @@
             let portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
             portfolios[user.id] = data;
             localStorage.setItem('mulmandu_portfolios', JSON.stringify(portfolios));
+            updateTopNavProfile(user);
             showModal('포트폴리오가 저장되었습니다! ✨', () => { renderPortfolio(data); switchView('portfolio-view'); });
         }
         function renderPortfolio(p) {
             const img = document.getElementById('view-profile-img');
-            if (p.image) { img.src = p.image; img.style.display = 'block'; } else { img.style.display = 'none'; }
+            const emojiFallback = document.getElementById('view-profile-emoji-fallback');
+            if (p.image) {
+                if (p.image.startsWith('http') || p.image.startsWith('data:')) {
+                    img.src = p.image; img.style.display = 'block';
+                    emojiFallback.style.display = 'none';
+                } else {
+                    emojiFallback.innerText = p.image;
+                    emojiFallback.style.display = 'flex';
+                    img.style.display = 'none';
+                }
+            } else {
+                emojiFallback.innerText = '🥟';
+                emojiFallback.style.display = 'flex';
+                img.style.display = 'none';
+            }
             document.getElementById('view-name').innerText = p.name;
             document.getElementById('view-job').innerText = p.job;
             document.getElementById('view-intro').innerText = p.intro;
