@@ -603,12 +603,29 @@
         }
 
         function openPortfolioFormWithBubbleEffect() {
-            const user = JSON.parse(localStorage.getItem('mulmandu_logged_in'));
-            if (user) document.getElementById('pf-name').value = user.name || '';
+            const user = JSON.parse(localStorage.getItem('mulmandu_logged_in') || '{}');
+            const portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
+            
+            // Check if portfolio already exists for this user
+            if (portfolios[user.id]) {
+                openPortfolioForm();
+                return;
+            }
+
+            // If first time, start completely blank (name only if available)
             document.getElementById('pf-image-base64').value = '';
             document.getElementById('pf-image-file').value = '';
             document.getElementById('pf-emoji-select').value = '';
+            document.getElementById('pf-name').value = user.name || '';
+            document.getElementById('pf-job').value = '';
+            document.getElementById('pf-contact').value = '';
+            document.getElementById('pf-intro').value = '';
+            document.getElementById('pf-skills').value = '';
+            document.getElementById('pf-experience').value = '';
+            document.getElementById('pf-education').value = '';
+            document.getElementById('pf-projects').value = '';
             document.getElementById('pf-notes').value = '';
+            
             switchView('form');
         }
 
