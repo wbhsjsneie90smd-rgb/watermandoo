@@ -26,7 +26,7 @@
 
         .brand-container {
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
             animation: fadeInDown 0.8s ease-out;
         }
 
@@ -35,7 +35,7 @@
             font-weight: 700;
             color: #581c87;
             letter-spacing: -1px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-shadow: 0 2px 10px rgba(168, 85, 247, 0.15);
         }
 
@@ -47,37 +47,37 @@
             font-size: 16px;
             color: #7e22ce;
             font-weight: 400;
-            letter-spacing: -0.3px;
         }
 
         .card {
             width: 100%;
-            max-width: 420px;
+            max-width: 440px;
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding: 40px;
+            padding: 35px 40px;
             border-radius: 24px;
             box-shadow: 0 10px 30px rgba(168, 85, 247, 0.08);
             border: 1px solid rgba(233, 213, 255, 0.6);
             animation: fadeInUp 0.8s ease-out;
+            position: relative;
         }
 
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .form-group label {
             display: block;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             color: #6b21a8;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
-        .form-group input, .form-group select {
+        .form-group input {
             width: 100%;
-            padding: 14px 18px;
+            padding: 13px 16px;
             background-color: #faf5ff;
             border: 1px solid #e9d5ff;
             border-radius: 12px;
@@ -87,36 +87,18 @@
             transition: all 0.25s ease;
         }
 
-        .form-group input:focus, .form-group select:focus {
+        .form-group input:focus {
             border-color: #c084fc;
             background-color: #ffffff;
             box-shadow: 0 0 0 4px rgba(192, 132, 252, 0.15);
         }
 
-        .inline-group {
-            display: flex;
-            gap: 8px;
-        }
-
-        .inline-group input {
-            flex: 1;
-        }
-
-        .btn-verify {
-            padding: 0 16px;
-            background-color: #f3e8ff;
-            color: #7e22ce;
-            border: 1px solid #d8b4fe;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.2s ease;
-        }
-
-        .btn-verify:hover {
-            background-color: #e9d5ff;
+        .hint {
+            font-size: 11px;
+            color: #9333ea;
+            margin-top: 4px;
+            margin-left: 4px;
+            opacity: 0.8;
         }
 
         .btn {
@@ -130,33 +112,33 @@
             transition: all 0.25s ease;
         }
 
-        .btn-login {
+        .btn-primary {
             background: linear-gradient(135deg, #c084fc 0%, #e879f9 100%);
             color: #ffffff;
-            margin-top: 6px;
-            margin-bottom: 14px;
+            margin-top: 8px;
+            margin-bottom: 12px;
             box-shadow: 0 4px 15px rgba(192, 132, 252, 0.3);
         }
 
-        .btn-login:hover {
+        .btn-primary:hover {
             transform: translateY(-1px);
             box-shadow: 0 6px 20px rgba(192, 132, 252, 0.4);
         }
 
-        .btn-signup {
+        .btn-secondary {
             background-color: #ffffff;
             color: #7e22ce;
             border: 1px solid #e9d5ff;
         }
 
-        .btn-signup:hover {
+        .btn-secondary:hover {
             background-color: #faf5ff;
             border-color: #d8b4fe;
         }
 
         .divider {
             text-align: center;
-            margin: 20px 0;
+            margin: 18px 0;
             color: #a855f7;
             font-size: 13px;
             position: relative;
@@ -179,6 +161,83 @@
             display: none;
         }
 
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-card {
+            background: #ffffff;
+            width: 90%;
+            max-width: 340px;
+            padding: 24px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-message {
+            font-size: 15px;
+            color: #334155;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            word-break: keep-all;
+        }
+
+        .modal-btn {
+            background: #a855f7;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .modal-btn:hover {
+            background: #9333ea;
+        }
+
+        .dashboard {
+            text-align: center;
+        }
+
+        .dashboard h2 {
+            font-size: 24px;
+            color: #581c87;
+            margin-bottom: 10px;
+        }
+
+        .dashboard p {
+            color: #7e22ce;
+            margin-bottom: 24px;
+            font-size: 15px;
+        }
+
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-15px); }
             to { opacity: 1; transform: translateY(0); }
@@ -197,114 +256,206 @@
         <p>나만의 색깔로 물들이는 커리어 아카이브</p>
     </div>
 
-    <div class="card">
-        <!-- 로그인 화면 -->
+    <div class="card" id="main-card">
+        
+        <!-- 로그인 뷰 -->
         <div id="login-section">
             <form onsubmit="handleLogin(event)">
                 <div class="form-group">
-                    <label for="username">아이디</label>
-                    <input type="text" id="username" placeholder="아이디를 입력하세요" required>
+                    <label for="login-id">아이디</label>
+                    <input type="text" id="login-id" placeholder="아이디를 입력하세요" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="password">비밀번호</label>
-                    <input type="password" id="password" placeholder="비밀번호를 입력하세요" required>
+                    <label for="login-pw">비밀번호</label>
+                    <input type="password" id="login-pw" placeholder="비밀번호를 입력하세요" required>
                 </div>
 
-                <button type="submit" class="btn btn-login">로그인</button>
+                <button type="submit" class="btn btn-primary">로그인</button>
             </form>
 
-            <div class="divider">또는</div>
-
-            <button type="button" class="btn btn-signup" onclick="switchView('signup')">회원가입하기</button>
+            <div class="divider">계정이 없으신가요?</div>
+            <button type="button" class="btn btn-secondary" onclick="switchView('signup')">회원가입하기</button>
         </div>
 
-        <!-- 회원가입 화면 (통신사 선택 및 휴대폰 본인인증 포함) -->
+        <!-- 회원가입 뷰 -->
         <div id="signup-section" class="hidden">
             <form onsubmit="handleSignup(event)">
                 <div class="form-group">
-                    <label for="signup-username">아이디</label>
-                    <input type="text" id="signup-username" placeholder="사용할 아이디 입력" required>
+                    <label for="signup-id">아이디</label>
+                    <input type="text" id="signup-id" placeholder="영문, 숫자 조합" required>
+                    <div class="hint">영문, 숫자 포함 9~15자</div>
                 </div>
 
                 <div class="form-group">
-                    <label for="signup-password">비밀번호</label>
-                    <input type="password" id="signup-password" placeholder="비밀번호 입력" required>
+                    <label for="signup-pw">비밀번호</label>
+                    <input type="password" id="signup-pw" placeholder="영문, 숫자, 특수문자 조합" required>
+                    <div class="hint">영문, 숫자, 특수문자 포함 9~15자</div>
                 </div>
 
                 <div class="form-group">
                     <label for="signup-name">이름</label>
-                    <input type="text" id="signup-name" placeholder="실명 입력" required>
+                    <input type="text" id="signup-name" placeholder="이름을 입력하세요" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="carrier">통신사</label>
-                    <select id="carrier" required>
-                        <option value="" disabled selected>통신사를 선택하세요</option>
-                        <option value="SKT">SKT</option>
-                        <option value="KT">KT</option>
-                        <option value="LGU">LG U+</option>
-                        <option value="SKT_MVNO">SKT 알뜰폰</option>
-                        <option value="KT_MVNO">KT 알뜰폰</option>
-                        <option value="LGU_MVNO">LG U+ 알뜰폰</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">휴대폰 번호</label>
-                    <div class="inline-group">
-                        <input type="tel" id="phone" placeholder="- 제외 번호 입력" required>
-                        <button type="button" class="btn-verify" onclick="sendAuthCode()">인증요청</button>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="auth-code">인증번호</label>
-                    <input type="text" id="auth-code" placeholder="인증번호 6자리 입력" required>
-                </div>
-
-                <button type="submit" class="btn btn-login">가입 완료하기</button>
+                <button type="submit" class="btn btn-primary">가입 완료하기</button>
             </form>
 
-            <div class="divider">또는</div>
+            <div class="divider">이미 계정이 있으신가요?</div>
+            <button type="button" class="btn btn-secondary" onclick="switchView('login')">로그인하기</button>
+        </div>
 
-            <button type="button" class="btn btn-signup" onclick="switchView('login')">돌아가기</button>
+        <!-- 로그인 성공 대시보드 뷰 -->
+        <div id="dashboard-section" class="hidden dashboard">
+            <h2>환영합니다! 🎉</h2>
+            <p id="welcome-msg">물만두 아카이브에 로그인되었습니다.</p>
+            <button type="button" class="btn btn-secondary" onclick="handleLogout()">로그아웃</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="custom-modal">
+        <div class="modal-card">
+            <div class="modal-message" id="modal-msg">알림 내용</div>
+            <button class="modal-btn" onclick="closeModal()">확인</button>
         </div>
     </div>
 
     <script>
+        // 커스텀 모달 알림창 함수
+        function showModal(message, callback) {
+            const modal = document.getElementById('custom-modal');
+            const msgEl = document.getElementById('modal-msg');
+            msgEl.innerText = message;
+            modal.classList.add('active');
+            window.modalCallback = callback;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('custom-modal');
+            modal.classList.remove('active');
+            if (typeof window.modalCallback === 'function') {
+                const cb = window.modalCallback;
+                window.modalCallback = null;
+                cb();
+            }
+        }
+
+        // 화면 전환 함수
         function switchView(view) {
-            const loginSection = document.getElementById('login-section');
-            const signupSection = document.getElementById('signup-section');
-            
-            if (view === 'signup') {
-                loginSection.classList.add('hidden');
-                signupSection.classList.remove('hidden');
-            } else {
-                signupSection.classList.add('hidden');
-                loginSection.classList.remove('hidden');
+            const loginSec = document.getElementById('login-section');
+            const signupSec = document.getElementById('signup-section');
+            const dashSec = document.getElementById('dashboard-section');
+
+            loginSec.classList.add('hidden');
+            signupSec.classList.add('hidden');
+            dashSec.classList.add('hidden');
+
+            if (view === 'login') {
+                loginSec.classList.remove('hidden');
+            } else if (view === 'signup') {
+                signupSec.classList.remove('hidden');
+            } else if (view === 'dashboard') {
+                dashSec.classList.remove('hidden');
             }
         }
 
-        function sendAuthCode() {
-            const phone = document.getElementById('phone').value;
-            if (!phone) {
-                alert('휴대폰 번호를 먼저 입력해주세요!');
-                return;
-            }
-            alert('입력하신 번호로 본인인증 번호가 전송되었습니다.');
+        // 로컬스토리지에서 사용자 목록 불러오기
+        function getUsers() {
+            const users = localStorage.getItem('mulmandu_users');
+            return users ? JSON.parse(users) : [];
         }
 
-        function handleLogin(event) {
-            event.preventDefault();
-             alert('로그인 기능은 준비 중입니다!');
+        // 로컬스토리지에 사용자 목록 저장하기
+        function saveUsers(users) {
+            localStorage.setItem('mulmandu_users', JSON.stringify(users));
         }
 
+        // 회원가입 처리 및 유효성 검사
         function handleSignup(event) {
             event.preventDefault();
-            alert('회원가입 및 본인인증이 완료되었습니다! 환영합니다.');
+            const id = document.getElementById('signup-id').value.trim();
+            const pw = document.getElementById('signup-pw').value.trim();
+            const name = document.getElementById('signup-name').value.trim();
+
+            // 아이디 유효성 검사: 영문 + 숫자, 9~15자
+            const idRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{9,15}$/;
+            if (!idRegex.test(id)) {
+                showModal('아이디는 영문과 숫자를 조합하여 9자~15자 사이로 입력해야 합니다.');
+                return;
+            }
+
+            // 비밀번호 유효성 검사: 영문 + 숫자 + 특수문자, 9~15자
+            const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+\\\|\[\]{};:\'",.<>/?])[A-Za-z\d!@#$%^&*()\-_=+\\\|\[\]{};:\'",.<>/?]{9,15}$/;
+            if (!pwRegex.test(pw)) {
+                showModal('비밀번호는 영문, 숫자, 특수문자를 모두 포함하여 9자~15자 사이로 입력해야 합니다.');
+                return;
+            }
+
+            // 아이디 중복 체크
+            const users = getUsers();
+            const existingUser = users.find(u => u.id === id);
+            if (existingUser) {
+                showModal('이미 존재하는 아이디입니다. 다른 아이디를 입력해주세요.');
+                return;
+            }
+
+            // 계정 정보 저장
+            users.push({ id, pw, name });
+            saveUsers(users);
+
+            showModal('회원가입이 완료되었습니다! 로그인해 주세요.', () => {
+                document.getElementById('signup-id').value = '';
+                document.getElementById('signup-pw').value = '';
+                document.getElementById('signup-name').value = '';
+                switchView('login');
+            });
+        }
+
+        // 로그인 처리
+        function handleLogin(event) {
+            event.preventDefault();
+            const id = document.getElementById('login-id').value.trim();
+            const pw = document.getElementById('login-pw').value.trim();
+
+            const users = getUsers();
+            const user = users.find(u => u.id === id && u.pw === pw);
+
+            if (!user) {
+                showModal('아이디 또는 비밀번호가 일치하지 않습니다.');
+                return;
+            }
+
+            // 세션 저장 및 대시보드 표시
+            localStorage.setItem('mulmandu_logged_in', JSON.stringify(user));
+            openDashboard(user);
+        }
+
+        // 대시보드 열기
+        function openDashboard(user) {
+            document.getElementById('welcome-msg').innerText = `${user.name} (${user.id}) 님, 물만두 아카이브에 오신 것을 환영합니다!`;
+            switchView('dashboard');
+        }
+
+        // 로그아웃 처리
+        function handleLogout() {
+            localStorage.removeItem('mulmandu_logged_in');
+            document.getElementById('login-id').value = '';
+            document.getElementById('login-pw').value = '';
             switchView('login');
         }
+
+        // 페이지 로드 시 기존 로그인 세션 확인
+        window.onload = function() {
+            const loggedInUser = localStorage.getItem('mulmandu_logged_in');
+            if (loggedInUser) {
+                try {
+                    const user = JSON.parse(loggedInUser);
+                    openDashboard(user);
+                } catch(e) {
+                    localStorage.removeItem('mulmandu_logged_in');
+                }
+            }
+        };
     </script>
 </body>
 </html>
