@@ -1,191 +1,266 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>물만두 - 나만의 색깔로 물들이는 커리어 아카이브</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+body {
+        font-family: 'Noto Sans KR', sans-serif;
+        background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 50%, #f3e8ff 100%);
+        color: #4a5568;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+    }
 
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 50%, #f3e8ff 100%);
-            color: #4a5568;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
+    .brand-container {
+        text-align: center;
+        margin-bottom: 30px;
+    }
 
-        .brand-container {
-            text-align: center;
-            margin-bottom: 35px;
-            animation: fadeInDown 0.8s ease-out;
-        }
+    .brand-container h1 {
+        font-size: 48px;
+        font-weight: 700;
+        color: #581c87;
+        letter-spacing: -1px;
+        margin-bottom: 8px;
+        text-shadow: 0 2px 10px rgba(168, 85, 247, 0.15);
+    }
 
-        .brand-container h1 {
-            font-size: 52px;
-            font-weight: 700;
-            color: #581c87;
-            letter-spacing: -1px;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(168, 85, 247, 0.15);
-        }
+    .brand-container h1 span {
+        color: #d946ef;
+    }
 
-        .brand-container h1 span {
-            color: #d946ef;
-        }
+    .brand-container p {
+        font-size: 15px;
+        color: #7e22ce;
+        font-weight: 400;
+        letter-spacing: -0.3px;
+    }
 
-        .brand-container p {
-            font-size: 16px;
-            color: #7e22ce;
-            font-weight: 400;
-            letter-spacing: -0.3px;
-        }
+    .card {
+        width: 100%;
+        max-width: 420px;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        padding: 36px;
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(168, 85, 247, 0.08);
+        border: 1px solid rgba(233, 213, 255, 0.6);
+        transition: all 0.3s ease;
+    }
 
-        .card {
-            width: 100%;
-            max-width: 420px;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.08);
-            border: 1px solid rgba(233, 213, 255, 0.6);
-            animation: fadeInUp 0.8s ease-out;
-        }
+    .form-group {
+        margin-bottom: 18px;
+    }
 
-        .form-group {
-            margin-bottom: 22px;
-        }
+    .form-group label {
+        display: block;
+        font-size: 13px;
+        font-weight: 500;
+        color: #6b21a8;
+        margin-bottom: 6px;
+    }
 
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 500;
-            color: #6b21a8;
-            margin-bottom: 8px;
-        }
+    .form-group input, .form-group select {
+        width: 100%;
+        padding: 12px 16px;
+        background-color: #faf5ff;
+        border: 1px solid #e9d5ff;
+        border-radius: 12px;
+        color: #4a5568;
+        font-size: 15px;
+        outline: none;
+        transition: all 0.25s ease;
+    }
 
-        .form-group input {
-            width: 100%;
-            padding: 14px 18px;
-            background-color: #faf5ff;
-            border: 1px solid #e9d5ff;
-            border-radius: 12px;
-            color: #4a5568;
-            font-size: 15px;
-            outline: none;
-            transition: all 0.25s ease;
-        }
+    .form-group input:focus, .form-group select:focus {
+        border-color: #c084fc;
+        background-color: #ffffff;
+        box-shadow: 0 0 0 4px rgba(192, 132, 252, 0.15);
+    }
 
-        .form-group input:focus {
-            border-color: #c084fc;
-            background-color: #ffffff;
-            box-shadow: 0 0 0 4px rgba(192, 132, 252, 0.15);
-        }
+    .inline-group {
+        display: flex;
+        gap: 8px;
+    }
 
-        .btn {
-            width: 100%;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: all 0.25s ease;
-        }
+    .inline-group input {
+        flex: 1;
+    }
 
-        .btn-login {
-            background: linear-gradient(135deg, #c084fc 0%, #e879f9 100%);
-            color: #ffffff;
-            margin-top: 6px;
-            margin-bottom: 14px;
-            box-shadow: 0 4px 15px rgba(192, 132, 252, 0.3);
-        }
+    .btn-verify {
+        padding: 0 16px;
+        background-color: #f3e8ff;
+        color: #7e22ce;
+        border: 1px solid #d8b4fe;
+        border-radius: 12px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.2s ease;
+    }
 
-        .btn-login:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(192, 132, 252, 0.4);
-        }
+    .btn-verify:hover {
+        background-color: #e9d5ff;
+    }
 
-        .btn-signup {
-            background-color: #ffffff;
-            color: #7e22ce;
-            border: 1px solid #e9d5ff;
-        }
+    .btn {
+        width: 100%;
+        padding: 14px;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        transition: all 0.25s ease;
+    }
 
-        .btn-signup:hover {
-            background-color: #faf5ff;
-            border-color: #d8b4fe;
-        }
+    .btn-primary {
+        background: linear-gradient(135deg, #c084fc 0%, #e879f9 100%);
+        color: #ffffff;
+        margin-top: 8px;
+        margin-bottom: 12px;
+        box-shadow: 0 4px 15px rgba(192, 132, 252, 0.3);
+    }
 
-        .divider {
-            text-align: center;
-            margin: 22px 0;
-            color: #a855f7;
-            font-size: 13px;
-            position: relative;
-            opacity: 0.7;
-        }
+    .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(192, 132, 252, 0.4);
+    }
 
-        .divider::before, .divider::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            width: 38%;
-            height: 1px;
-            background-color: #e9d5ff;
-        }
+    .btn-secondary {
+        background-color: #ffffff;
+        color: #7e22ce;
+        border: 1px solid #e9d5ff;
+    }
 
-        .divider::before { left: 0; }
-        .divider::after { right: 0; }
+    .btn-secondary:hover {
+        background-color: #faf5ff;
+        border-color: #d8b4fe;
+    }
 
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .divider {
+        text-align: center;
+        margin: 18px 0;
+        color: #a855f7;
+        font-size: 13px;
+        position: relative;
+        opacity: 0.7;
+    }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
-</head>
-<body>
+    .divider::before, .divider::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 38%;
+        height: 1px;
+        background-color: #e9d5ff;
+    }
 
-    <div class="brand-container">
-        <h1>물<span>만두</span></h1>
-        <p>나만의 색깔로 물들이는 커리어 아카이브</p>
-    </div>
+    .divider::before { left: 0; }
+    .divider::after { right: 0; }
 
-    <div class="card">
-        <form onsubmit="event.preventDefault(); alert('로그인 기능은 준비 중입니다!');">
+    .hidden {
+        display: none;
+    }
+</style>
+<div class="brand-container">
+    <h1>물<span>만두</span></h1>
+    <p>나만의 색깔로 물들이는 커리어 아카이브</p>
+</div>
+
+<div class="card">
+    <!-- 로그인 폼 -->
+    <div id="login-section">
+        <form onsubmit="handleLogin(event)">
             <div class="form-group">
-                <label for="username">아이디</label>
-                <input type="text" id="username" placeholder="아이디를 입력하세요" required>
+                <label for="login-id">아이디</label>
+                <input type="text" id="login-id" placeholder="아이디를 입력하세요" required>
             </div>
-
             <div class="form-group">
-                <label for="password">비밀번호</label>
-                <input type="password" id="password" placeholder="비밀번호를 입력하세요" required>
+                <label for="login-pw">비밀번호</label>
+                <input type="password" id="login-pw" placeholder="비밀번호를 입력하세요" required>
             </div>
-
-            <button type="submit" class="btn btn-login">로그인</button>
+            <button type="submit" class="btn btn-primary">로그인</button>
         </form>
-
         <div class="divider">또는</div>
-
-        <button type="button" class="btn btn-signup" onclick="alert('회원가입 기능은 준비 중입니다!')">회원가입하기</button>
+        <button type="button" class="btn btn-secondary" onclick="switchView('signup')">회원가입하기</button>
     </div>
 
-</body>
-</html>
+    <!-- 회원가입 폼 (기본은 숨김 처리) -->
+    <div id="signup-section" class="hidden">
+        <form onsubmit="handleSignup(event)">
+            <div class="form-group">
+                <label for="signup-id">아이디</label>
+                <input type="text" id="signup-id" placeholder="사용할 아이디 입력" required>
+            </div>
+            <div class="form-group">
+                <label for="signup-pw">비밀번호</label>
+                <input type="password" id="signup-pw" placeholder="비밀번호 입력" required>
+            </div>
+            <div class="form-group">
+                <label for="signup-name">이름</label>
+                <input type="text" id="signup-name" placeholder="실명 입력" required>
+            </div>
+            <div class="form-group">
+                <label for="carrier">통신사</label>
+                <select id="carrier" required>
+                    <option value="" disabled selected>통신사를 선택하세요</option>
+                    <option value="SKT">SKT</option>
+                    <option value="KT">KT</option>
+                    <option value="LGU">LG U+</option>
+                    <option value="SKT_MVNO">SKT 알뜰폰</option>
+                    <option value="KT_MVNO">KT 알뜰폰</option>
+                    <option value="LGU_MVNO">LG U+ 알뜰폰</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="phone">휴대폰 번호</label>
+                <div class="inline-group">
+                    <input type="tel" id="phone" placeholder="- 제외 번호 입력" required>
+                    <button type="button" class="btn-verify" onclick="sendAuthCode()">인증요청</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="auth-code">인증번호</label>
+                <input type="text" id="auth-code" placeholder="인증번호 6자리 입력" required>
+            </div>
+            <button type="submit" class="btn btn-primary">가입 완료하기</button>
+        </form>
+        <div class="divider">또는</div>
+        <button type="button" class="btn btn-secondary" onclick="switchView('login')">돌아가기</button>
+    </div>
+</div>
+
+<script>
+    function switchView(view) {
+        const loginSection = document.getElementById('login-section');
+        const signupSection = document.getElementById('signup-section');
+        if (view === 'signup') {
+            loginSection.classList.add('hidden');
+            signupSection.classList.remove('hidden');
+        } else {
+            signupSection.classList.add('hidden');
+            loginSection.classList.remove('hidden');
+        }
+    }
+
+    function sendAuthCode() {
+        const phone = document.getElementById('phone').value;
+        if (!phone) {
+            alert('휴대폰 번호를 먼저 입력해주세요!');
+            return;
+        }
+        alert('입력하신 번호로 본인인증 번호가 전송되었습니다. (가뮬레이션)');
+    }
+
+    function handleLogin(event) {
+        event.preventDefault();
+        alert('로그인 기능은 준비 중입니다!');
+    }
+
+    function handleSignup(event) {
+        event.preventDefault();
+        alert('회원가입 및 본인인증이 완료되었습니다! 환영합니다.');
+        switchView('login');
+    }
+</script>
