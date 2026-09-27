@@ -64,7 +64,7 @@
         }
 
         .form-group {
-            margin-bottom: 22px;
+            margin-bottom: 18px;
         }
 
         .form-group label {
@@ -75,7 +75,7 @@
             margin-bottom: 8px;
         }
 
-        .form-group input {
+        .form-group input, .form-group select {
             width: 100%;
             padding: 14px 18px;
             background-color: #faf5ff;
@@ -87,10 +87,36 @@
             transition: all 0.25s ease;
         }
 
-        .form-group input:focus {
+        .form-group input:focus, .form-group select:focus {
             border-color: #c084fc;
             background-color: #ffffff;
             box-shadow: 0 0 0 4px rgba(192, 132, 252, 0.15);
+        }
+
+        .inline-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .inline-group input {
+            flex: 1;
+        }
+
+        .btn-verify {
+            padding: 0 16px;
+            background-color: #f3e8ff;
+            color: #7e22ce;
+            border: 1px solid #d8b4fe;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .btn-verify:hover {
+            background-color: #e9d5ff;
         }
 
         .btn {
@@ -130,7 +156,7 @@
 
         .divider {
             text-align: center;
-            margin: 22px 0;
+            margin: 20px 0;
             color: #a855f7;
             font-size: 13px;
             position: relative;
@@ -148,6 +174,10 @@
 
         .divider::before { left: 0; }
         .divider::after { right: 0; }
+
+        .hidden {
+            display: none;
+        }
 
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-15px); }
@@ -168,24 +198,113 @@
     </div>
 
     <div class="card">
-        <form onsubmit="event.preventDefault(); alert('로그인 기능은 준비 중입니다!');">
-            <div class="form-group">
-                <label for="username">아이디</label>
-                <input type="text" id="username" placeholder="아이디를 입력하세요" required>
-            </div>
+        <!-- 로그인 화면 -->
+        <div id="login-section">
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">아이디</label>
+                    <input type="text" id="username" placeholder="아이디를 입력하세요" required>
+                </div>
 
-            <div class="form-group">
-                <label for="password">비밀번호</label>
-                <input type="password" id="password" placeholder="비밀번호를 입력하세요" required>
-            </div>
+                <div class="form-group">
+                    <label for="password">비밀번호</label>
+                    <input type="password" id="password" placeholder="비밀번호를 입력하세요" required>
+                </div>
 
-            <button type="submit" class="btn btn-login">로그인</button>
-        </form>
+                <button type="submit" class="btn btn-login">로그인</button>
+            </form>
 
-        <div class="divider">또는</div>
+            <div class="divider">또는</div>
 
-        <button type="button" class="btn btn-signup" onclick="alert('회원가입 기능은 준비 중입니다!')">회원가입하기</button>
+            <button type="button" class="btn btn-signup" onclick="switchView('signup')">회원가입하기</button>
+        </div>
+
+        <!-- 회원가입 화면 (통신사 선택 및 휴대폰 본인인증 포함) -->
+        <div id="signup-section" class="hidden">
+            <form onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="signup-username">아이디</label>
+                    <input type="text" id="signup-username" placeholder="사용할 아이디 입력" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-password">비밀번호</label>
+                    <input type="password" id="signup-password" placeholder="비밀번호 입력" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-name">이름</label>
+                    <input type="text" id="signup-name" placeholder="실명 입력" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="carrier">통신사</label>
+                    <select id="carrier" required>
+                        <option value="" disabled selected>통신사를 선택하세요</option>
+                        <option value="SKT">SKT</option>
+                        <option value="KT">KT</option>
+                        <option value="LGU">LG U+</option>
+                        <option value="SKT_MVNO">SKT 알뜰폰</option>
+                        <option value="KT_MVNO">KT 알뜰폰</option>
+                        <option value="LGU_MVNO">LG U+ 알뜰폰</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">휴대폰 번호</label>
+                    <div class="inline-group">
+                        <input type="tel" id="phone" placeholder="- 제외 번호 입력" required>
+                        <button type="button" class="btn-verify" onclick="sendAuthCode()">인증요청</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="auth-code">인증번호</label>
+                    <input type="text" id="auth-code" placeholder="인증번호 6자리 입력" required>
+                </div>
+
+                <button type="submit" class="btn btn-login">가입 완료하기</button>
+            </form>
+
+            <div class="divider">또는</div>
+
+            <button type="button" class="btn btn-signup" onclick="switchView('login')">돌아가기</button>
+        </div>
     </div>
 
+    <script>
+        function switchView(view) {
+            const loginSection = document.getElementById('login-section');
+            const signupSection = document.getElementById('signup-section');
+            
+            if (view === 'signup') {
+                loginSection.classList.add('hidden');
+                signupSection.classList.remove('hidden');
+            } else {
+                signupSection.classList.add('hidden');
+                loginSection.classList.remove('hidden');
+            }
+        }
+
+        function sendAuthCode() {
+            const phone = document.getElementById('phone').value;
+            if (!phone) {
+                alert('휴대폰 번호를 먼저 입력해주세요!');
+                return;
+            }
+            alert('입력하신 번호로 본인인증 번호가 전송되었습니다.');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+             alert('로그인 기능은 준비 중입니다!');
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            alert('회원가입 및 본인인증이 완료되었습니다! 환영합니다.');
+            switchView('login');
+        }
+    </script>
 </body>
 </html>
