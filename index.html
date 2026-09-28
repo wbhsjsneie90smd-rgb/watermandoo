@@ -27,17 +27,17 @@
             pointer-events: none; overflow: hidden; z-index: 0;
         }
         .bubble {
-            position: absolute; bottom: -100px;
+            position: absolute; bottom: -120px;
             background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.95), rgba(216, 180, 254, 0.45));
             border-radius: 50%;
-            box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.8), 0 0 14px rgba(168, 85, 247, 0.25);
-            animation: floatUp 8s infinite ease-in-out; opacity: 0.75;
+            box-shadow: inset 0 0 22px rgba(255, 255, 255, 0.85), 0 0 18px rgba(168, 85, 247, 0.28);
+            animation: floatUp 8s infinite ease-in-out; opacity: 0.78;
         }
         @keyframes floatUp {
             0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
-            20% { opacity: 0.75; }
-            80% { opacity: 0.75; }
-            100% { transform: translateY(-110vh) translateX(60px) scale(1.15); opacity: 0; }
+            20% { opacity: 0.78; }
+            80% { opacity: 0.78; }
+            100% { transform: translateY(-115vh) translateX(70px) scale(1.18); opacity: 0; }
         }
 
         .pop-particle {
@@ -103,7 +103,7 @@
             border: 1px solid #f3e8ff; border-radius: 12px; color: #4a5568; font-size: 14px; outline: none;
         }
         .form-group textarea { resize: vertical; min-height: 90px; }
-        .form-group input:focus, .form-group textarea:focus {
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
             border-color: #a855f7; background-color: #ffffff; box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.12);
         }
         .hint { font-size: 11px; color: #9333ea; margin-top: 4px; margin-left: 4px; opacity: 0.9; }
@@ -138,6 +138,17 @@
         .section-box h3 { font-size: 15px; color: #7e22ce; margin-bottom: 8px; }
         .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
         .tag { background: #f3e8ff; color: #7e22ce; padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 500; border: 1px solid #e9d5ff; }
+        
+        .level-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 6px; }
+        .level-btn {
+            background: #faf5ff; border: 1px solid #d8b4fe; color: #7e22ce; padding: 8px 4px;
+            border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; text-align: center;
+            transition: all 0.2s;
+        }
+        .level-btn.active {
+            background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%); color: white; border-color: #a855f7;
+            box-shadow: 0 2px 8px rgba(168, 85, 247, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -282,8 +293,15 @@
                     <input type="text" id="pf-intro" required>
                 </div>
                 <div class="form-group">
-                    <label>보유 기술 (쉼표 구분)</label>
-                    <input type="text" id="pf-skills" required>
+                    <label>보유 기술 (직무 역량 / 스킬명)</label>
+                    <input type="text" id="pf-skills" placeholder="예: JavaScript, React, UI/UX 디자인 등" required>
+                </div>
+                <div class="form-group">
+                    <label>보유 기술 숙련도 수준 (Lv.1 ~ Lv.10)</label>
+                    <div class="level-grid" id="skill-level-grid">
+                        <!-- Levels 1 to 10 generated via JS -->
+                    </div>
+                    <input type="hidden" id="pf-skill-level" value="5">
                 </div>
                 <div class="form-group">
                     <label>경력 사항</label>
@@ -329,7 +347,11 @@
                 <button type="button" class="btn btn-secondary" onclick="goHome()" style="width:auto; padding:8px 14px;">🏠 홈으로</button>
             </div>
             <div class="section-box"><h3>📞 연락처</h3><p id="view-contact"></p></div>
-            <div class="section-box"><h3>💡 기술 스택</h3><div class="tag-list" id="view-skills-tags"></div></div>
+            <div class="section-box">
+                <h3>💡 기술 스택 & 보유 기술</h3>
+                <div style="font-size: 13px; color: #7e22ce; font-weight: 600; margin-bottom: 6px;" id="view-skill-level-text">숙련도: Lv.5</div>
+                <div class="tag-list" id="view-skills-tags"></div>
+            </div>
             <div class="section-box"><h3>💼 경력 사항</h3><p id="view-experience"></p></div>
             <div class="section-box"><h3>🎓 학력 및 교육</h3><p id="view-education"></p></div>
             <div class="section-box"><h3>🚀 프로젝트</h3><p id="view-projects"></p></div>
@@ -388,6 +410,37 @@
                 bubble.style.animationDelay = `${Math.random() * 5}s`;
                 container.appendChild(bubble);
             }
+        }
+
+        function initSkillLevelButtons(selectedLevel = 5) {
+            const grid = document.getElementById('skill-level-grid');
+            grid.innerHTML = '';
+            const labels = {
+                1: 'Lv.1 입문자',
+                2: 'Lv.2 초급',
+                3: 'Lv.3 수습',
+                4: 'Lv.4 중하',
+                5: 'Lv.5 중급',
+                6: 'Lv.6 중상',
+                7: 'Lv.7 고급',
+                8: 'Lv.8 숙련',
+                9: 'Lv.9 마스터',
+                10: 'Lv.10 전문가'
+            };
+            for (let i = 1; i <= 10; i++) {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = `level-btn ${i === Number(selectedLevel) ? 'active' : ''}`;
+                btn.innerText = `Lv.${i}`;
+                btn.title = labels[i];
+                btn.onclick = () => {
+                    document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    document.getElementById('pf-skill-level').value = i;
+                };
+                grid.appendChild(btn);
+            }
+            document.getElementById('pf-skill-level').value = selectedLevel;
         }
 
         function triggerFullScreenBubbleBurst() {
@@ -603,6 +656,10 @@
             }
         }
 
+        function loadExploreList(keyword) {
+            handleSearch(keyword);
+        }
+
         function handleSearch(keyword) {
             const portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
             const users = JSON.parse(localStorage.getItem('mulmandu_users') || '[]');
@@ -686,6 +743,7 @@
             document.getElementById('pf-contact').value = '';
             document.getElementById('pf-intro').value = '';
             document.getElementById('pf-skills').value = '';
+            initSkillLevelButtons(5);
             document.getElementById('pf-experience').value = '';
             document.getElementById('pf-education').value = '';
             document.getElementById('pf-projects').value = '';
@@ -703,11 +761,14 @@
             const p = portfolios[user.id];
             if (p) {
                 document.getElementById('pf-image-base64').value = p.image || '';
-                document.getElementById('pf-name').value = p.name || '';
+                document.getElementById('pf-image-file').value = '';
+                document.getElementById('pf-emoji-select').value = '';
+                document.getElementById('pf-name').value = p.name || user.name || '';
                 document.getElementById('pf-job').value = p.job || '';
                 document.getElementById('pf-contact').value = p.contact || '';
                 document.getElementById('pf-intro').value = p.intro || '';
                 document.getElementById('pf-skills').value = p.skills || '';
+                initSkillLevelButtons(p.skillLevel || 5);
                 document.getElementById('pf-experience').value = p.experience || '';
                 document.getElementById('pf-education').value = p.education || '';
                 document.getElementById('pf-projects').value = p.projects || '';
@@ -723,6 +784,7 @@
                 document.getElementById('pf-contact').value = '';
                 document.getElementById('pf-intro').value = '';
                 document.getElementById('pf-skills').value = '';
+                initSkillLevelButtons(5);
                 document.getElementById('pf-experience').value = '';
                 document.getElementById('pf-education').value = '';
                 document.getElementById('pf-projects').value = '';
@@ -761,6 +823,7 @@
                 contact: document.getElementById('pf-contact').value.trim(),
                 intro: document.getElementById('pf-intro').value.trim(),
                 skills: document.getElementById('pf-skills').value.trim(),
+                skillLevel: Number(document.getElementById('pf-skill-level').value) || 5,
                 experience: document.getElementById('pf-experience').value.trim(),
                 education: document.getElementById('pf-education').value.trim(),
                 projects: document.getElementById('pf-projects').value.trim(),
@@ -823,6 +886,13 @@
             document.getElementById('view-awards').innerText = p.awards || '미입력';
             document.getElementById('view-notes').innerText = p.notes || '미입력';
             
+            const levelNames = {
+                1: 'Lv.1 입문자', 2: 'Lv.2 초급', 3: 'Lv.3 수습', 4: 'Lv.4 중하', 5: 'Lv.5 중급',
+                6: 'Lv.6 중상', 7: 'Lv.7 고급', 8: 'Lv.8 숙련', 9: 'Lv.9 마스터', 10: 'Lv.10 전문가'
+            };
+            const sLevel = p.skillLevel || 5;
+            document.getElementById('view-skill-level-text').innerText = `숙련도: ${levelNames[sLevel] || ('Lv.' + sLevel)}`;
+
             const tags = document.getElementById('view-skills-tags');
             tags.innerHTML = '';
             if (p.skills) {
@@ -890,6 +960,7 @@
 
         window.onload = function() {
             initBubbles();
+            initSkillLevelButtons(5);
             const savedCreds = JSON.parse(localStorage.getItem('mulmandu_saved_credentials') || 'null');
             if (savedCreds) {
                 document.getElementById('login-id').value = savedCreds.id || '';
