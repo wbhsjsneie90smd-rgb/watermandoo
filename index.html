@@ -39,6 +39,15 @@
             100% { transform: translateY(-115vh) translateX(70px) scale(1.18); opacity: 0; }
         }
 
+        .pop-particle {
+            position: fixed; border-radius: 50%; pointer-events: none; z-index: 2000;
+            animation: popOut 0.9s forwards ease-out;
+        }
+        @keyframes popOut {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+
         .top-nav {
             position: fixed; top: 0; left: 0; width: 100%; padding: 15px 30px;
             display: flex; justify-content: space-between; align-items: center; z-index: 100;
@@ -327,7 +336,6 @@
         </div>
     </div>
 
-    <!-- Custom Modal -->
     <div class="modal-overlay" id="custom-modal">
         <div class="modal-card">
             <div class="modal-message" id="modal-message">알림 메시지</div>
@@ -340,7 +348,7 @@
         let usersData = JSON.parse(localStorage.getItem('mulmandu_users') || '{}');
         let portfoliosData = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
         let commentsData = JSON.parse(localStorage.getItem('mulmandu_comments') || '{}');
-        let currentEditingSkills = []; // [{name: '코딩', level: 1}, ...]
+        let currentEditingSkills = [];
 
         function saveToStorage() {
             localStorage.setItem('mulmandu_users', JSON.stringify(usersData));
@@ -348,7 +356,6 @@
             localStorage.setItem('mulmandu_comments', JSON.stringify(commentsData));
         }
 
-        // Generate floating bubbles
         window.onload = function() {
             const container = document.getElementById('bubble-container');
             for(let i=0; i<15; i++) {
@@ -363,7 +370,6 @@
                 container.appendChild(bubble);
             }
 
-            // Check remember me
             const rememberedId = localStorage.getItem('mulmandu_remember_id');
             const rememberedPw = localStorage.getItem('mulmandu_remember_pw');
             if(rememberedId && rememberedPw) {
@@ -658,7 +664,6 @@
             if(pf.goals) html += `<div class="section-box"><h3>🎯 향후 커리어 목표 및 비전</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.goals}</p></div>`;
             if(pf.side) html += `<div class="section-box"><h3>🧪 사이드 프로젝트 & 실험실</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.side}</p></div>`;
 
-            // Comments section
             html += `
                 <div class="section-box" style="margin-top:24px;">
                     <h3>💬 동료 코멘트 & 피드백</h3>
