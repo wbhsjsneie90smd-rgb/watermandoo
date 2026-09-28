@@ -9,8 +9,10 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 50%, #f3e8ff 100%);
-            color: #4a5568;
+            /* Balanced 70% lavender & 30% pink gradient background */
+            background: linear-gradient(135deg, #e9d5ff 0%, #d8b4fe 40%, #f472b6 100%), linear-gradient(135deg, #c084fc 0%, #fbcfe8 100%);
+            background-blend-mode: overlay;
+            color: #6b21a8;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -25,20 +27,19 @@
             pointer-events: none; overflow: hidden; z-index: 0;
         }
         .bubble {
-            position: absolute; bottom: -80px;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(216, 180, 254, 0.4));
+            position: absolute; bottom: -100px;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.95), rgba(216, 180, 254, 0.45));
             border-radius: 50%;
-            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.8), 0 0 15px rgba(168, 85, 247, 0.3);
-            animation: floatUp 8s infinite ease-in-out; opacity: 0.7;
+            box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.8), 0 0 14px rgba(168, 85, 247, 0.25);
+            animation: floatUp 8s infinite ease-in-out; opacity: 0.75;
         }
         @keyframes floatUp {
             0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
-            20% { opacity: 0.8; }
-            80% { opacity: 0.8; }
+            20% { opacity: 0.75; }
+            80% { opacity: 0.75; }
             100% { transform: translateY(-110vh) translateX(60px) scale(1.15); opacity: 0; }
         }
 
-        /* Full-screen & Card celebratory bubble particles */
         .pop-particle {
             position: fixed; border-radius: 50%; pointer-events: none; z-index: 2000;
             animation: popOut 0.9s forwards ease-out;
@@ -51,14 +52,14 @@
         .top-nav {
             position: fixed; top: 0; left: 0; width: 100%; padding: 15px 30px;
             display: flex; justify-content: space-between; align-items: center; z-index: 100;
-            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(233, 213, 255, 0.5);
+            background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(233, 213, 255, 0.8);
         }
         .nav-logo {
             font-size: 18px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px;
         }
         .nav-logo span.mul { color: #a855f7; }
-        .nav-logo span.mandu { color: #d946ef; }
+        .nav-logo span.mandu { color: #c084fc; }
         .nav-logo-icon {
             width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
         }
@@ -75,67 +76,68 @@
         .nav-profile-wrapper { position: relative; }
         .nav-profile-btn {
             width: 42px; height: 42px; border-radius: 50%; overflow: hidden;
-            border: 2px solid #d8b4fe; cursor: pointer; background-color: #faf5ff;
+            border: 2px solid #d8b4fe; cursor: pointer; background-color: #f3e8ff;
             display: flex; align-items: center; justify-content: center; font-size: 18px;
             transition: transform 0.2s, box-shadow 0.2s;
         }
         .nav-profile-btn:hover {
-            transform: scale(1.05); box-shadow: 0 0 12px rgba(192, 132, 252, 0.5);
+            transform: scale(1.05); box-shadow: 0 0 12px rgba(168, 85, 247, 0.35);
         }
         .nav-profile-btn img { width: 100%; height: 100%; object-fit: cover; }
 
         .card {
             width: 100%; max-width: 460px; margin-top: 40px;
-            background: rgba(255, 255, 255, 0.88);
+            background: rgba(255, 255, 255, 0.94);
             backdrop-filter: blur(14px); padding: 35px; border-radius: 24px;
-            box-shadow: 0 12px 35px rgba(168, 85, 247, 0.1);
-            border: 1px solid rgba(233, 213, 255, 0.7); z-index: 10; position: relative;
+            box-shadow: 0 12px 35px rgba(147, 51, 234, 0.15);
+            border: 1px solid rgba(233, 213, 255, 0.9); z-index: 10; position: relative;
         }
         .card.wide { max-width: 750px; max-height: 82vh; overflow-y: auto; }
         .card.wide::-webkit-scrollbar { width: 6px; }
         .card.wide::-webkit-scrollbar-thumb { background-color: #d8b4fe; border-radius: 10px; }
-
+        
         .form-group { margin-bottom: 16px; }
-        .form-group label { display: block; font-size: 13px; font-weight: 500; color: #6b21a8; margin-bottom: 6px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 500; color: #7e22ce; margin-bottom: 6px; }
         .form-group input, .form-group textarea, .form-group select {
             width: 100%; padding: 12px 16px; background-color: #faf5ff;
-            border: 1px solid #e9d5ff; border-radius: 12px; color: #4a5568; font-size: 14px; outline: none;
+            border: 1px solid #f3e8ff; border-radius: 12px; color: #4a5568; font-size: 14px; outline: none;
         }
         .form-group textarea { resize: vertical; min-height: 90px; }
         .form-group input:focus, .form-group textarea:focus {
-            border-color: #c084fc; background-color: #ffffff; box-shadow: 0 0 0 4px rgba(192, 132, 252, 0.15);
+            border-color: #a855f7; background-color: #ffffff; box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.12);
         }
-        .hint { font-size: 11px; color: #9333ea; margin-top: 4px; margin-left: 4px; opacity: 0.8; }
+        .hint { font-size: 11px; color: #9333ea; margin-top: 4px; margin-left: 4px; opacity: 0.9; }
+        
         .btn { width: 100%; padding: 13px; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; border: none; }
-        .btn-primary { background: linear-gradient(135deg, #c084fc 0%, #e879f9 100%); color: #ffffff; margin-top: 8px; margin-bottom: 10px; }
-        .btn-secondary { background-color: #ffffff; color: #7e22ce; border: 1px solid #e9d5ff; }
-        .btn-accent { background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%); color: white; }
-
-        .divider { text-align: center; margin: 16px 0; color: #a855f7; font-size: 13px; position: relative; opacity: 0.7; }
-        .divider::before, .divider::after { content: ""; position: absolute; top: 50%; width: 36%; height: 1px; background-color: #e9d5ff; }
+        .btn-primary { background: linear-gradient(135deg, #a855f7 0%, #c084fc 50%, #f472b6 100%); color: #ffffff; margin-top: 8px; margin-bottom: 10px; box-shadow: 0 4px 12px rgba(168, 85, 247, 0.25); }
+        .btn-secondary { background-color: #ffffff; color: #7e22ce; border: 1px solid #d8b4fe; }
+        .btn-accent { background: linear-gradient(135deg, #9333ea 0%, #c084fc 100%); color: white; box-shadow: 0 4px 12px rgba(147, 51, 234, 0.25); }
+        
+        .divider { text-align: center; margin: 16px 0; color: #a855f7; font-size: 13px; position: relative; opacity: 0.8; }
+        .divider::before, .divider::after { content: ""; position: absolute; top: 50%; width: 36%; height: 1px; background-color: #f3e8ff; }
         .divider::before { left: 0; }
         .divider::after { right: 0; }
         .hidden { display: none !important; }
-
+        
         .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; z-index: 1000;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(3px); display: flex; justify-content: center; align-items: center; z-index: 1000;
             opacity: 0; visibility: hidden; transition: all 0.3s ease;
         }
         .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-card { background: #ffffff; width: 90%; max-width: 340px; padding: 24px; border-radius: 20px; text-align: center; }
-        .modal-message { font-size: 15px; color: #334155; margin-bottom: 20px; line-height: 1.5; }
+        .modal-card { background: #ffffff; width: 90%; max-width: 340px; padding: 24px; border-radius: 20px; text-align: center; box-shadow: 0 10px 25px rgba(168, 85, 247, 0.15); }
+        .modal-message { font-size: 15px; color: #4a5568; margin-bottom: 20px; line-height: 1.5; }
         .modal-btn { background: #a855f7; color: white; border: none; padding: 10px 24px; border-radius: 10px; font-weight: 600; cursor: pointer; width: 100%; }
-
+        
         .portfolio-view { text-align: left; }
-        .portfolio-header { border-bottom: 2px solid #f3e8ff; padding-bottom: 16px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .portfolio-header { border-bottom: 2px solid #faf5ff; padding-bottom: 16px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
         .profile-flex { display: flex; align-items: center; gap: 16px; }
         .profile-img-preview { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 2px solid #d8b4fe; background-color: #faf5ff; }
-        .portfolio-header h2 { font-size: 24px; color: #581c87; font-weight: 700; }
-        .section-box { background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 16px; padding: 16px; margin-bottom: 16px; }
+        .portfolio-header h2 { font-size: 24px; color: #6b21a8; font-weight: 700; }
+        .section-box { background: #faf5ff; border: 1px solid #f3e8ff; border-radius: 16px; padding: 16px; margin-bottom: 16px; }
         .section-box h3 { font-size: 15px; color: #7e22ce; margin-bottom: 8px; }
         .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
-        .tag { background: #f3e8ff; color: #7e22ce; padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 500; }
+        .tag { background: #f3e8ff; color: #7e22ce; padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 500; border: 1px solid #e9d5ff; }
     </style>
 </head>
 <body>
@@ -146,9 +148,9 @@
         <div class="nav-logo" onclick="goHome()">
             <div class="nav-logo-icon">
                 <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15 30C15 27.2386 17.2386 25 20 25H42L52 35H80C82.7614 35 85 37.2386 85 40V75C85 77.7614 82.7614 80 80 80H20C17.2386 80 15 77.7614 15 75V30Z" fill="#E9D5FF" stroke="#A855F7" stroke-width="4"/>
-                    <circle cx="50" cy="57" r="18" fill="white" stroke="#D946EF" stroke-width="3"/>
-                    <path d="M40 54C45 50 55 50 60 54" stroke="#D946EF" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M15 30C15 27.2386 17.2386 25 20 25H42L52 35H80C82.7614 35 85 37.2386 85 40V75C85 77.7614 82.7614 80 80 80H20C17.2386 80 15 77.7614 15 75V30Z" fill="#F3E8FF" stroke="#C084FC" stroke-width="4"/>
+                    <circle cx="50" cy="57" r="18" fill="white" stroke="#D8B4FE" stroke-width="3"/>
+                    <path d="M40 54C45 50 55 50 60 54" stroke="#C084FC" stroke-width="2.5" stroke-linecap="round"/>
                 </svg>
             </div>
             <div><span class="mul">물</span><span class="mandu">만두</span></div>
@@ -170,8 +172,8 @@
         <!-- Login Section -->
         <div id="login-section">
             <div style="text-align: center; margin-bottom: 24px;">
-                <h2 style="font-size: 24px; font-weight: 700; color: #581c87; margin-bottom: 6px;">로그인</h2>
-                <p style="font-size: 13px; color: #7e22ce;">나만의 색깔로 물들이는 커리어 아카이브</p>
+                <h2 style="font-size: 24px; font-weight: 700; color: #6b21a8; margin-bottom: 6px;">로그인</h2>
+                <p style="font-size: 13px; color: #9333ea;">나만의 색깔로 물들이는 커리어 아카이브</p>
             </div>
             <form onsubmit="handleLogin(event)">
                 <div class="form-group">
@@ -182,6 +184,10 @@
                     <label>비밀번호</label>
                     <input type="password" id="login-pw" placeholder="비밀번호를 입력하세요" required>
                 </div>
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px; font-size: 13px; color: #7e22ce;">
+                    <input type="checkbox" id="remember-me" style="width: 16px; height: 16px; accent-color: #a855f7; cursor: pointer;">
+                    <label for="remember-me" style="margin-bottom: 0; cursor: pointer;">아이디 및 비밀번호 저장</label>
+                </div>
                 <button type="submit" class="btn btn-primary">로그인</button>
             </form>
             <div class="divider">계정이 없으신가요?</div>
@@ -191,7 +197,7 @@
         <!-- Signup Section -->
         <div id="signup-section" class="hidden">
             <div style="text-align: center; margin-bottom: 20px;">
-                <h2 style="font-size: 22px; font-weight: 700; color: #581c87;">회원가입</h2>
+                <h2 style="font-size: 22px; font-weight: 700; color: #6b21a8;">회원가입</h2>
             </div>
             <form onsubmit="handleSignup(event)">
                 <div class="form-group">
@@ -213,38 +219,41 @@
             <button type="button" class="btn btn-secondary" onclick="switchView('login')" style="margin-top: 10px;">로그인으로 돌아가기</button>
         </div>
 
-        <!-- Explore / Search Central Home Section -->
+        <!-- Explore Home Section (Default after login) -->
         <div id="explore-home-section" class="hidden" style="text-align: center;">
             <div style="margin-top: 10px; margin-bottom: 24px;">
-                <h2 id="explore-welcome-title" style="font-size: 22px; color: #581c87; margin-bottom: 6px;">커리어 탐색 아카이브 🔍</h2>
-                <p style="color: #7e22ce; font-size: 13px;">다른 사용자의 커리어를 검색하거나 내 포트폴리오를 관리해보세요!</p>
+                <h2 id="explore-welcome-title" style="font-size: 22px; color: #6b21a8; margin-bottom: 6px;">커리어 탐색 아카이브 🔍</h2>
+                <p style="color: #9333ea; font-size: 13px;">다른 사용자의 커리어를 검색하거나 우측 상단 프로필에서 내 포트폴리오를 관리해보세요!</p>
             </div>
-            <div class="form-group" style="position: relative;">
-                <input type="text" id="search-input" placeholder="관심 직무, 기술, 이름으로 검색..." oninput="handleSearch(this.value)" style="padding-left: 40px;">
-                <span style="position: absolute; left: 14px; top: 38px; color: #a855f7;">🔍</span>
+            <div class="form-group" style="position: relative; margin-bottom: 4px;">
+                <span style="position: absolute; left: 16px; top: 38%; transform: translateY(-50%); font-size: 16px; pointer-events: none; z-index: 2;">🔍</span>
+                <input type="text" id="search-input" placeholder="쉼표(,)로 구분하여 검색어 입력 (예: 프론트엔드, React, 김)" oninput="handleSearch(this.value)" style="padding-left: 44px;">
+            </div>
+            <div style="font-size: 11px; color: #a855f7; margin-top: 8px; margin-bottom: 16px; text-align: left; padding-left: 4px;">
+                * 쉼표(,)로 구분된 모든 검색어가 포함된 포트폴리오만 검색됩니다.
             </div>
             <div id="search-results-container" style="max-height: 220px; overflow-y: auto; text-align: left; margin-top: 12px;"></div>
             <button type="button" class="btn btn-secondary" onclick="handleLogout()" style="margin-top: 16px;">로그아웃</button>
         </div>
 
-        <!-- Welcome Section (First time no portfolio) -->
+        <!-- Welcome Portfolio Section (For users with no portfolio yet) -->
         <div id="welcome-portfolio-section" class="hidden" style="text-align: center;">
-            <h2 id="welcome-title" style="font-size: 22px; color: #581c87; margin-bottom: 10px;">환영합니다! 🎉</h2>
-            <p style="color: #7e22ce; margin-bottom: 24px; font-size: 14px;">아직 등록된 포트폴리오가 없습니다. 나만의 커리어를 채워보세요!</p>
+            <h2 id="welcome-title" style="font-size: 22px; color: #6b21a8; margin-bottom: 10px;">환영합니다! 🎉</h2>
+            <p style="color: #9333ea; margin-bottom: 24px; font-size: 14px;">아직 등록된 포트폴리오가 없습니다. 나만의 커리어를 채워보세요!</p>
             <button type="button" class="btn btn-accent" onclick="openPortfolioFormWithBubbleEffect()" style="padding: 16px;">✨ 포트폴리오 생성하기</button>
             <button type="button" class="btn btn-secondary" onclick="handleLogout()" style="margin-top: 12px;">로그아웃</button>
         </div>
 
         <!-- Portfolio Form Section -->
         <div id="portfolio-form-section" class="hidden">
-            <h2 style="font-size: 20px; color: #581c87; margin-bottom: 16px; text-align: center;">📝 커리어 포트폴리오 작성</h2>
+            <h2 style="font-size: 20px; color: #6b21a8; margin-bottom: 16px; text-align: center;">📝 커리어 포트폴리오 작성</h2>
             <form onsubmit="handleSavePortfolio(event)">
                 <div class="form-group">
                     <label>프로필 사진 (컴퓨터 파일 선택)</label>
                     <input type="file" id="pf-image-file" accept="image/*" onchange="previewImageFile(event)">
                     <input type="hidden" id="pf-image-base64">
                     <div style="margin-top: 8px; display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 12px; color: #7e22ce;">또는 아바타 이모지 선택:</span>
+                        <span style="font-size: 12px; color: #9333ea;">또는 아바타 이모지 선택:</span>
                         <select id="pf-emoji-select" onchange="selectEmojiAvatar(this.value)" style="width: auto; padding: 6px 10px;">
                             <option value="">이모지 선택</option>
                             <option value="🥟">🥟 만두</option>
@@ -289,8 +298,16 @@
                     <textarea id="pf-projects"></textarea>
                 </div>
                 <div class="form-group">
+                    <label>자격증 및 전문 수료증</label>
+                    <textarea id="pf-certificates" placeholder="취득한 자격증이나 이수한 전문 교육 과정을 적어주세요"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>수상 및 대외활동 내역</label>
+                    <textarea id="pf-awards" placeholder="공모전, 해커톤 수상 내역 및 대외 활동 내역을 적어주세요"></textarea>
+                </div>
+                <div class="form-group">
                     <label>특이사항</label>
-                    <textarea id="pf-notes" placeholder="수상 내역, 자격증, 대외활동 등 특이사항을 적어주세요"></textarea>
+                    <textarea id="pf-notes" placeholder="기타 특이사항을 적어주세요"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">저장하기</button>
                 <button type="button" class="btn btn-secondary" onclick="cancelPortfolioForm()" style="margin-top: 6px;">취소</button>
@@ -305,7 +322,7 @@
                     <div id="view-profile-emoji-fallback" style="display:none; font-size:45px; width:70px; height:70px; display:flex; align-items:center; justify-content:center; background:#faf5ff; border:2px solid #d8b4fe; border-radius:50%;"></div>
                     <div>
                         <h2 id="view-name"></h2>
-                        <div id="view-job" style="color:#d946ef; font-weight:600; margin-top:2px;"></div>
+                        <div id="view-job" style="color:#a855f7; font-weight:600; margin-top:2px;"></div>
                         <div id="view-intro" style="color:#64748b; font-size:13px; margin-top:4px;"></div>
                     </div>
                 </div>
@@ -316,8 +333,34 @@
             <div class="section-box"><h3>💼 경력 사항</h3><p id="view-experience"></p></div>
             <div class="section-box"><h3>🎓 학력 및 교육</h3><p id="view-education"></p></div>
             <div class="section-box"><h3>🚀 프로젝트</h3><p id="view-projects"></p></div>
+            <div class="section-box"><h3>📜 자격증 및 전문 수료증</h3><p id="view-certificates"></p></div>
+            <div class="section-box"><h3>🏆 수상 및 대외활동 내역</h3><p id="view-awards"></p></div>
             <div class="section-box"><h3>⭐ 특이사항</h3><p id="view-notes"></p></div>
-            <button type="button" class="btn btn-secondary" onclick="openPortfolioForm()" style="margin-top:10px;">✏️ 포트폴리오 수정하기</button>
+            
+            <!-- Comments Section -->
+            <div class="section-box" style="margin-top: 24px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 style="margin-bottom:0;">💬 동료 코멘트 & 추천사</h3>
+                    <button type="button" id="open-comment-btn" class="btn btn-accent hidden" onclick="openCommentModal()" style="width: auto; padding: 6px 14px; font-size: 13px;">코멘트 달기</button>
+                </div>
+                <div id="view-comments-list" style="display: flex; flex-direction: column; gap: 8px;"></div>
+            </div>
+
+            <button type="button" id="view-edit-btn" class="btn btn-secondary hidden" onclick="openPortfolioForm()" style="margin-top:10px;">✏️ 포트폴리오 수정하기</button>
+        </div>
+    </div>
+
+    <!-- Comment Modal -->
+    <div class="modal-overlay" id="comment-modal">
+        <div class="modal-card" style="max-width: 400px; text-align: left;">
+            <h3 style="color: #6b21a8; font-size: 16px; margin-bottom: 12px;">동료 코멘트 남기기</h3>
+            <div class="form-group" style="margin-bottom: 12px;">
+                <textarea id="comment-input" placeholder="함께 일했던 경험이나 추천 한마디를 남겨주세요!" style="min-height: 100px;"></textarea>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button type="button" class="btn btn-primary" onclick="submitComment()" style="margin-top:0;">등록하기</button>
+                <button type="button" class="btn btn-secondary" onclick="closeCommentModal()" style="margin-top:0;">취소</button>
+            </div>
         </div>
     </div>
 
@@ -329,13 +372,15 @@
     </div>
 
     <script>
+        let currentViewingUserId = null;
+
         function initBubbles() {
             const container = document.getElementById('bubble-container');
             container.innerHTML = '';
-            for (let i = 0; i < 18; i++) {
+            for (let i = 0; i < 20; i++) {
                 const bubble = document.createElement('div');
                 bubble.classList.add('bubble');
-                const size = Math.random() * 60 + 35; // Larger size: 35px ~ 95px
+                const size = Math.random() * 80 + 45;
                 bubble.style.width = `${size}px`;
                 bubble.style.height = `${size}px`;
                 bubble.style.left = `${Math.random() * 100}%`;
@@ -345,58 +390,56 @@
             }
         }
 
-        // Full-screen burst effect for first-time portfolio creation
         function triggerFullScreenBubbleBurst() {
-            for (let i = 0; i < 90; i++) {
+            for (let i = 0; i < 100; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('pop-particle');
-                const size = Math.random() * 22 + 10;
+                const size = Math.random() * 24 + 10;
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 particle.style.left = `${window.innerWidth / 2}px`;
                 particle.style.top = `${window.innerHeight / 2}px`;
-
-                const colors = ['#c084fc', '#e879f9', '#a855f7', '#d8b4fe', '#f472b6', '#fb7185', '#ffffff'];
+                
+                const colors = ['#d8b4fe', '#c084fc', '#a855f7', '#f472b6', '#fbcfe8', '#ffffff'];
                 particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-
+                
                 const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * (Math.max(window.innerWidth, window.innerHeight) * 0.7) + 50;
+                const distance = Math.random() * (Math.max(window.innerWidth, window.innerHeight) * 0.75) + 50;
                 const tx = Math.cos(angle) * distance;
                 const ty = Math.sin(angle) * distance;
-
+                
                 particle.style.setProperty('--tx', `${tx}px`);
                 particle.style.setProperty('--ty', `${ty}px`);
-
+                
                 document.body.appendChild(particle);
                 setTimeout(() => particle.remove(), 900);
             }
         }
 
-        // Card-only burst effect for portfolio updates
         function triggerCardBubbleBurst(event) {
             const clientX = event ? event.clientX : window.innerWidth / 2;
             const clientY = event ? event.clientY : window.innerHeight / 2;
-
-            for (let i = 0; i < 30; i++) {
+            
+            for (let i = 0; i < 35; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('pop-particle');
-                const size = Math.random() * 16 + 8;
+                const size = Math.random() * 18 + 8;
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 particle.style.left = `${clientX}px`;
                 particle.style.top = `${clientY}px`;
-
-                const colors = ['#c084fc', '#e879f9', '#a855f7', '#d8b4fe', '#f472b6', '#fb7185'];
+                
+                const colors = ['#d8b4fe', '#c084fc', '#a855f7', '#f472b6', '#ffffff'];
                 particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-
+                
                 const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * 200 + 50;
+                const distance = Math.random() * 220 + 50;
                 const tx = Math.cos(angle) * distance;
                 const ty = Math.sin(angle) * distance;
-
+                
                 particle.style.setProperty('--tx', `${tx}px`);
                 particle.style.setProperty('--ty', `${ty}px`);
-
+                
                 document.body.appendChild(particle);
                 setTimeout(() => particle.remove(), 800);
             }
@@ -428,6 +471,7 @@
                 updateTopNavProfile(parsedUser);
                 switchView('explore');
                 loadExploreList('');
+                document.getElementById('search-input').value = '';
             } else {
                 switchView('login');
             }
@@ -437,7 +481,7 @@
             const user = JSON.parse(localStorage.getItem('mulmandu_logged_in') || '{}');
             const portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
             if (portfolios[user.id]) {
-                renderPortfolio(portfolios[user.id]);
+                renderPortfolio(portfolios[user.id], user.id);
                 switchView('portfolio-view');
             } else {
                 document.getElementById('welcome-title').innerText = `${user.name} 님 환영합니다! 🎉`;
@@ -450,6 +494,7 @@
             document.getElementById('custom-modal').classList.add('active');
             window.modalCallback = cb;
         }
+
         function closeModal() {
             document.getElementById('custom-modal').classList.remove('active');
             if (window.modalCallback) { window.modalCallback(); window.modalCallback = null; }
@@ -470,7 +515,7 @@
             const p = portfolios[user.id];
             const imgEl = document.getElementById('nav-profile-img');
             const emojiEl = document.getElementById('nav-profile-emoji');
-
+            
             if (p && p.image) {
                 if (p.image.startsWith('data:')) {
                     imgEl.src = p.image;
@@ -494,15 +539,14 @@
             });
             const card = document.getElementById('main-card');
             card.classList.remove('wide');
-            if (name === 'login') document.getElementById('login-section').classList.add('hidden'); // handled below
-
+            
             if (name === 'login') document.getElementById('login-section').classList.remove('hidden');
             else if (name === 'signup') document.getElementById('signup-section').classList.remove('hidden');
-            else if (name === 'explore') { document.getElementById('explore-home-section').classList.remove('hidden'); }
+            else if (name === 'explore') document.getElementById('explore-home-section').classList.remove('hidden');
             else if (name === 'welcome') document.getElementById('welcome-portfolio-section').classList.remove('hidden');
             else if (name === 'form') { document.getElementById('portfolio-form-section').classList.remove('hidden'); card.classList.add('wide'); }
             else if (name === 'portfolio-view') { document.getElementById('portfolio-view-section').classList.remove('hidden'); card.classList.add('wide'); }
-
+            
             const user = localStorage.getItem('mulmandu_logged_in');
             updateTopNavProfile(user ? JSON.parse(user) : null);
         }
@@ -529,92 +573,111 @@
             e.preventDefault();
             const id = document.getElementById('login-id').value.trim();
             const pw = document.getElementById('login-pw').value.trim();
+            const rememberMe = document.getElementById('remember-me').checked;
+
             const users = JSON.parse(localStorage.getItem('mulmandu_users') || '[]');
             const user = users.find(u => u.id === id && u.pw === pw);
             if (!user) { showModal('아이디 또는 비밀번호가 틀렸습니다.'); return; }
+
+            if (rememberMe) {
+                localStorage.setItem('mulmandu_saved_credentials', JSON.stringify({ id, pw }));
+            } else {
+                localStorage.removeItem('mulmandu_saved_credentials');
+            }
+
             localStorage.setItem('mulmandu_logged_in', JSON.stringify(user));
             checkUserSession(user);
         }
 
         function checkUserSession(user) {
             updateTopNavProfile(user);
-            document.getElementById('explore-welcome-title').innerText = `${user.name} 님 환영합니다! 🔍`;
-            switchView('explore');
-            loadExploreList('');
+            const portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
+            if (portfolios[user.id]) {
+                document.getElementById('explore-welcome-title').innerText = `${user.name} 님 환영합니다! 🔍`;
+                switchView('explore');
+                loadExploreList('');
+                document.getElementById('search-input').value = '';
+            } else {
+                document.getElementById('welcome-title').innerText = `${user.name} 님 환영합니다! 🎉`;
+                switchView('welcome');
+            }
         }
 
-        function loadExploreList(keyword) {
+        function handleSearch(keyword) {
             const portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
             const users = JSON.parse(localStorage.getItem('mulmandu_users') || '[]');
             const container = document.getElementById('search-results-container');
             container.innerHTML = '';
+            
+            if (!keyword || keyword.trim() === '') {
+                container.innerHTML = `<div style="text-align: center; color: #a855f7; font-size: 13px; padding: 20px;">검색어를 입력하면 조건에 맞는 포트폴리오가 표시됩니다.</div>`;
+                return;
+            }
+
+            const terms = keyword.split(',').map(t => t.trim().toLowerCase()).filter(t => t.length > 0);
+            if (terms.length === 0) {
+                container.innerHTML = `<div style="text-align: center; color: #a855f7; font-size: 13px; padding: 20px;">검색어를 입력해주세요.</div>`;
+                return;
+            }
 
             let list = [];
             for (let uid in portfolios) {
                 const p = portfolios[uid];
                 const u = users.find(x => x.id === uid);
-                list.push({ uid, ...p, authorName: u ? u.name : '작성자' });
-            }
+                const searchableText = [
+                    u ? u.name : '',
+                    p.name, p.job, p.contact, p.intro, p.skills,
+                    p.experience, p.education, p.projects, p.certificates, p.awards, p.notes
+                ].join(' ').toLowerCase();
 
-            if (keyword) {
-                const kw = keyword.toLowerCase();
-                list = list.filter(item => 
-                    (item.name && item.name.toLowerCase().includes(kw)) ||
-                    (item.job && item.job.toLowerCase().includes(kw)) ||
-                    (item.skills && item.skills.toLowerCase().includes(kw))
-                );
+                const matchesAll = terms.every(term => searchableText.includes(term));
+                if (matchesAll) {
+                    list.push({ uid, p, name: u ? u.name : p.name });
+                }
             }
 
             if (list.length === 0) {
-                container.innerHTML = `<div style="text-align: center; color: #9333ea; font-size: 13px; padding: 20px;">등록된 포트폴리오가 없거나 검색 결과가 없습니다.</div>`;
+                container.innerHTML = `<div style="text-align: center; color: #9333ea; font-size: 13px; padding: 20px;">검색 결과가 없습니다.</div>`;
                 return;
             }
 
             list.forEach(item => {
                 const cardEl = document.createElement('div');
-                cardEl.style.cssText = "background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 12px; padding: 12px 16px; margin-bottom: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;";
-                cardEl.onclick = () => { renderPortfolio(item); switchView('portfolio-view'); };
+                cardEl.style.cssText = "background: #ffffff; border: 1px solid #f3e8ff; border-radius: 12px; padding: 14px 18px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: transform 0.2s;";
+                cardEl.onmouseover = () => cardEl.style.transform = 'scale(1.01)';
+                cardEl.onmouseout = () => cardEl.style.transform = 'scale(1)';
+                cardEl.onclick = () => {
+                    renderPortfolio(item.p, item.uid);
+                    switchView('portfolio-view');
+                };
 
-                let avatarHTML = `<span style="font-size:24px;">🥟</span>`;
-                if (item.image) {
-                    if (item.image.startsWith('data:')) {
-                        avatarHTML = `<img src="${item.image}" style="width:36px; height:36px; border-radius:50%; object-fit:cover;">`;
-                    } else {
-                        avatarHTML = `<span style="font-size:24px;">${item.image}</span>`;
-                    }
-                }
+                let avatarHtml = item.p.image && item.p.image.startsWith('data:') 
+                    ? `<img src="${item.p.image}" style="width:40px; height:40px; border-radius:50%; object-fit:cover; border:1px solid #d8b4fe;">`
+                    : `<div style="width:40px; height:40px; border-radius:50%; background:#faf5ff; border:1px solid #d8b4fe; display:flex; align-items:center; justify-content:center; font-size:20px;">${item.p.image || '🥟'}</div>`;
 
                 cardEl.innerHTML = `
                     <div style="display: flex; align-items: center; gap: 12px;">
-                        <div>${avatarHTML}</div>
+                        ${avatarHtml}
                         <div>
-                            <div style="font-weight: 700; color: #581c87; font-size: 14px;">${item.name} (${item.job})</div>
-                            <div style="font-size: 12px; color: #64748b; margin-top: 2px;">${item.intro || ''}</div>
+                            <div style="font-weight: 700; color: #6b21a8; font-size: 15px;">${item.p.name}</div>
+                            <div style="font-size: 12px; color: #a855f7;">${item.p.job} | ${item.p.intro}</div>
                         </div>
                     </div>
-                    <div style="font-size: 12px; color: #d946ef; font-weight: 600;">보기 →</div>
+                    <span style="font-size: 12px; color: #7e22ce; font-weight: 600; background: #f3e8ff; padding: 4px 10px; border-radius: 8px;">포트폴리오 보기 &rarr;</span>
                 `;
                 container.appendChild(cardEl);
             });
         }
 
-        function handleSearch(val) {
-            loadExploreList(val);
-        }
-
         function openPortfolioFormWithBubbleEffect() {
-            const user = JSON.parse(localStorage.getItem('mulmandu_logged_in'));
-            if (user) document.getElementById('pf-name').value = user.name || '';
             const user = JSON.parse(localStorage.getItem('mulmandu_logged_in') || '{}');
             const portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
             
-            // Check if portfolio already exists for this user
             if (portfolios[user.id]) {
                 openPortfolioForm();
                 return;
             }
 
-            // If first time, start completely blank (name only if available)
             document.getElementById('pf-image-base64').value = '';
             document.getElementById('pf-image-file').value = '';
             document.getElementById('pf-emoji-select').value = '';
@@ -626,6 +689,8 @@
             document.getElementById('pf-experience').value = '';
             document.getElementById('pf-education').value = '';
             document.getElementById('pf-projects').value = '';
+            document.getElementById('pf-certificates').value = '';
+            document.getElementById('pf-awards').value = '';
             document.getElementById('pf-notes').value = '';
             
             switchView('form');
@@ -646,17 +711,37 @@
                 document.getElementById('pf-experience').value = p.experience || '';
                 document.getElementById('pf-education').value = p.education || '';
                 document.getElementById('pf-projects').value = p.projects || '';
+                document.getElementById('pf-certificates').value = p.certificates || '';
+                document.getElementById('pf-awards').value = p.awards || '';
                 document.getElementById('pf-notes').value = p.notes || '';
             } else {
+                document.getElementById('pf-image-base64').value = '';
+                document.getElementById('pf-image-file').value = '';
+                document.getElementById('pf-emoji-select').value = '';
                 document.getElementById('pf-name').value = user.name || '';
+                document.getElementById('pf-job').value = '';
+                document.getElementById('pf-contact').value = '';
+                document.getElementById('pf-intro').value = '';
+                document.getElementById('pf-skills').value = '';
+                document.getElementById('pf-experience').value = '';
+                document.getElementById('pf-education').value = '';
+                document.getElementById('pf-projects').value = '';
+                document.getElementById('pf-certificates').value = '';
+                document.getElementById('pf-awards').value = '';
+                document.getElementById('pf-notes').value = '';
             }
             switchView('form');
         }
 
         function cancelPortfolioForm() {
-            const user = JSON.parse(localStorage.getItem('mulmandu_logged_in'));
+            const user = JSON.parse(localStorage.getItem('mulmandu_logged_in') || '{}');
             const portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
-            if (portfolios[user.id]) { renderPortfolio(portfolios[user.id]); switchView('portfolio-view'); } else { switchView('explore'); }
+            if (portfolios[user.id]) {
+                renderPortfolio(portfolios[user.id], user.id);
+                switchView('portfolio-view');
+            } else {
+                goHome();
+            }
         }
 
         function handleSavePortfolio(e) {
@@ -666,8 +751,9 @@
             const isFirstTime = !portfolios[user.id];
 
             const existingImage = portfolios[user.id]?.image || '🥟';
+            const existingComments = portfolios[user.id]?.comments || [];
             const newImage = document.getElementById('pf-image-base64').value.trim() || existingImage;
-
+            
             const data = {
                 image: newImage,
                 name: document.getElementById('pf-name').value.trim(),
@@ -678,22 +764,38 @@
                 experience: document.getElementById('pf-experience').value.trim(),
                 education: document.getElementById('pf-education').value.trim(),
                 projects: document.getElementById('pf-projects').value.trim(),
-                notes: document.getElementById('pf-notes').value.trim()
+                certificates: document.getElementById('pf-certificates').value.trim(),
+                awards: document.getElementById('pf-awards').value.trim(),
+                notes: document.getElementById('pf-notes').value.trim(),
+                comments: existingComments
             };
             portfolios[user.id] = data;
             localStorage.setItem('mulmandu_portfolios', JSON.stringify(portfolios));
             updateTopNavProfile(user);
-
+            
             if (isFirstTime) {
                 triggerFullScreenBubbleBurst();
             } else {
                 triggerCardBubbleBurst(e);
             }
 
-            showModal('포트폴리오가 성공적으로 저장되었습니다! 🎉', () => { renderPortfolio(data); switchView('portfolio-view'); });
+            showModal('포트폴리오가 성공적으로 저장되었습니다! 🎉', () => { renderPortfolio(data, user.id); switchView('portfolio-view'); });
         }
 
-        function renderPortfolio(p) {
+        function renderPortfolio(p, ownerUid) {
+            currentViewingUserId = ownerUid;
+            const currentUser = JSON.parse(localStorage.getItem('mulmandu_logged_in') || '{}');
+            const editBtn = document.getElementById('view-edit-btn');
+            const commentBtn = document.getElementById('open-comment-btn');
+            
+            if (ownerUid && ownerUid === currentUser.id) {
+                editBtn.classList.remove('hidden');
+                commentBtn.classList.add('hidden');
+            } else {
+                editBtn.classList.add('hidden');
+                commentBtn.classList.remove('hidden');
+            }
+
             const img = document.getElementById('view-profile-img');
             const emojiFallback = document.getElementById('view-profile-emoji-fallback');
             if (p.image) {
@@ -717,7 +819,10 @@
             document.getElementById('view-experience').innerText = p.experience || '미입력';
             document.getElementById('view-education').innerText = p.education || '미입력';
             document.getElementById('view-projects').innerText = p.projects || '미입력';
+            document.getElementById('view-certificates').innerText = p.certificates || '미입력';
+            document.getElementById('view-awards').innerText = p.awards || '미입력';
             document.getElementById('view-notes').innerText = p.notes || '미입력';
+            
             const tags = document.getElementById('view-skills-tags');
             tags.innerHTML = '';
             if (p.skills) {
@@ -725,6 +830,55 @@
                     const tag = document.createElement('span');
                     tag.className = 'tag'; tag.innerText = s.trim();
                     tags.appendChild(tag);
+                });
+            }
+
+            const commentsList = document.getElementById('view-comments-list');
+            commentsList.innerHTML = '';
+            if (p.comments && p.comments.length > 0) {
+                p.comments.forEach(c => {
+                    const cEl = document.createElement('div');
+                    cEl.style.cssText = "background: #ffffff; border: 1px solid #f3e8ff; border-radius: 10px; padding: 10px 14px; font-size: 13px;";
+                    cEl.innerHTML = `
+                        <div style="font-weight: 700; color: #7e22ce; margin-bottom: 2px;">${c.authorName}</div>
+                        <div style="color: #4a5568; line-height: 1.4;">${c.text}</div>
+                    `;
+                    commentsList.appendChild(cEl);
+                });
+            } else {
+                commentsList.innerHTML = `<div style="font-size: 13px; color: #9333ea; opacity: 0.8;">작성된 코멘트가 없습니다. 첫 코멘트를 남겨보세요!</div>`;
+            }
+        }
+
+        function openCommentModal() {
+            document.getElementById('comment-input').value = '';
+            document.getElementById('comment-modal').classList.add('active');
+        }
+
+        function closeCommentModal() {
+            document.getElementById('comment-modal').classList.remove('active');
+        }
+
+        function submitComment() {
+            const text = document.getElementById('comment-input').value.trim();
+            if (!text) { showModal('코멘트 내용을 입력해주세요.'); return; }
+            
+            const currentUser = JSON.parse(localStorage.getItem('mulmandu_logged_in') || '{}');
+            let portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
+            
+            if (portfolios[currentViewingUserId]) {
+                if (!portfolios[currentViewingUserId].comments) {
+                    portfolios[currentViewingUserId].comments = [];
+                }
+                portfolios[currentViewingUserId].comments.push({
+                    authorId: currentUser.id,
+                    authorName: currentUser.name || '동료',
+                    text: text
+                });
+                localStorage.setItem('mulmandu_portfolios', JSON.stringify(portfolios));
+                closeCommentModal();
+                showModal('코멘트가 성공적으로 등록되었습니다! 🎉', () => {
+                    renderPortfolio(portfolios[currentViewingUserId], currentViewingUserId);
                 });
             }
         }
@@ -736,6 +890,13 @@
 
         window.onload = function() {
             initBubbles();
+            const savedCreds = JSON.parse(localStorage.getItem('mulmandu_saved_credentials') || 'null');
+            if (savedCreds) {
+                document.getElementById('login-id').value = savedCreds.id || '';
+                document.getElementById('login-pw').value = savedCreds.pw || '';
+                document.getElementById('remember-me').checked = true;
+            }
+
             const user = localStorage.getItem('mulmandu_logged_in');
             if (user) {
                 const parsedUser = JSON.parse(user);
