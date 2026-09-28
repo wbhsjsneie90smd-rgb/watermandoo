@@ -38,7 +38,6 @@
             100% { transform: translateY(-110vh) translateX(60px) scale(1.15); opacity: 0; }
         }
 
-        /* Full-screen & Card celebratory bubble particles */
         .pop-particle {
             position: fixed; border-radius: 50%; pointer-events: none; z-index: 2000;
             animation: popOut 0.9s forwards ease-out;
@@ -220,9 +219,10 @@
                 <p style="color: #7e22ce; font-size: 13px;">다른 사용자의 커리어를 검색하거나 내 포트폴리오를 관리해보세요!</p>
             </div>
             <div class="form-group" style="position: relative;">
-                <input type="text" id="search-input" placeholder="관심 직무, 기술, 이름으로 검색..." oninput="handleSearch(this.value)" style="padding-left: 40px;">
+                <input type="text" id="search-input" placeholder="쉼표(,)로 구분하여 검색어 입력 (예: 프론트엔드, React, 김)" oninput="handleSearch(this.value)" style="padding-left: 40px;">
                 <span style="position: absolute; left: 14px; top: 38px; color: #a855f7;">🔍</span>
             </div>
+            <div style="font-size: 11px; color: #9333ea; margin-top: -8px; margin-bottom: 12px; text-align: left; padding-left: 4px;">* 쉼표(,)로 구분된 모든 검색어가 포함된 포트폴리오만 검색됩니다.</div>
             <div id="search-results-container" style="max-height: 220px; overflow-y: auto; text-align: left; margin-top: 12px;"></div>
             <button type="button" class="btn btn-secondary" onclick="handleLogout()" style="margin-top: 16px;">로그아웃</button>
         </div>
@@ -317,7 +317,7 @@
             <div class="section-box"><h3>🎓 학력 및 교육</h3><p id="view-education"></p></div>
             <div class="section-box"><h3>🚀 프로젝트</h3><p id="view-projects"></p></div>
             <div class="section-box"><h3>⭐ 특이사항</h3><p id="view-notes"></p></div>
-            <button type="button" class="btn btn-secondary" onclick="openPortfolioForm()" style="margin-top:10px;">✏️ 포트폴리오 수정하기</button>
+            <button type="button" id="view-edit-btn" class="btn btn-secondary hidden" onclick="openPortfolioForm()" style="margin-top:10px;">✏️ 포트폴리오 수정하기</button>
         </div>
     </div>
 
@@ -335,7 +335,7 @@
             for (let i = 0; i < 18; i++) {
                 const bubble = document.createElement('div');
                 bubble.classList.add('bubble');
-                const size = Math.random() * 60 + 35; // Larger size: 35px ~ 95px
+                const size = Math.random() * 60 + 35;
                 bubble.style.width = `${size}px`;
                 bubble.style.height = `${size}px`;
                 bubble.style.left = `${Math.random() * 100}%`;
@@ -345,7 +345,6 @@
             }
         }
 
-        // Full-screen burst effect for first-time portfolio creation
         function triggerFullScreenBubbleBurst() {
             for (let i = 0; i < 90; i++) {
                 const particle = document.createElement('div');
@@ -372,7 +371,6 @@
             }
         }
 
-        // Card-only burst effect for portfolio updates
         function triggerCardBubbleBurst(event) {
             const clientX = event ? event.clientX : window.innerWidth / 2;
             const clientY = event ? event.clientY : window.innerHeight / 2;
@@ -437,7 +435,7 @@
             const user = JSON.parse(localStorage.getItem('mulmandu_logged_in') || '{}');
             const portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
             if (portfolios[user.id]) {
-                renderPortfolio(portfolios[user.id]);
+                renderPortfolio(portfolios[user.id], user.id);
                 switchView('portfolio-view');
             } else {
                 document.getElementById('welcome-title').innerText = `${user.name} 님 환영합니다! 🎉`;
@@ -450,6 +448,7 @@
             document.getElementById('custom-modal').classList.add('active');
             window.modalCallback = cb;
         }
+
         function closeModal() {
             document.getElementById('custom-modal').classList.remove('active');
             if (window.modalCallback) { window.modalCallback(); window.modalCallback = null; }
@@ -494,11 +493,10 @@
             });
             const card = document.getElementById('main-card');
             card.classList.remove('wide');
-            if (name === 'login') document.getElementById('login-section').classList.add('hidden'); // handled below
             
             if (name === 'login') document.getElementById('login-section').classList.remove('hidden');
             else if (name === 'signup') document.getElementById('signup-section').classList.remove('hidden');
-            else if (name === 'explore') { document.getElementById('explore-home-section').classList.remove('hidden'); }
+            else if (name === 'explore') document.getElementById('explore-home-section').classList.remove('hidden');
             else if (name === 'welcome') document.getElementById('welcome-portfolio-section').classList.remove('hidden');
             else if (name === 'form') { document.getElementById('portfolio-form-section').classList.remove('hidden'); card.classList.add('wide'); }
             else if (name === 'portfolio-view') { document.getElementById('portfolio-view-section').classList.remove('hidden'); card.classList.add('wide'); }
@@ -549,6 +547,11 @@
             const container = document.getElementById('search-results-container');
             container.innerHTML = '';
             
+            if (!keyword || keyword.trim() === '') {
+                container.innerHTML = `<div style="text-align: center; color: #9333ea; font-size: 13px; padding: 20px;">검색어를 입력하면 조건에 맞는 포트폴리오가 표시됩니다.</div>`;
+                return;
+            }
+
             let list = [];
             for (let uid in portfolios) {
                 const p = portfolios[uid];
@@ -556,24 +559,36 @@
                 list.push({ uid, ...p, authorName: u ? u.name : '작성자' });
             }
 
-            if (keyword) {
-                const kw = keyword.toLowerCase();
-                list = list.filter(item => 
-                    (item.name && item.name.toLowerCase().includes(kw)) ||
-                    (item.job && item.job.toLowerCase().includes(kw)) ||
-                    (item.skills && item.skills.toLowerCase().includes(kw))
-                );
+            const keywords = keyword.split(',').map(k => k.trim().toLowerCase()).filter(k => k.length > 0);
+
+            if (keywords.length > 0) {
+                list = list.filter(item => {
+                    const fullText = [
+                        item.name || '',
+                        item.job || '',
+                        item.contact || '',
+                        item.intro || '',
+                        item.skills || '',
+                        item.experience || '',
+                        item.education || '',
+                        item.projects || '',
+                        item.notes || '',
+                        item.authorName || ''
+                    ].join(' ').toLowerCase();
+
+                    return keywords.every(kw => fullText.includes(kw));
+                });
             }
 
             if (list.length === 0) {
-                container.innerHTML = `<div style="text-align: center; color: #9333ea; font-size: 13px; padding: 20px;">등록된 포트폴리오가 없거나 검색 결과가 없습니다.</div>`;
+                container.innerHTML = `<div style="text-align: center; color: #9333ea; font-size: 13px; padding: 20px;">검색 조건과 일치하는 포트폴리오가 없습니다.</div>`;
                 return;
             }
 
             list.forEach(item => {
                 const cardEl = document.createElement('div');
                 cardEl.style.cssText = "background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 12px; padding: 12px 16px; margin-bottom: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;";
-                cardEl.onclick = () => { renderPortfolio(item); switchView('portfolio-view'); };
+                cardEl.onclick = () => { renderPortfolio(item, item.uid); switchView('portfolio-view'); };
                 
                 let avatarHTML = `<span style="font-size:24px;">🥟</span>`;
                 if (item.image) {
@@ -606,13 +621,11 @@
             const user = JSON.parse(localStorage.getItem('mulmandu_logged_in') || '{}');
             const portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
             
-            // Check if portfolio already exists for this user
             if (portfolios[user.id]) {
                 openPortfolioForm();
                 return;
             }
 
-            // If first time, start completely blank (name only if available)
             document.getElementById('pf-image-base64').value = '';
             document.getElementById('pf-image-file').value = '';
             document.getElementById('pf-emoji-select').value = '';
@@ -654,7 +667,7 @@
         function cancelPortfolioForm() {
             const user = JSON.parse(localStorage.getItem('mulmandu_logged_in'));
             const portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
-            if (portfolios[user.id]) { renderPortfolio(portfolios[user.id]); switchView('portfolio-view'); } else { switchView('explore'); }
+            if (portfolios[user.id]) { renderPortfolio(portfolios[user.id], user.id); switchView('portfolio-view'); } else { switchView('explore'); }
         }
 
         function handleSavePortfolio(e) {
@@ -688,10 +701,19 @@
                 triggerCardBubbleBurst(e);
             }
 
-            showModal('포트폴리오가 성공적으로 저장되었습니다! 🎉', () => { renderPortfolio(data); switchView('portfolio-view'); });
+            showModal('포트폴리오가 성공적으로 저장되었습니다! 🎉', () => { renderPortfolio(data, user.id); switchView('portfolio-view'); });
         }
 
-        function renderPortfolio(p) {
+        function renderPortfolio(p, ownerUid) {
+            const currentUser = JSON.parse(localStorage.getItem('mulmandu_logged_in') || '{}');
+            const editBtn = document.getElementById('view-edit-btn');
+            
+            if (ownerUid && ownerUid === currentUser.id) {
+                editBtn.classList.remove('hidden');
+            } else {
+                editBtn.classList.add('hidden');
+            }
+
             const img = document.getElementById('view-profile-img');
             const emojiFallback = document.getElementById('view-profile-emoji-fallback');
             if (p.image) {
@@ -716,6 +738,7 @@
             document.getElementById('view-education').innerText = p.education || '미입력';
             document.getElementById('view-projects').innerText = p.projects || '미입력';
             document.getElementById('view-notes').innerText = p.notes || '미입력';
+            
             const tags = document.getElementById('view-skills-tags');
             tags.innerHTML = '';
             if (p.skills) {
