@@ -166,6 +166,11 @@
         .ranking-title { font-size: 14px; font-weight: 700; color: #7e22ce; margin: 4px 0 10px 4px; }
         .rank-badge { width: 26px; text-align: center; font-size: 18px; font-weight: 700; color: #a855f7; flex-shrink: 0; }
         .like-pill { font-size: 12px; color: #db2777; font-weight: 600; background: #fdf2f8; border: 1px solid #fbcfe8; padding: 4px 10px; border-radius: 8px; white-space: nowrap; }
+
+        .skill-level-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: #faf5ff; border: 1px solid #f3e8ff; border-radius: 10px; padding: 8px 12px; margin-top: 8px; }
+        .skill-level-name { font-size: 13px; font-weight: 600; color: #6b21a8; word-break: break-all; }
+        .skill-level-row select { width: auto !important; min-width: 130px; padding: 6px 10px !important; font-size: 13px !important; border-radius: 8px !important; flex-shrink: 0; }
+        .skill-tag-level { margin-left: 6px; padding-left: 6px; border-left: 1px solid #d8b4fe; color: #a855f7; font-weight: 700; }
     </style>
 </head>
 <body>
@@ -311,14 +316,9 @@
                 </div>
                 <div class="form-group">
                     <label>보유 기술 (직무 역량 / 스킬명)</label>
-                    <input type="text" id="pf-skills" placeholder="예: JavaScript, React, UI/UX 디자인 등" required>
-                </div>
-                <div class="form-group">
-                    <label>보유 기술 숙련도 수준 (Lv.1 ~ Lv.10)</label>
-                    <div class="level-grid" id="skill-level-grid">
-                        <!-- Levels 1 to 10 generated via JS -->
-                    </div>
-                    <input type="hidden" id="pf-skill-level" value="5">
+                    <input type="text" id="pf-skills" placeholder="예: JavaScript, React, UI/UX 디자인 등" oninput="renderSkillLevelInputs(this.value)" required>
+                    <div class="hint">쉼표(,)로 구분해서 입력하면 아래에 기술별 레벨 선택칸이 생겨요. (Lv.1 입문자 ~ Lv.10 전문가)</div>
+                    <div id="skill-levels-container"></div>
                 </div>
                 <div class="form-group">
                     <label>경력 사항</label>
@@ -369,7 +369,6 @@
             <div class="section-box"><h3>📞 연락처</h3><p id="view-contact"></p></div>
             <div class="section-box">
                 <h3>💡 기술 스택 & 보유 기술</h3>
-                <div style="font-size: 13px; color: #7e22ce; font-weight: 600; margin-bottom: 6px;" id="view-skill-level-text">숙련도: Lv.5</div>
                 <div class="tag-list" id="view-skills-tags"></div>
             </div>
             <div class="section-box"><h3>💼 경력 사항</h3><p id="view-experience"></p></div>
@@ -432,35 +431,65 @@
             }
         }
 
-        function initSkillLevelButtons(selectedLevel = 5) {
-            const grid = document.getElementById('skill-level-grid');
-            grid.innerHTML = '';
-            const labels = {
-                1: 'Lv.1 입문자',
-                2: 'Lv.2 초급',
-                3: 'Lv.3 수습',
-                4: 'Lv.4 중하',
-                5: 'Lv.5 중급',
-                6: 'Lv.6 중상',
-                7: 'Lv.7 고급',
-                8: 'Lv.8 숙련',
-                9: 'Lv.9 마스터',
-                10: 'Lv.10 전문가'
-            };
-            for (let i = 1; i <= 10; i++) {
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = `level-btn ${i === Number(selectedLevel) ? 'active' : ''}`;
-                btn.innerText = `Lv.${i}`;
-                btn.title = labels[i];
-                btn.onclick = () => {
-                    document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    document.getElementById('pf-skill-level').value = i;
-                };
-                grid.appendChild(btn);
-            }
-            document.getElementById('pf-skill-level').value = selectedLevel;
+        const SKILL_LEVEL_NAMES = {
+            1: 'Lv.1 입문자', 2: 'Lv.2 초급', 3: 'Lv.3 수습', 4: 'Lv.4 중하', 5: 'Lv.5 중급',
+            6: 'Lv.6 중상', 7: 'Lv.7 고급', 8: 'Lv.8 숙련', 9: 'Lv.9 마스터', 10: 'Lv.10 전문가'
+        };
+        const DEFAULT_SKILL_LEVEL = 5;
+        let currentSkillLevels = {};
+
+        function parseSkills(str) {
+            const seen = new Set();
+            return String(str || '').split(',').map(t => t.trim()).filter(t => {
+                if (!t || seen.has(t)) return false;
+                seen.add(t);
+                return true;
+            });
+        }
+
+        // 저장된 포트폴리오에서 기술별 레벨 꺼내기 (예전 데이터는 단일 숙련도를 모든 기술에 적용)
+        function getSkillLevels(p) {
+            if (p && p.skillLevels) return { ...p.skillLevels };
+            const levels = {};
+            parseSkills(p && p.skills).forEach(name => { levels[name] = (p && p.skillLevel) || DEFAULT_SKILL_LEVEL; });
+            return levels;
+        }
+
+        // 보유 기술 입력값에 맞춰 기술별 레벨 선택칸 생성
+        function renderSkillLevelInputs(skillsStr, levels) {
+            if (levels) currentSkillLevels = { ...levels };
+            const container = document.getElementById('skill-levels-container');
+            container.innerHTML = '';
+            parseSkills(skillsStr).forEach(name => {
+                const row = document.createElement('div');
+                row.className = 'skill-level-row';
+
+                const label = document.createElement('span');
+                label.className = 'skill-level-name';
+                label.textContent = name;
+
+                const select = document.createElement('select');
+                const current = currentSkillLevels[name] || DEFAULT_SKILL_LEVEL;
+                for (let i = 1; i <= 10; i++) {
+                    const opt = document.createElement('option');
+                    opt.value = i;
+                    opt.textContent = SKILL_LEVEL_NAMES[i];
+                    if (i === Number(current)) opt.selected = true;
+                    select.appendChild(opt);
+                }
+                select.onchange = () => { currentSkillLevels[name] = Number(select.value); };
+
+                row.appendChild(label);
+                row.appendChild(select);
+                container.appendChild(row);
+            });
+        }
+
+        // 저장 시: 현재 입력된 기술만 골라 {기술명: 레벨} 만들기
+        function collectSkillLevels(skillsStr) {
+            const result = {};
+            parseSkills(skillsStr).forEach(name => { result[name] = Number(currentSkillLevels[name]) || DEFAULT_SKILL_LEVEL; });
+            return result;
         }
 
         function triggerFullScreenBubbleBurst() {
@@ -796,7 +825,7 @@
             document.getElementById('pf-contact').value = '';
             document.getElementById('pf-intro').value = '';
             document.getElementById('pf-skills').value = '';
-            initSkillLevelButtons(5);
+            renderSkillLevelInputs('', {});
             document.getElementById('pf-experience').value = '';
             document.getElementById('pf-education').value = '';
             document.getElementById('pf-projects').value = '';
@@ -821,7 +850,7 @@
                 document.getElementById('pf-contact').value = p.contact || '';
                 document.getElementById('pf-intro').value = p.intro || '';
                 document.getElementById('pf-skills').value = p.skills || '';
-                initSkillLevelButtons(p.skillLevel || 5);
+                renderSkillLevelInputs(p.skills || '', getSkillLevels(p));
                 document.getElementById('pf-experience').value = p.experience || '';
                 document.getElementById('pf-education').value = p.education || '';
                 document.getElementById('pf-projects').value = p.projects || '';
@@ -837,7 +866,7 @@
                 document.getElementById('pf-contact').value = '';
                 document.getElementById('pf-intro').value = '';
                 document.getElementById('pf-skills').value = '';
-                initSkillLevelButtons(5);
+                renderSkillLevelInputs('', {});
                 document.getElementById('pf-experience').value = '';
                 document.getElementById('pf-education').value = '';
                 document.getElementById('pf-projects').value = '';
@@ -877,7 +906,7 @@
                 contact: document.getElementById('pf-contact').value.trim(),
                 intro: document.getElementById('pf-intro').value.trim(),
                 skills: document.getElementById('pf-skills').value.trim(),
-                skillLevel: Number(document.getElementById('pf-skill-level').value) || 5,
+                skillLevels: collectSkillLevels(document.getElementById('pf-skills').value),
                 experience: document.getElementById('pf-experience').value.trim(),
                 education: document.getElementById('pf-education').value.trim(),
                 projects: document.getElementById('pf-projects').value.trim(),
@@ -948,22 +977,25 @@
             document.getElementById('view-awards').innerText = p.awards || '미입력';
             document.getElementById('view-notes').innerText = p.notes || '미입력';
             
-            const levelNames = {
-                1: 'Lv.1 입문자', 2: 'Lv.2 초급', 3: 'Lv.3 수습', 4: 'Lv.4 중하', 5: 'Lv.5 중급',
-                6: 'Lv.6 중상', 7: 'Lv.7 고급', 8: 'Lv.8 숙련', 9: 'Lv.9 마스터', 10: 'Lv.10 전문가'
-            };
-            const sLevel = p.skillLevel || 5;
-            document.getElementById('view-skill-level-text').innerText = `숙련도: ${levelNames[sLevel] || ('Lv.' + sLevel)}`;
-
             const tags = document.getElementById('view-skills-tags');
             tags.innerHTML = '';
-            if (p.skills) {
-                p.skills.split(',').forEach(s => {
-                    const tag = document.createElement('span');
-                    tag.className = 'tag'; tag.innerText = s.trim();
-                    tags.appendChild(tag);
-                });
+            const levels = getSkillLevels(p);
+            const skillNames = parseSkills(p.skills);
+            if (skillNames.length === 0) {
+                tags.innerText = '미입력';
             }
+            skillNames.forEach(name => {
+                const lv = levels[name] || DEFAULT_SKILL_LEVEL;
+                const tag = document.createElement('span');
+                tag.className = 'tag';
+                tag.title = SKILL_LEVEL_NAMES[lv] || ('Lv.' + lv);
+                tag.appendChild(document.createTextNode(name));
+                const badge = document.createElement('span');
+                badge.className = 'skill-tag-level';
+                badge.textContent = SKILL_LEVEL_NAMES[lv] || ('Lv.' + lv);
+                tag.appendChild(badge);
+                tags.appendChild(tag);
+            });
 
             const commentsList = document.getElementById('view-comments-list');
             commentsList.innerHTML = '';
@@ -1039,7 +1071,7 @@
 
         window.onload = function() {
             initBubbles();
-            initSkillLevelButtons(5);
+            renderSkillLevelInputs('', {});
             const savedCreds = JSON.parse(localStorage.getItem('mulmandu_saved_credentials') || 'null');
             if (savedCreds) {
                 document.getElementById('login-id').value = savedCreds.id || '';
