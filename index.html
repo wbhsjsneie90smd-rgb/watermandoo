@@ -244,12 +244,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label>프로필 사진</label>
+                    <label>프로필 사진 (로컬 최적화 가이드 적용)</label>
                     <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
                         <div id="pf-current-img-preview" style="width: 52px; height: 52px; border-radius: 50%; overflow: hidden; border: 2px solid #d8b4fe; background: #faf5ff; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0;">🥟</div>
                         <div style="flex: 1;">
                             <input type="file" id="pf-image" accept="image/*" onchange="previewImage(event)">
-                            <div class="hint" id="pf-img-status">등록된 프로필 사진이 있습니다. 변경하려면 새 파일을 선택하세요.</div>
+                            <div class="hint" id="pf-img-status">로컬 환경(LocalStorage) 용량 최적화를 위해 작은 크기의 이미지를 권장합니다.</div>
                         </div>
                     </div>
                 </div>
@@ -267,53 +267,53 @@
                 </div>
 
                 <div class="form-group">
-                    <label>1. 소개 및 개요 (Introduction)</label>
-                    <textarea id="pf-intro" placeholder="본인 소개 및 커리어 방향성을 자유롭게 작성해주세요."></textarea>
+                    <label>1. 핵심 역량 및 전문성 (Core Competencies)</label>
+                    <textarea id="pf-core" placeholder="본인의 주력 기술, 도메인 지식, 핵심 강점을 기재하세요."></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>2. 주요 경력 (Experience)</label>
-                    <textarea id="pf-exp" placeholder="근무 회사, 직무, 주요 담당 업무 및 성과를 적어주세요."></textarea>
+                    <label>2. 주요 문제 해결 사례 (Problem-Solving Cases)</label>
+                    <textarea id="pf-problem" placeholder="마주했던 기술적 난관과 이를 해결한 과정(Situation-Task-Action-Result)을 적어주세요."></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>3. 프로젝트 경험 (Projects)</label>
-                    <textarea id="pf-projects" placeholder="참여했던 주요 프로젝트 소개 및 본인의 기여도를 적어주세요."></textarea>
+                    <label>3. 오픈소스 기여 및 활동 (Open Source & Community)</label>
+                    <textarea id="pf-opensource" placeholder="GitHub 기여, 기술 블로그 운영, 스터디 리드 등 협업/공유 활동을 적어주세요."></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>4. 기술 스택 (Tech Stack)</label>
-                    <textarea id="pf-tech" placeholder="사용 가능한 프로그래밍 언어, 프레임워크, 툴 등을 적어주세요."></textarea>
+                    <label>4. 자격증 및 전문 수료증 (Certificates & Courses)</label>
+                    <textarea id="pf-certs" placeholder="취득한 자격증이나 부트캠프 수료증 내역을 적어주세요."></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>5. 교육 및 훈련 (Education & Training)</label>
-                    <textarea id="pf-edu" placeholder="학교, 학과, 부트캠프, 이수 교육 과정을 적어주세요."></textarea>
+                    <label>5. 수상 및 대외활동 내역 (Awards & Activities)</label>
+                    <textarea id="pf-awards" placeholder="해커톤 입상, 공모전 수상 및 대외활동 내역을 적어주세요."></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>6. 자격증 (Certificates)</label>
-                    <textarea id="pf-certs" placeholder="보유하고 있는 자격증 내역을 적어주세요."></textarea>
+                    <label>6. 일하는 방식 및 협업 철학 (Working Style)</label>
+                    <textarea id="pf-style" placeholder="소통 방식, 코드 리뷰 문화에 대한 생각 등을 적어주세요."></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>7. 수상 경력 (Awards)</label>
-                    <textarea id="pf-awards" placeholder="대회, 공모전 수상 내역을 적어주세요."></textarea>
+                    <label>7. 인사이트 & 기술 블로그 (Articles & Tech Insights)</label>
+                    <textarea id="pf-insights" placeholder="작성한 기술 아티클 링크나 배운 점을 기록한 포스팅 요약을 적어주세요."></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>8. 활동 및 커뮤니티 (Activities & Community)</label>
-                    <textarea id="pf-activities" placeholder="스터디, 동아리, 오픈소스 기여 등 대외 활동을 적어주세요."></textarea>
+                    <label>8. 향후 커리어 목표 및 비전 (Career Goals & Vision)</label>
+                    <textarea id="pf-goals" placeholder="단기 및 장기 커리어 로드맵을 적어주세요."></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>9. 블로그 및 저작물 (Publications & Blog)</label>
-                    <textarea id="pf-publications" placeholder="기술 블로그 포스팅 링크나 작성한 글을 요약해 주세요."></textarea>
+                    <label>9. 사이드 프로젝트 & 실험실 (Side Projects & Experiments)</label>
+                    <textarea id="pf-side" placeholder="개인적으로 만들어본 토이 프로젝트나 미니 앱을 소개해주세요."></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>10. 목표 및 비전 (Goals & Vision)</label>
-                    <textarea id="pf-goals" placeholder="앞으로의 커리어 계획과 목표를 적어주세요."></textarea>
+                    <label>10. 추천사 및 동료 피드백 (Testimonials & Peer Reviews)</label>
+                    <textarea id="pf-testimonials" placeholder="동료나 멘토가 남겨준 평가나 추천 한 줄을 적어주세요."></textarea>
                 </div>
 
                 <div style="display: flex; gap: 10px; margin-top: 20px;">
@@ -332,6 +332,7 @@
         </div>
     </div>
 
+    <!-- Custom Modal -->
     <div class="modal-overlay" id="custom-modal">
         <div class="modal-card">
             <div class="modal-message" id="modal-message">알림 메시지</div>
@@ -347,9 +348,17 @@
         let currentEditingSkills = [];
 
         function saveToStorage() {
-            localStorage.setItem('mulmandu_users', JSON.stringify(usersData));
-            localStorage.setItem('mulmandu_portfolios', JSON.stringify(portfoliosData));
-            localStorage.setItem('mulmandu_comments', JSON.stringify(commentsData));
+            try {
+                localStorage.setItem('mulmandu_users', JSON.stringify(usersData));
+                localStorage.setItem('mulmandu_portfolios', JSON.stringify(portfoliosData));
+                localStorage.setItem('mulmandu_comments', JSON.stringify(commentsData));
+            } catch (e) {
+                if (e.name === 'QuotaExceededError') {
+                    showMessage('로컬 스토리지 용량이 초과되었습니다! 프로필 이미지 크기를 줄이거나 텍스트를 간결하게 입력해주세요.');
+                } else {
+                    showMessage('데이터 저장 중 오류가 발생했습니다.');
+                }
+            }
         }
 
         window.onload = function() {
@@ -429,6 +438,11 @@
         function previewImage(event) {
             const file = event.target.files[0];
             if(file) {
+                // 용량 체크 안내 (대략 1MB 이상 시 경고)
+                if(file.size > 1024 * 1024) {
+                    showMessage('⚠️ 주의: 1MB 이상의 큰 파일은 로컬 스토리지(localStorage) 용량을 초과하여 저장에 실패할 수 있습니다. 가급적 작은 이미지를 선택해주세요.');
+                }
+
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     tempUploadedImage = e.target.result;
@@ -481,16 +495,16 @@
                 name: name,
                 image: '',
                 bio: '',
-                intro: '',
-                exp: '',
-                projects: '',
-                tech: '',
-                edu: '',
+                core: '',
+                problem: '',
+                openSource: '',
                 certs: '',
                 awards: '',
-                activities: '',
-                publications: '',
+                style: '',
+                insights: '',
                 goals: '',
+                side: '',
+                testimonials: '',
                 skills: []
             };
             saveToStorage();
@@ -505,16 +519,16 @@
             
             document.getElementById('pf-name').value = pf.name || usersData[currentUser].name;
             document.getElementById('pf-bio').value = pf.bio || '';
-            document.getElementById('pf-intro').value = pf.intro || '';
-            document.getElementById('pf-exp').value = pf.exp || '';
-            document.getElementById('pf-projects').value = pf.projects || '';
-            document.getElementById('pf-tech').value = pf.tech || '';
-            document.getElementById('pf-edu').value = pf.edu || '';
+            document.getElementById('pf-core').value = pf.core || '';
+            document.getElementById('pf-problem').value = pf.problem || '';
+            document.getElementById('pf-opensource').value = pf.openSource || '';
             document.getElementById('pf-certs').value = pf.certs || '';
             document.getElementById('pf-awards').value = pf.awards || '';
-            document.getElementById('pf-activities').value = pf.activities || '';
-            document.getElementById('pf-publications').value = pf.publications || '';
+            document.getElementById('pf-style').value = pf.style || '';
+            document.getElementById('pf-insights').value = pf.insights || '';
             document.getElementById('pf-goals').value = pf.goals || '';
+            document.getElementById('pf-side').value = pf.side || '';
+            document.getElementById('pf-testimonials').value = pf.testimonials || '';
 
             tempUploadedImage = pf.image || '';
             if(tempUploadedImage) {
@@ -586,31 +600,31 @@
             e.preventDefault();
             const name = document.getElementById('pf-name').value;
             const bio = document.getElementById('pf-bio').value;
-            const intro = document.getElementById('pf-intro').value;
-            const exp = document.getElementById('pf-exp').value;
-            const projects = document.getElementById('pf-projects').value;
-            const tech = document.getElementById('pf-tech').value;
-            const edu = document.getElementById('pf-edu').value;
+            const core = document.getElementById('pf-core').value;
+            const problem = document.getElementById('pf-problem').value;
+            const openSource = document.getElementById('pf-opensource').value;
             const certs = document.getElementById('pf-certs').value;
             const awards = document.getElementById('pf-awards').value;
-            const activities = document.getElementById('pf-activities').value;
-            const publications = document.getElementById('pf-publications').value;
+            const style = document.getElementById('pf-style').value;
+            const insights = document.getElementById('pf-insights').value;
             const goals = document.getElementById('pf-goals').value;
+            const side = document.getElementById('pf-side').value;
+            const testimonials = document.getElementById('pf-testimonials').value;
 
             portfoliosData[currentUser] = {
                 name,
                 image: tempUploadedImage,
                 bio,
-                intro,
-                exp,
-                projects,
-                tech,
-                edu,
+                core,
+                problem,
+                openSource,
                 certs,
                 awards,
-                activities,
-                publications,
+                style,
+                insights,
                 goals,
+                side,
+                testimonials,
                 skills: currentEditingSkills.filter(s => s.name.trim() !== '')
             };
             saveToStorage();
@@ -654,20 +668,20 @@
                 html += `</div></div>`;
             }
 
-            if(pf.intro) html += `<div class="section-box"><h3>1. 소개 및 개요</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.intro}</p></div>`;
-            if(pf.exp) html += `<div class="section-box"><h3>2. 주요 경력</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.exp}</p></div>`;
-            if(pf.projects) html += `<div class="section-box"><h3>3. 프로젝트 경험</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.projects}</p></div>`;
-            if(pf.tech) html += `<div class="section-box"><h3>4. 기술 스택</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.tech}</p></div>`;
-            if(pf.edu) html += `<div class="section-box"><h3>5. 교육 및 훈련</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.edu}</p></div>`;
-            if(pf.certs) html += `<div class="section-box"><h3>6. 자격증</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.certs}</p></div>`;
-            if(pf.awards) html += `<div class="section-box"><h3>7. 수상 경력</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.awards}</p></div>`;
-            if(pf.activities) html += `<div class="section-box"><h3>8. 활동 및 커뮤니티</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.activities}</p></div>`;
-            if(pf.publications) html += `<div class="section-box"><h3>9. 블로그 및 저작물</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.publications}</p></div>`;
-            if(pf.goals) html += `<div class="section-box"><h3>10. 목표 및 비전</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.goals}</p></div>`;
+            if(pf.core) html += `<div class="section-box"><h3>1. 핵심 역량 및 전문성</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.core}</p></div>`;
+            if(pf.problem) html += `<div class="section-box"><h3>2. 주요 문제 해결 사례</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.problem}</p></div>`;
+            if(pf.openSource) html += `<div class="section-box"><h3>3. 오픈소스 기여 및 활동</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.openSource}</p></div>`;
+            if(pf.certs) html += `<div class="section-box"><h3>4. 자격증 및 전문 수료증</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.certs}</p></div>`;
+            if(pf.awards) html += `<div class="section-box"><h3>5. 수상 및 대외활동 내역</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.awards}</p></div>`;
+            if(pf.style) html += `<div class="section-box"><h3>6. 일하는 방식 및 협업 철학</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.style}</p></div>`;
+            if(pf.insights) html += `<div class="section-box"><h3>7. 인사이트 & 기술 블로그</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.insights}</p></div>`;
+            if(pf.goals) html += `<div class="section-box"><h3>8. 향후 커리어 목표 및 비전</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.goals}</p></div>`;
+            if(pf.side) html += `<div class="section-box"><h3>9. 사이드 프로젝트 & 실험실</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.side}</p></div>`;
+            if(pf.testimonials) html += `<div class="section-box"><h3>10. 추천사 및 동료 피드백</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.testimonials}</p></div>`;
 
             html += `
                 <div class="section-box" style="margin-top:24px;">
-                    <h3>💬 동료 코멘트 & 피드백</h3>
+                    <h3>💬 동료 코멘트 & 피드백 (로컬 저장소 기반)</h3>
                     <div id="comments-list-${userIdKey}" style="margin-bottom: 16px;">
             `;
 
@@ -740,16 +754,16 @@
                 let fullText = [
                     pf.name,
                     pf.bio,
-                    pf.intro,
-                    pf.exp,
-                    pf.projects,
-                    pf.tech,
-                    pf.edu,
+                    pf.core,
+                    pf.problem,
+                    pf.openSource,
                     pf.certs,
                     pf.awards,
-                    pf.activities,
-                    pf.publications,
+                    pf.style,
+                    pf.insights,
                     pf.goals,
+                    pf.side,
+                    pf.testimonials,
                     ...(pf.skills ? pf.skills.map(s => `${s.name} lv.${s.level}`) : [])
                 ].join(' ').toLowerCase();
 
@@ -765,7 +779,7 @@
             }
 
             matchedUsers.forEach(item => {
-                const card = document.createElement('div');
+                const card = document.embedElement ? document.createElement('div') : document.createElement('div');
                 card.style.cssText = "background: #ffffff; border: 1px solid #f3e8ff; border-radius: 14px; padding: 14px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: transform 0.2s;";
                 card.onmouseover = () => card.style.transform = "scale(1.01)";
                 card.onmouseout = () => card.style.transform = "scale(1)";
