@@ -179,6 +179,53 @@
         .skill-level-name { font-size: 13px; font-weight: 600; color: #6b21a8; word-break: break-all; }
         .skill-level-row select { width: auto !important; min-width: 130px; padding: 6px 10px !important; font-size: 13px !important; border-radius: 8px !important; flex-shrink: 0; }
         .skill-tag-level { margin-left: 6px; padding-left: 6px; border-left: 1px solid #d8b4fe; color: #a855f7; font-weight: 700; }
+
+        .nav-icon-btn { position: relative; width: 40px; height: 40px; border-radius: 50%; border: 1px solid #e9d5ff; background: #faf5ff; color: #a855f7; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+        .nav-icon-btn:hover { background: #f3e8ff; }
+        .badge { position: absolute; top: -4px; right: -4px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: #f43f5e; color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+        .badge-inline { display: inline-block; min-width: 18px; height: 18px; line-height: 18px; padding: 0 5px; border-radius: 9px; background: #f43f5e; color: #fff; font-size: 11px; font-weight: 700; margin-left: 4px; text-align: center; }
+        .link-btn { background: none; border: none; color: #9333ea; font-size: 12px; cursor: pointer; text-decoration: underline; padding: 0; }
+        .tab-row { display: flex; gap: 6px; background: #faf5ff; border: 1px solid #f3e8ff; border-radius: 14px; padding: 4px; margin-bottom: 16px; }
+        .tab-btn { flex: 1; padding: 9px 6px; border: none; border-radius: 10px; background: transparent; color: #7e22ce; font-size: 13px; font-weight: 600; cursor: pointer; }
+        .tab-btn.active { background: #ffffff; box-shadow: 0 2px 8px rgba(168, 85, 247, 0.18); color: #6b21a8; }
+        .pill-btn { background: #ffffff; color: #7e22ce; border: 1px solid #d8b4fe; padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; }
+        .pill-btn:hover:not(:disabled) { background: #faf5ff; transform: scale(1.04); }
+        .pill-btn.on { background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%); color: #ffffff; border-color: #a855f7; }
+        .pill-btn.danger { color: #be185d; border-color: #fbcfe8; }
+        .pill-btn:disabled { opacity: 0.6; cursor: default; }
+        .section-title { font-size: 13px; font-weight: 700; color: #7e22ce; margin: 14px 0 8px 4px; }
+        .req-card { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: #ffffff; border: 1px solid #f3e8ff; border-radius: 12px; padding: 10px 14px; margin-bottom: 8px; }
+        .req-card .req-actions { display: flex; gap: 6px; flex-shrink: 0; }
+        .req-card .req-actions button { padding: 6px 12px; font-size: 12px; }
+        .conv-item { display: flex; align-items: center; gap: 12px; background: #ffffff; border: 1px solid #f3e8ff; border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; cursor: pointer; transition: transform 0.2s; }
+        .conv-item:hover { transform: scale(1.01); }
+        .chat-header { display: flex; align-items: center; gap: 10px; padding-bottom: 12px; border-bottom: 2px solid #faf5ff; margin-bottom: 12px; }
+        .chat-messages { height: min(46vh, 380px); overflow-y: auto; background: #faf5ff; border: 1px solid #f3e8ff; border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+        .msg-row { display: flex; flex-direction: column; max-width: 78%; }
+        .msg-row.me { align-self: flex-end; align-items: flex-end; }
+        .msg-row.them { align-self: flex-start; align-items: flex-start; }
+        .msg-bubble { padding: 8px 12px; border-radius: 16px; font-size: 14px; line-height: 1.45; white-space: pre-wrap; word-break: break-word; }
+        .msg-row.me .msg-bubble { background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%); color: #ffffff; border-bottom-right-radius: 4px; }
+        .msg-row.them .msg-bubble { background: #ffffff; color: #4a5568; border: 1px solid #f3e8ff; border-bottom-left-radius: 4px; }
+        .msg-time { font-size: 10px; color: #a78bfa; margin-top: 2px; }
+        .chat-notice { font-size: 12px; color: #7e22ce; background: #f3e8ff; border-radius: 10px; padding: 8px 12px; margin-bottom: 10px; line-height: 1.5; text-align: center; }
+        .chat-input-row { display: flex; gap: 8px; margin-top: 10px; align-items: flex-end; }
+        .chat-input-row textarea { flex: 1; min-height: 44px; max-height: 110px; padding: 10px 14px; border: 1px solid #f3e8ff; border-radius: 14px; background: #faf5ff; font-size: 14px; font-family: inherit; outline: none; resize: none; color: #4a5568; }
+        .chat-input-row textarea:focus { border-color: #a855f7; background: #ffffff; }
+        .chat-input-row button { width: auto; padding: 0 18px; height: 44px; margin: 0; }
+        @media (max-width: 480px) {
+            .top-nav { padding: 10px 12px; }
+            .nav-logo { font-size: 17px; white-space: nowrap; gap: 4px; }
+            .nav-logo-icon { width: 30px; height: 30px; }
+            .nav-logo-icon svg { width: 30px; height: 30px; }
+            .nav-right-area { gap: 8px; }
+            .nav-my-portfolio-btn { white-space: nowrap; padding: 6px 10px; font-size: 12px; }
+            .nav-icon-btn { width: 36px; height: 36px; }
+            .nav-profile-btn { width: 38px; height: 38px; }
+            .card { padding: 26px 22px; }
+        }
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); background: rgba(76, 29, 149, 0.92); color: #ffffff; padding: 10px 18px; border-radius: 20px; font-size: 13px; z-index: 1500; opacity: 0; pointer-events: none; transition: all 0.3s ease; max-width: 88vw; text-align: center; }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     </style>
 </head>
 <body>
@@ -197,6 +244,10 @@
             <div><span class="mul">물</span><span class="mandu">만두</span></div>
         </div>
         <div class="nav-right-area">
+            <button id="nav-msg-btn" class="nav-icon-btn hidden" onclick="openMessages()" title="메시지" aria-label="메시지">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <span id="nav-msg-badge" class="badge hidden">0</span>
+            </button>
             <button id="nav-my-pf-btn" class="nav-my-portfolio-btn hidden" onclick="viewMyPortfolio()">내 포트폴리오 보기</button>
             <div id="nav-profile-container" class="hidden">
                 <div class="nav-profile-wrapper">
@@ -228,6 +279,7 @@
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px; font-size: 13px; color: #7e22ce;">
                     <input type="checkbox" id="remember-me" style="width: 16px; height: 16px; accent-color: #a855f7; cursor: pointer;">
                     <label for="remember-me" style="margin-bottom: 0; cursor: pointer;">이메일 저장</label>
+                    <button type="button" class="link-btn" style="margin-left: auto;" onclick="openResetView()">비밀번호를 잊으셨나요?</button>
                 </div>
                 <button type="submit" class="btn btn-primary">로그인</button>
             </form>
@@ -260,12 +312,53 @@
             <button type="button" class="btn btn-secondary" onclick="switchView('login')" style="margin-top: 10px;">로그인으로 돌아가기</button>
         </div>
 
+        <!-- Password Reset Request Section -->
+        <div id="reset-section" class="hidden">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h2 style="font-size: 22px; font-weight: 700; color: #6b21a8; margin-bottom: 6px;">비밀번호 찾기</h2>
+                <p style="font-size: 13px; color: #9333ea; line-height: 1.5;">가입할 때 사용한 이메일을 입력하면<br>비밀번호 재설정 링크를 보내드려요.</p>
+            </div>
+            <form onsubmit="handleResetRequest(event)">
+                <div class="form-group">
+                    <label>이메일</label>
+                    <input type="email" id="reset-email" placeholder="가입한 이메일을 입력하세요" autocomplete="email" required>
+                </div>
+                <button type="submit" class="btn btn-primary">재설정 메일 보내기</button>
+            </form>
+            <button type="button" class="btn btn-secondary" onclick="switchView('login')" style="margin-top: 10px;">로그인으로 돌아가기</button>
+        </div>
+
+        <!-- New Password Section (after clicking the email link) -->
+        <div id="newpw-section" class="hidden">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h2 style="font-size: 22px; font-weight: 700; color: #6b21a8; margin-bottom: 6px;">새 비밀번호 설정</h2>
+                <p style="font-size: 13px; color: #9333ea;">앞으로 사용할 새 비밀번호를 입력해주세요.</p>
+            </div>
+            <form onsubmit="handleNewPassword(event)">
+                <div class="form-group">
+                    <label>새 비밀번호</label>
+                    <input type="password" id="newpw-1" placeholder="영문, 숫자, 특수문자 조합" autocomplete="new-password" required>
+                    <div class="hint">영문, 숫자, 특수문자 포함 9자 이상</div>
+                </div>
+                <div class="form-group">
+                    <label>새 비밀번호 확인</label>
+                    <input type="password" id="newpw-2" placeholder="한 번 더 입력하세요" autocomplete="new-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">비밀번호 변경하기</button>
+            </form>
+        </div>
+
         <!-- Explore Home Section (Default after login) -->
         <div id="explore-home-section" class="hidden" style="text-align: center;">
             <div style="margin-top: 10px; margin-bottom: 24px;">
                 <h2 id="explore-welcome-title" style="font-size: 22px; color: #6b21a8; margin-bottom: 6px;">커리어 탐색 아카이브 🔍</h2>
                 <p style="color: #9333ea; font-size: 13px;">다른 사용자의 커리어를 검색하거나 우측 상단 프로필에서 내 포트폴리오를 관리해보세요!</p>
             </div>
+            <div class="tab-row">
+                <button type="button" id="tab-explore" class="tab-btn active" onclick="switchHomeTab('explore')">🔍 탐색</button>
+                <button type="button" id="tab-friends" class="tab-btn" onclick="switchHomeTab('friends')">👥 친구 <span id="friends-tab-badge" class="badge-inline hidden">0</span></button>
+            </div>
+            <div id="explore-panel">
             <div class="form-group" style="position: relative; margin-bottom: 4px;">
                 <span style="position: absolute; left: 16px; top: 38%; transform: translateY(-50%); font-size: 16px; pointer-events: none; z-index: 2;">🔍</span>
                 <input type="text" id="search-input" placeholder="쉼표(,)로 구분하여 검색어 입력 (예: 프론트엔드, React, 김)" oninput="handleSearch(this.value)" style="padding-left: 44px;">
@@ -274,7 +367,49 @@
                 * 쉼표(,)로 구분된 모든 검색어가 포함된 포트폴리오만 검색됩니다.
             </div>
             <div id="search-results-container" style="max-height: 320px; overflow-y: auto; text-align: left; margin-top: 12px;"></div>
+            </div>
+            <div id="friends-panel" class="hidden">
+                <div class="form-group" style="margin-bottom: 12px;">
+                    <input type="text" id="friends-search-input" placeholder="친구 포트폴리오 검색 (쉼표로 구분)" oninput="renderFriends()">
+                </div>
+                <div id="friends-container" style="max-height: 340px; overflow-y: auto; text-align: left;"></div>
+            </div>
             <button type="button" class="btn btn-secondary" onclick="handleLogout()" style="margin-top: 16px;">로그아웃</button>
+        </div>
+
+        <!-- Messages Inbox Section -->
+        <div id="messages-section" class="hidden">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                <h2 style="font-size: 20px; color: #6b21a8;">💬 메시지</h2>
+                <button type="button" class="btn btn-secondary" onclick="goHome()" style="width: auto; padding: 8px 14px;">🏠 홈으로</button>
+            </div>
+            <div class="tab-row">
+                <button type="button" id="msgtab-chats" class="tab-btn active" onclick="setMessagesTab('chats')">대화</button>
+                <button type="button" id="msgtab-requests" class="tab-btn" onclick="setMessagesTab('requests')">요청함 <span id="msg-requests-badge" class="badge-inline hidden">0</span></button>
+            </div>
+            <div id="inbox-container" style="max-height: 420px; overflow-y: auto;"></div>
+        </div>
+
+        <!-- Chat Section -->
+        <div id="chat-section" class="hidden">
+            <div class="chat-header">
+                <button type="button" class="btn btn-secondary" onclick="chatBack()" style="width: auto; padding: 8px 14px;" aria-label="뒤로">←</button>
+                <div id="chat-avatar"></div>
+                <div style="min-width: 0; cursor: pointer;" onclick="openChatUserProfile()" title="프로필 보기">
+                    <div id="chat-name" style="font-weight: 700; color: #6b21a8; font-size: 16px;"></div>
+                    <div style="font-size: 11px; color: #a855f7;">프로필 보기</div>
+                </div>
+            </div>
+            <div id="chat-notice" class="chat-notice hidden"></div>
+            <div id="chat-request-bar" class="hidden" style="display: flex; gap: 8px; margin-bottom: 10px;">
+                <button type="button" class="btn btn-primary" onclick="respondConversation(true)" style="margin: 0;">수락</button>
+                <button type="button" class="btn btn-secondary" onclick="respondConversation(false)">거절</button>
+            </div>
+            <div id="chat-messages" class="chat-messages"></div>
+            <div id="chat-input-row" class="chat-input-row">
+                <textarea id="chat-input" rows="1" placeholder="메시지를 입력하세요 (Enter: 전송, Shift+Enter: 줄바꿈)" onkeydown="chatKeydown(event)"></textarea>
+                <button type="button" id="chat-send-btn" class="btn btn-primary" onclick="sendChatMessage()">보내기</button>
+            </div>
         </div>
 
         <!-- Welcome Portfolio Section (For users with no portfolio yet) -->
@@ -372,8 +507,14 @@
                 </div>
                 <button type="button" class="btn btn-secondary" onclick="goHome()" style="width:auto; padding:8px 14px;">🏠 홈으로</button>
             </div>
-            <div style="margin-bottom: 16px;">
+            <div style="margin-bottom: 16px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
                 <button type="button" id="like-btn" class="like-btn" onclick="toggleLike()">🤍 좋아요 0</button>
+                <button type="button" id="msg-btn" class="pill-btn hidden" onclick="openChatFromPortfolio()" title="메시지 보내기">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    메시지
+                </button>
+                <button type="button" id="friend-btn" class="pill-btn hidden" onclick="handleFriendClick()">👥 친구 추가</button>
+                <button type="button" id="friend-decline-btn" class="pill-btn danger hidden" onclick="declineFriendFromProfile()">거절</button>
             </div>
             <div class="section-box"><h3>📞 연락처</h3><p id="view-contact"></p></div>
             <div class="section-box">
@@ -417,12 +558,23 @@
     <div class="modal-overlay" id="custom-modal">
         <div class="modal-card">
             <div class="modal-message" id="modal-msg"></div>
-            <button class="modal-btn" onclick="closeModal()">확인</button>
+            <div style="display: flex; gap: 8px;">
+                <button type="button" id="modal-cancel-btn" class="modal-btn hidden" onclick="cancelConfirm()" style="background: #ffffff; color: #7e22ce; border: 1px solid #d8b4fe;">취소</button>
+                <button type="button" id="modal-ok-btn" class="modal-btn" onclick="closeModal()">확인</button>
+            </div>
         </div>
     </div>
 
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
+        // 메일 링크(비밀번호 재설정)로 들어왔는지 — Supabase가 주소의 #... 를 지우기 전에 미리 읽어 둠
+        const INITIAL_HASH = window.location.hash || '';
+        const RECOVERY_FROM_URL = /type=recovery/.test(INITIAL_HASH);
+        const LINK_ERROR_FROM_URL = /error_code=|error=access_denied/.test(INITIAL_HASH);
+        const SITE_URL = 'https://watermandoo.vercel.app/';
+
         // ====== Supabase 연결 ======
         const SUPABASE_URL = 'https://glmaovxvfnwggfgdurzj.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_n_wLVCYNzGyAfI9pxi51Lg_4sUy44yg';
@@ -440,6 +592,17 @@
         let pendingAvatarBlob = null;    // 새로 고른 프로필 사진(업로드 대기)
         let likeBusy = false;
         let openingPortfolio = false;
+        let recoveryMode = false;        // 비밀번호 재설정 링크로 들어온 상태
+        let homeTab = 'explore';
+        let friendsRaw = [];             // friendships 행 (내가 포함된 것만)
+        let friendItems = [];            // 친구/요청 상대의 포트폴리오
+        let friendBusy = false;
+        let lastConvList = [];           // my_conversations() 결과
+        let messagesTab = 'chats';
+        let chat = null;                 // 열려 있는 대화 상태
+        let chatTimer = null;
+        let chatSending = false;
+        let pollTimer = null;
 
         function initBubbles() {
             const container = document.getElementById('bubble-container');
@@ -617,8 +780,16 @@
             if (/invalid login credentials/i.test(msg)) return '이메일 또는 비밀번호가 틀렸습니다.';
             if (/already registered|already been registered/i.test(msg)) return '이미 가입된 이메일입니다.';
             if (/email not confirmed/i.test(msg)) return '이메일 인증이 필요합니다. 메일함을 확인해주세요.';
+            if (/not authorized/i.test(msg)) return '지금은 이 이메일로 메일을 보낼 수 없어요. 서버의 메일 발송 설정이 필요합니다.';
             if (/rate limit|too many/i.test(msg) || (err && err.status === 429)) return '요청이 너무 많아요. 잠시 후 다시 시도해주세요.';
+            if (/different from the old password/i.test(msg)) return '이전과 다른 비밀번호를 사용해주세요.';
+            if (/auth session missing|session.*(expired|missing)/i.test(msg)) return '링크가 만료되었어요. 비밀번호 찾기를 다시 진행해주세요.';
             if (/valid email|invalid.*email|email.*invalid/i.test(msg)) return '이메일 형식을 확인해주세요.';
+            if (/need_portfolio/.test(msg)) return '먼저 내 포트폴리오를 만들어주세요.';
+            if (/request_pending|request_declined/.test(msg)) return '상대가 메시지 요청을 수락하면 이어서 보낼 수 있어요.';
+            if (/must_accept/.test(msg)) return '받은 메시지 요청을 먼저 수락해주세요.';
+            if (/invalid_message/.test(msg)) return '메시지는 1~2000자로 입력해주세요.';
+            if (/invalid_recipient/.test(msg)) return '메시지를 보낼 수 없는 상대예요.';
             if (/failed to fetch|networkerror|load failed/i.test(msg)) return '서버에 연결할 수 없어요. 인터넷 연결을 확인해주세요.';
             if (err && (err.code === '42501' || /row-level security/i.test(msg))) return '이 작업을 할 권한이 없습니다.';
             return '오류가 발생했어요: ' + msg;
@@ -633,7 +804,7 @@
             const limits = {
                 'signup-name': 30, 'pf-name': 30, 'pf-job': 50, 'pf-contact': 100, 'pf-intro': 100, 'pf-skills': 200,
                 'pf-experience': 3000, 'pf-education': 3000, 'pf-projects': 3000, 'pf-certificates': 3000,
-                'pf-awards': 3000, 'pf-notes': 3000, 'comment-input': 1000
+                'pf-awards': 3000, 'pf-notes': 3000, 'comment-input': 1000, 'chat-input': 2000
             };
             Object.keys(limits).forEach(id => { const el = document.getElementById(id); if (el) el.maxLength = limits[id]; });
         }
@@ -701,8 +872,30 @@
         // ====== 화면 전환 / 공용 UI ======
         function showModal(msg, cb) {
             document.getElementById('modal-msg').innerText = msg;
+            document.getElementById('modal-cancel-btn').classList.add('hidden');
             document.getElementById('custom-modal').classList.add('active');
             window.modalCallback = cb;
+        }
+
+        // 확인/취소 두 버튼 — '확인'을 눌렀을 때만 yesCb 실행
+        function showConfirm(msg, yesCb) {
+            document.getElementById('modal-msg').innerText = msg;
+            document.getElementById('modal-cancel-btn').classList.remove('hidden');
+            document.getElementById('custom-modal').classList.add('active');
+            window.modalCallback = yesCb;
+        }
+
+        function cancelConfirm() {
+            document.getElementById('custom-modal').classList.remove('active');
+            window.modalCallback = null;
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.innerText = msg;
+            t.classList.add('show');
+            clearTimeout(window._toastTimer);
+            window._toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
         }
 
         function closeModal() {
@@ -713,13 +906,16 @@
         function updateTopNavProfile() {
             const navProfile = document.getElementById('nav-profile-container');
             const navMyPfBtn = document.getElementById('nav-my-pf-btn');
+            const navMsgBtn = document.getElementById('nav-msg-btn');
             if (!currentUser) {
                 navProfile.classList.add('hidden');
                 navMyPfBtn.classList.add('hidden');
+                navMsgBtn.classList.add('hidden');
                 return;
             }
             navProfile.classList.remove('hidden');
             navMyPfBtn.classList.remove('hidden');
+            navMsgBtn.classList.remove('hidden');
 
             const imgEl = document.getElementById('nav-profile-img');
             const emojiEl = document.getElementById('nav-profile-emoji');
@@ -736,19 +932,25 @@
         }
 
         function switchView(name) {
-            ['login-section', 'signup-section', 'explore-home-section', 'welcome-portfolio-section', 'portfolio-form-section', 'portfolio-view-section'].forEach(id => {
+            ['login-section', 'signup-section', 'reset-section', 'newpw-section', 'explore-home-section', 'welcome-portfolio-section',
+             'portfolio-form-section', 'portfolio-view-section', 'messages-section', 'chat-section'].forEach(id => {
                 document.getElementById(id).classList.add('hidden');
             });
             const card = document.getElementById('main-card');
             card.classList.remove('wide');
+            if (name !== 'chat') stopChatPolling();
 
-            if (name === 'login') document.getElementById('login-section').classList.remove('hidden');
-            else if (name === 'signup') document.getElementById('signup-section').classList.remove('hidden');
-            else if (name === 'explore') document.getElementById('explore-home-section').classList.remove('hidden');
-            else if (name === 'welcome') document.getElementById('welcome-portfolio-section').classList.remove('hidden');
-            else if (name === 'form') { document.getElementById('portfolio-form-section').classList.remove('hidden'); card.classList.add('wide'); }
-            else if (name === 'portfolio-view') { document.getElementById('portfolio-view-section').classList.remove('hidden'); card.classList.add('wide'); }
+            const map = {
+                'login': 'login-section', 'signup': 'signup-section', 'reset': 'reset-section', 'newpw': 'newpw-section',
+                'explore': 'explore-home-section', 'welcome': 'welcome-portfolio-section',
+                'form': 'portfolio-form-section', 'portfolio-view': 'portfolio-view-section',
+                'messages': 'messages-section', 'chat': 'chat-section'
+            };
+            if (map[name]) document.getElementById(map[name]).classList.remove('hidden');
+            if (name === 'form' || name === 'portfolio-view') card.classList.add('wide');
 
+            card.scrollTop = 0;
+            window.scrollTo(0, 0);
             updateTopNavProfile();
         }
 
@@ -822,10 +1024,13 @@
             try {
                 myPortfolio = await fetchMyPortfolio();
                 updateTopNavProfile();
+                startPolling();
                 if (myPortfolio) {
                     document.getElementById('explore-welcome-title').innerText = `${currentUser.name} 님 환영합니다! 🔍`;
                     document.getElementById('search-input').value = '';
+                    setHomeTabUI('explore');
                     switchView('explore');
+                    refreshBadges();
                     await loadExploreData();
                 } else {
                     document.getElementById('welcome-title').innerText = `${currentUser.name} 님 환영합니다! 🎉`;
@@ -838,8 +1043,12 @@
         }
 
         async function handleLogout() {
+            stopPolling();
+            stopChatPolling();
             try { if (sb) await sb.auth.signOut(); } catch (err) { /* 무시 */ }
             currentUser = null; myPortfolio = null; exploreData = [];
+            friendsRaw = []; friendItems = []; lastConvList = []; chat = null;
+            setBadge('nav-msg-badge', 0); setBadge('friends-tab-badge', 0);
             document.getElementById('search-input').value = '';
             switchView('login');
         }
@@ -848,8 +1057,10 @@
         function goHome() {
             if (!currentUser) { switchView('login'); return; }
             document.getElementById('search-input').value = '';
+            setHomeTabUI('explore');
             switchView('explore');
             loadExploreData();
+            refreshBadges();
         }
 
         async function loadExploreData() {
@@ -1052,20 +1263,23 @@
             if (openingPortfolio || !currentUser) return;
             openingPortfolio = true;
             try {
-                const [pf, likeCnt, myLike, comments] = await Promise.all([
+                const [pf, likeCnt, myLike, comments, friendRes] = await Promise.all([
                     sb.from('portfolios').select('*').eq('user_id', uid).maybeSingle(),
                     sb.from('likes').select('*', { count: 'exact', head: true }).eq('portfolio_id', uid),
                     sb.from('likes').select('portfolio_id').eq('portfolio_id', uid).eq('user_id', currentUser.id).maybeSingle(),
-                    sb.from('comments').select('id, author_id, author_name, text, created_at').eq('portfolio_id', uid).order('created_at', { ascending: true })
+                    sb.from('comments').select('id, author_id, author_name, text, created_at').eq('portfolio_id', uid).order('created_at', { ascending: true }),
+                    sb.from('friendships').select('id, requester_id, addressee_id, status')
+                        .or(`requester_id.eq.${uid},addressee_id.eq.${uid}`)
                 ]);
-                const failed = [pf, likeCnt, myLike, comments].find(r => r.error);
+                const failed = [pf, likeCnt, myLike, comments, friendRes].find(r => r.error);
                 if (failed) throw failed.error;
                 if (!pf.data) { showModal('포트폴리오를 찾을 수 없어요.'); return; }
 
                 renderPortfolio(normalizePortfolio(pf.data), uid, {
                     likeCount: likeCnt.count || 0,
                     liked: !!myLike.data,
-                    comments: comments.data || []
+                    comments: comments.data || [],
+                    friend: resolveFriendState(friendRes.data, uid)
                 });
                 switchView('portfolio-view');
             } catch (err) {
@@ -1103,7 +1317,7 @@
 
         function renderPortfolio(p, ownerUid, extra) {
             currentViewingUserId = ownerUid;
-            viewState = { likeCount: extra.likeCount, liked: extra.liked, comments: extra.comments };
+            viewState = { likeCount: extra.likeCount, liked: extra.liked, comments: extra.comments, friend: extra.friend || { id: null, status: 'none' }, p };
 
             const editBtn = document.getElementById('view-edit-btn');
             const commentBtn = document.getElementById('open-comment-btn');
@@ -1116,6 +1330,7 @@
             }
 
             updateLikeButton();
+            updateFriendUI();
 
             const img = document.getElementById('view-profile-img');
             const emojiFallback = document.getElementById('view-profile-emoji-fallback');
@@ -1219,6 +1434,601 @@
             }
         }
 
+        // ====== 도우미 ======
+        function avatarMarkup(image, size = 40) {
+            const base = `width:${size}px; height:${size}px; border-radius:50%; flex-shrink:0;`;
+            if (isPhoto(image)) {
+                return `<img src="${escapeHtml(image)}" alt="" style="${base} object-fit:cover; border:1px solid #d8b4fe;">`;
+            }
+            return `<div style="${base} background:#faf5ff; border:1px solid #d8b4fe; display:flex; align-items:center; justify-content:center; font-size:${Math.round(size * 0.5)}px;">${escapeHtml(image || '🥟')}</div>`;
+        }
+
+        function formatTime(iso) {
+            if (!iso) return '';
+            const d = new Date(iso);
+            if (isNaN(d)) return '';
+            if (d.toDateString() === new Date().toDateString()) {
+                return d.toLocaleTimeString('ko-KR', { hour: 'numeric', minute: '2-digit' });
+            }
+            return `${d.getMonth() + 1}/${d.getDate()}`;
+        }
+
+        function setBadge(id, n) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.innerText = n > 99 ? '99+' : String(n);
+            el.classList.toggle('hidden', !(n > 0));
+        }
+
+        function requirePortfolio() {
+            if (!myPortfolio) {
+                showModal('먼저 내 포트폴리오를 만들어야 친구·메시지 기능을 쓸 수 있어요.');
+                return false;
+            }
+            return true;
+        }
+
+        // ====== 비밀번호 찾기 ======
+        function openResetView() {
+            document.getElementById('reset-email').value = document.getElementById('login-email').value.trim();
+            switchView('reset');
+        }
+
+        async function handleResetRequest(e) {
+            e.preventDefault();
+            const form = e.currentTarget;
+            const email = document.getElementById('reset-email').value.trim();
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showModal('올바른 이메일 주소를 입력해주세요.'); return; }
+            if (!sb) { showModal('서버에 연결할 수 없어요. 새로고침 후 다시 시도해주세요.'); return; }
+
+            setBusy(form, true);
+            try {
+                const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: SITE_URL });
+                if (error) throw error;
+                // 가입 여부를 알려주지 않도록 항상 같은 안내를 보여줌
+                showModal('가입된 이메일이라면 비밀번호 재설정 메일을 보냈어요. 메일함(스팸함 포함)을 확인해주세요.', () => switchView('login'));
+            } catch (err) {
+                showModal(friendlyError(err));
+            } finally {
+                setBusy(form, false);
+            }
+        }
+
+        async function handleNewPassword(e) {
+            e.preventDefault();
+            const form = e.currentTarget;
+            const pw1 = document.getElementById('newpw-1').value;
+            const pw2 = document.getElementById('newpw-2').value;
+            if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z\d\s]).{9,72}$/.test(pw1)) {
+                showModal('비밀번호는 영문, 숫자, 특수문자를 포함해 9자 이상이어야 합니다.'); return;
+            }
+            if (pw1 !== pw2) { showModal('비밀번호 확인이 일치하지 않아요.'); return; }
+
+            setBusy(form, true);
+            try {
+                const { data, error } = await sb.auth.updateUser({ password: pw1 });
+                if (error) throw error;
+                recoveryMode = false;
+                history.replaceState(null, '', window.location.pathname + window.location.search);
+                currentUser = userFromAuth(data.user);
+                form.reset();
+                showToast('비밀번호가 변경되었어요.');
+                await checkUserSession();
+            } catch (err) {
+                showModal(friendlyError(err));
+            } finally {
+                setBusy(form, false);
+            }
+        }
+
+        // ====== 친구 ======
+        function resolveFriendState(rows, otherId) {
+            const me = currentUser.id;
+            const r = (rows || []).find(x =>
+                (x.requester_id === me && x.addressee_id === otherId) || (x.requester_id === otherId && x.addressee_id === me));
+            if (!r) return { id: null, status: 'none' };
+            if (r.status === 'accepted') return { id: r.id, status: 'friends' };
+            return { id: r.id, status: r.requester_id === me ? 'sent' : 'received' };
+        }
+
+        function updateFriendUI() {
+            const isOwn = !!currentUser && currentViewingUserId === currentUser.id;
+            const msgBtn = document.getElementById('msg-btn');
+            const friendBtn = document.getElementById('friend-btn');
+            const declineBtn = document.getElementById('friend-decline-btn');
+            msgBtn.classList.toggle('hidden', isOwn);
+            friendBtn.classList.toggle('hidden', isOwn);
+            if (isOwn) { declineBtn.classList.add('hidden'); return; }
+
+            const st = viewState.friend.status;
+            friendBtn.className = 'pill-btn' + (st === 'friends' ? ' on' : '');
+            friendBtn.innerText = { none: '👥 친구 추가', sent: '⏳ 요청 보냄 (취소)', received: '✅ 친구 요청 수락', friends: '🤝 친구' }[st];
+            friendBtn.title = st === 'friends' ? '눌러서 친구 해제' : '';
+            declineBtn.classList.toggle('hidden', st !== 'received');
+        }
+
+        function handleFriendClick() {
+            if (!requirePortfolio() || friendBusy) return;
+            const st = viewState.friend.status;
+            if (st === 'sent') { showConfirm('보낸 친구 요청을 취소할까요?', () => runFriendOp('cancel')); return; }
+            if (st === 'friends') { showConfirm('친구를 해제할까요?', () => runFriendOp('remove')); return; }
+            runFriendOp(st === 'received' ? 'accept' : 'add');
+        }
+
+        function declineFriendFromProfile() {
+            if (friendBusy) return;
+            showConfirm('친구 요청을 거절할까요?', () => runFriendOp('decline'));
+        }
+
+        async function runFriendOp(op) {
+            friendBusy = true;
+            const other = currentViewingUserId;
+            try {
+                if (op === 'add') {
+                    const { data, error } = await sb.from('friendships').insert({ addressee_id: other })
+                        .select('id, requester_id, addressee_id, status').single();
+                    if (error && error.code !== '23505') throw error;
+                    if (error) {   // 이미 요청 관계가 있음 → 최신 상태를 다시 읽음
+                        const { data: rows } = await sb.from('friendships').select('id, requester_id, addressee_id, status')
+                            .or(`requester_id.eq.${other},addressee_id.eq.${other}`);
+                        viewState.friend = resolveFriendState(rows, other);
+                    } else {
+                        viewState.friend = { id: data.id, status: 'sent' };
+                        showToast('친구 요청을 보냈어요.');
+                    }
+                } else if (op === 'accept') {
+                    const { data, error } = await sb.from('friendships').update({ status: 'accepted' })
+                        .eq('id', viewState.friend.id).select('id');
+                    if (error) throw error;
+                    if (!data || data.length === 0) throw new Error('수락할 수 없는 요청이에요.');
+                    viewState.friend = { id: viewState.friend.id, status: 'friends' };
+                    showToast('친구가 되었어요! 🎉');
+                } else {   // cancel / remove / decline
+                    const { error } = await sb.from('friendships').delete().eq('id', viewState.friend.id);
+                    if (error) throw error;
+                    viewState.friend = { id: null, status: 'none' };
+                    showToast(op === 'remove' ? '친구를 해제했어요.' : op === 'cancel' ? '친구 요청을 취소했어요.' : '친구 요청을 거절했어요.');
+                }
+            } catch (err) {
+                showModal(friendlyError(err));
+            } finally {
+                friendBusy = false;
+                updateFriendUI();
+                refreshBadges();
+            }
+        }
+
+        function setHomeTabUI(tab) {
+            homeTab = tab;
+            document.getElementById('tab-explore').classList.toggle('active', tab === 'explore');
+            document.getElementById('tab-friends').classList.toggle('active', tab === 'friends');
+            document.getElementById('explore-panel').classList.toggle('hidden', tab !== 'explore');
+            document.getElementById('friends-panel').classList.toggle('hidden', tab !== 'friends');
+        }
+
+        function switchHomeTab(tab) {
+            setHomeTabUI(tab);
+            if (tab === 'friends') loadFriends();
+            else loadExploreData();
+        }
+
+        async function loadFriends() {
+            const box = document.getElementById('friends-container');
+            if (friendsRaw.length === 0 && friendItems.length === 0) {
+                box.innerHTML = `<div style="text-align: center; color: #a855f7; font-size: 13px; padding: 20px;">불러오는 중...</div>`;
+            }
+            try {
+                const { data: rows, error } = await sb.from('friendships').select('id, requester_id, addressee_id, status, created_at');
+                if (error) throw error;
+                friendsRaw = rows || [];
+                const ids = [...new Set(friendsRaw.map(r => r.requester_id === currentUser.id ? r.addressee_id : r.requester_id))];
+                friendItems = [];
+                if (ids.length > 0) {
+                    const { data, error: e2 } = await sb.from('portfolio_stats').select('*').in('user_id', ids);
+                    if (e2) throw e2;
+                    friendItems = (data || []).map(normalizePortfolio);
+                }
+                renderFriends();
+                updateFriendsBadge();
+            } catch (err) {
+                box.innerHTML = `<div style="text-align: center; color: #9333ea; font-size: 13px; padding: 20px;">${escapeHtml(friendlyError(err))}</div>`;
+            }
+        }
+
+        function updateFriendsBadge() {
+            const n = friendsRaw.filter(r => r.status === 'pending' && r.addressee_id === currentUser.id).length;
+            setBadge('friends-tab-badge', n);
+        }
+
+        function buildRequestCard(row, kind) {
+            const otherId = row.requester_id === currentUser.id ? row.addressee_id : row.requester_id;
+            const p = friendItems.find(x => x.uid === otherId);
+            const card = document.createElement('div');
+            card.className = 'req-card';
+            const info = document.createElement('div');
+            info.style.cssText = 'display:flex; align-items:center; gap:10px; min-width:0; cursor:pointer;';
+            info.innerHTML = `${avatarMarkup(p ? p.image : '', 38)}
+                <div style="min-width:0;">
+                    <div style="font-weight:700; color:#6b21a8; font-size:14px;">${escapeHtml(p ? p.name : '알 수 없음')}</div>
+                    <div style="font-size:12px; color:#a855f7;">${escapeHtml(p ? p.job : '')}</div>
+                </div>`;
+            info.onclick = () => openPortfolio(otherId);
+            card.appendChild(info);
+
+            const actions = document.createElement('div');
+            actions.className = 'req-actions';
+            if (kind === 'received') {
+                const ok = document.createElement('button');
+                ok.type = 'button'; ok.className = 'pill-btn on'; ok.innerText = '수락';
+                ok.onclick = () => respondFriendRequest(row.id, true);
+                const no = document.createElement('button');
+                no.type = 'button'; no.className = 'pill-btn danger'; no.innerText = '거절';
+                no.onclick = () => respondFriendRequest(row.id, false);
+                actions.appendChild(ok); actions.appendChild(no);
+            } else {
+                const cancel = document.createElement('button');
+                cancel.type = 'button'; cancel.className = 'pill-btn'; cancel.innerText = '취소';
+                cancel.onclick = () => showConfirm('보낸 친구 요청을 취소할까요?', () => respondFriendRequest(row.id, false));
+                actions.appendChild(cancel);
+            }
+            card.appendChild(actions);
+            return card;
+        }
+
+        function renderFriends() {
+            const box = document.getElementById('friends-container');
+            if (!currentUser) return;
+            box.innerHTML = '';
+            const me = currentUser.id;
+            const received = friendsRaw.filter(r => r.status === 'pending' && r.addressee_id === me);
+            const sent = friendsRaw.filter(r => r.status === 'pending' && r.requester_id === me);
+            const accepted = friendsRaw.filter(r => r.status === 'accepted');
+
+            const addTitle = (text) => { const t = document.createElement('div'); t.className = 'section-title'; t.innerText = text; box.appendChild(t); };
+
+            if (received.length > 0) {
+                addTitle(`받은 친구 요청 (${received.length})`);
+                received.forEach(r => box.appendChild(buildRequestCard(r, 'received')));
+            }
+
+            const keyword = document.getElementById('friends-search-input').value;
+            const terms = (keyword || '').split(',').map(t => t.trim().toLowerCase()).filter(t => t.length > 0);
+            let friends = accepted.map(r => {
+                const otherId = r.requester_id === me ? r.addressee_id : r.requester_id;
+                const p = friendItems.find(x => x.uid === otherId);
+                return p ? { uid: p.uid, p, likes: p.likeCount, name: p.displayName || p.name } : null;
+            }).filter(Boolean);
+            friends.sort((a, b) => a.p.name.localeCompare(b.p.name, 'ko'));
+            const totalFriends = friends.length;
+            if (terms.length > 0) {
+                friends = friends.filter(item => {
+                    const p = item.p;
+                    const text = [item.name, p.name, p.job, p.contact, p.intro, p.skills, p.experience, p.education, p.projects, p.certificates, p.awards, p.notes].join(' ').toLowerCase();
+                    return terms.every(t => text.includes(t));
+                });
+            }
+
+            addTitle(`내 친구 (${totalFriends})`);
+            if (totalFriends === 0) {
+                const empty = document.createElement('div');
+                empty.style.cssText = 'text-align:center; color:#a855f7; font-size:13px; padding:16px; line-height:1.6;';
+                empty.innerText = '아직 친구가 없어요.\n다른 사람의 프로필에서 "친구 추가"를 눌러보세요!';
+                empty.style.whiteSpace = 'pre-line';
+                box.appendChild(empty);
+            } else if (friends.length === 0) {
+                const none = document.createElement('div');
+                none.style.cssText = 'text-align:center; color:#9333ea; font-size:13px; padding:16px;';
+                none.innerText = '검색 결과가 없습니다.';
+                box.appendChild(none);
+            } else {
+                friends.forEach(item => box.appendChild(buildProfileCard(item)));
+            }
+
+            if (sent.length > 0) {
+                addTitle(`보낸 친구 요청 (${sent.length})`);
+                sent.forEach(r => box.appendChild(buildRequestCard(r, 'sent')));
+            }
+        }
+
+        async function respondFriendRequest(id, accept) {
+            try {
+                if (accept) {
+                    const { data, error } = await sb.from('friendships').update({ status: 'accepted' }).eq('id', id).select('id');
+                    if (error) throw error;
+                    if (!data || data.length === 0) throw new Error('수락할 수 없는 요청이에요.');
+                    showToast('친구가 되었어요! 🎉');
+                } else {
+                    const { error } = await sb.from('friendships').delete().eq('id', id);
+                    if (error) throw error;
+                }
+                await loadFriends();
+                refreshBadges();
+            } catch (err) {
+                showModal(friendlyError(err));
+            }
+        }
+
+        // ====== 알림 배지 (메시지/친구 요청) ======
+        async function refreshBadges() {
+            if (!currentUser || !sb) return;
+            try {
+                const [conv, fr] = await Promise.all([
+                    sb.rpc('my_conversations'),
+                    sb.from('friendships').select('id', { count: 'exact', head: true })
+                        .eq('addressee_id', currentUser.id).eq('status', 'pending')
+                ]);
+                if (!conv.error) {
+                    lastConvList = conv.data || [];
+                    const unread = lastConvList.filter(c => c.status === 'accepted').reduce((sum, c) => sum + (c.unread_count || 0), 0);
+                    const requests = lastConvList.filter(c => c.status === 'pending' && c.initiator_id !== currentUser.id).length;
+                    setBadge('nav-msg-badge', unread + requests);
+                }
+                if (!fr.error) setBadge('friends-tab-badge', fr.count || 0);
+            } catch (_) { /* 배지 갱신 실패는 조용히 무시 */ }
+        }
+
+        function startPolling() {
+            if (pollTimer) return;
+            pollTimer = setInterval(() => { if (document.visibilityState === 'visible') refreshBadges(); }, 30000);
+        }
+
+        function stopPolling() {
+            if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+        }
+
+        // ====== 메시지함 ======
+        async function openMessages(tab) {
+            if (!currentUser) { switchView('login'); return; }
+            if (!requirePortfolio()) return;
+            messagesTab = tab || 'chats';
+            switchView('messages');
+            await loadInbox();
+        }
+
+        function setMessagesTab(tab) {
+            messagesTab = tab;
+            renderInbox();
+        }
+
+        async function loadInbox() {
+            const box = document.getElementById('inbox-container');
+            if (lastConvList.length === 0) {
+                box.innerHTML = `<div style="text-align: center; color: #a855f7; font-size: 13px; padding: 20px;">불러오는 중...</div>`;
+            }
+            const { data, error } = await sb.rpc('my_conversations');
+            if (error) {
+                box.innerHTML = `<div style="text-align: center; color: #9333ea; font-size: 13px; padding: 20px;">${escapeHtml(friendlyError(error))}</div>`;
+                return;
+            }
+            lastConvList = data || [];
+            renderInbox();
+            refreshBadges();
+        }
+
+        function buildConvItem(c) {
+            const me = currentUser.id;
+            const el = document.createElement('div');
+            el.className = 'conv-item';
+            el.onclick = () => openChatFromConv(c);
+            const sentPending = c.status !== 'accepted' && c.initiator_id === me;
+            const preview = (c.last_sender_id === me ? '나: ' : '') + (c.last_body || '');
+            el.innerHTML = `
+                ${avatarMarkup(c.other_image, 44)}
+                <div style="flex: 1; min-width: 0;">
+                    <div style="display: flex; justify-content: space-between; gap: 8px;">
+                        <span style="font-weight: 700; color: #6b21a8; font-size: 14px;">${escapeHtml(c.other_name)}</span>
+                        <span style="font-size: 11px; color: #a78bfa; white-space: nowrap;">${escapeHtml(formatTime(c.last_at))}</span>
+                    </div>
+                    <div style="font-size: 12px; color: #7c6f9b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                        ${sentPending ? '<span style="color: #a855f7; font-weight: 600;">[요청 대기중] </span>' : ''}${escapeHtml(preview)}
+                    </div>
+                </div>
+                ${c.unread_count > 0 ? `<span class="badge-inline">${c.unread_count}</span>` : ''}`;
+            return el;
+        }
+
+        function renderInbox() {
+            const me = currentUser.id;
+            const chats = lastConvList.filter(c => c.status === 'accepted' || c.initiator_id === me);
+            const requests = lastConvList.filter(c => c.status === 'pending' && c.initiator_id !== me);
+            document.getElementById('msgtab-chats').classList.toggle('active', messagesTab === 'chats');
+            document.getElementById('msgtab-requests').classList.toggle('active', messagesTab === 'requests');
+            setBadge('msg-requests-badge', requests.length);
+
+            const box = document.getElementById('inbox-container');
+            box.innerHTML = '';
+            const list = messagesTab === 'requests' ? requests : chats;
+            if (list.length === 0) {
+                box.innerHTML = `<div style="text-align: center; color: #a855f7; font-size: 13px; padding: 24px; line-height: 1.6;">${
+                    messagesTab === 'requests' ? '받은 메시지 요청이 없어요.' : '아직 대화가 없어요.<br>다른 사람의 프로필에서 메시지를 보내보세요!'}</div>`;
+                return;
+            }
+            list.forEach(c => box.appendChild(buildConvItem(c)));
+        }
+
+        // ====== 채팅 ======
+        function stopChatPolling() {
+            if (chatTimer) { clearInterval(chatTimer); chatTimer = null; }
+        }
+
+        function startChatPolling() {
+            stopChatPolling();
+            chatTimer = setInterval(() => {
+                if (document.visibilityState === 'visible' && chat && !chatSending) loadChatState().catch(() => {});
+            }, 4000);
+        }
+
+        async function openChatFromPortfolio() {
+            if (!requirePortfolio() || !currentViewingUserId || currentViewingUserId === currentUser.id) return;
+            const p = viewState.p || {};
+            await enterChat({ otherId: currentViewingUserId, name: p.name || '알 수 없음', image: p.image || '', from: 'portfolio' });
+        }
+
+        async function openChatFromConv(c) {
+            await enterChat({ otherId: c.other_user_id, name: c.other_name, image: c.other_image, from: 'inbox' });
+        }
+
+        async function enterChat(init) {
+            chat = { ...init, conv: null, messages: [], isFriend: false, renderedKey: null };
+            document.getElementById('chat-input').value = '';
+            document.getElementById('chat-name').innerText = chat.name;
+            document.getElementById('chat-avatar').innerHTML = avatarMarkup(chat.image, 44);
+            document.getElementById('chat-messages').innerHTML = '';
+            switchView('chat');
+            try {
+                await loadChatState();
+                startChatPolling();
+            } catch (err) {
+                showModal(friendlyError(err));
+            }
+        }
+
+        async function loadChatState() {
+            if (!chat) return;
+            const target = chat;
+            const me = currentUser.id, other = target.otherId;
+            const [ua, ub] = me < other ? [me, other] : [other, me];
+            const [cv, fr] = await Promise.all([
+                sb.from('conversations').select('id, status, initiator_id').eq('user_a', ua).eq('user_b', ub).maybeSingle(),
+                sb.from('friendships').select('id, status').or(`requester_id.eq.${other},addressee_id.eq.${other}`)
+            ]);
+            if (cv.error) throw cv.error;
+            if (fr.error) throw fr.error;
+            if (chat !== target) return;   // 그 사이 다른 대화로 이동함
+
+            target.conv = cv.data || null;
+            target.isFriend = (fr.data || []).some(r => r.status === 'accepted');
+            if (target.conv) {
+                const { data, error } = await sb.from('messages').select('id, sender_id, body, created_at, read_at')
+                    .eq('conversation_id', target.conv.id).order('id', { ascending: true });
+                if (error) throw error;
+                if (chat !== target) return;
+                target.messages = data || [];
+                if (target.messages.some(m => m.sender_id !== me && !m.read_at)) markChatRead(target.conv.id);
+            } else {
+                target.messages = [];
+            }
+            renderChat();
+        }
+
+        async function markChatRead(convId) {
+            try {
+                await sb.from('messages').update({ read_at: new Date().toISOString() })
+                    .eq('conversation_id', convId).neq('sender_id', currentUser.id).is('read_at', null);
+                refreshBadges();
+            } catch (_) { /* 무시 */ }
+        }
+
+        function renderChat() {
+            if (!chat) return;
+            const me = currentUser.id;
+            const conv = chat.conv;
+
+            let notice = '', showBar = false, canSend = true;
+            if (!chat.isFriend) {
+                if (!conv) {
+                    notice = '친구가 아니어서 "메시지 요청"으로 전달돼요. 상대가 수락하면 대화를 이어갈 수 있어요. (요청 단계에서는 메시지를 1개만 보낼 수 있어요)';
+                } else if (conv.status !== 'accepted') {
+                    if (conv.initiator_id === me) {
+                        notice = '메시지 요청을 보냈어요. 상대가 수락하면 대화를 이어갈 수 있어요.';
+                        canSend = false;
+                    } else if (conv.status === 'pending') {
+                        notice = '이 사람이 메시지 요청을 보냈어요. 수락하면 서로 메시지를 주고받을 수 있어요.';
+                        showBar = true; canSend = false;
+                    }
+                }
+            }
+
+            const noticeEl = document.getElementById('chat-notice');
+            noticeEl.innerText = notice;
+            noticeEl.classList.toggle('hidden', !notice);
+            document.getElementById('chat-request-bar').classList.toggle('hidden', !showBar);
+            document.getElementById('chat-input-row').classList.toggle('hidden', !canSend);
+
+            const last = chat.messages[chat.messages.length - 1];
+            const key = `${chat.messages.length}:${last ? last.id : 0}`;
+            if (key === chat.renderedKey) return;   // 변화 없으면 다시 그리지 않음 (스크롤/입력 유지)
+            chat.renderedKey = key;
+
+            const box = document.getElementById('chat-messages');
+            box.innerHTML = '';
+            if (chat.messages.length === 0) {
+                box.innerHTML = `<div style="margin: auto; text-align: center; color: #a855f7; font-size: 13px; line-height: 1.6;">아직 메시지가 없어요.<br>첫 메시지를 보내보세요!</div>`;
+            }
+            chat.messages.forEach(m => {
+                const row = document.createElement('div');
+                row.className = 'msg-row ' + (m.sender_id === me ? 'me' : 'them');
+                const bubble = document.createElement('div');
+                bubble.className = 'msg-bubble';
+                bubble.textContent = m.body;
+                const time = document.createElement('div');
+                time.className = 'msg-time';
+                time.textContent = formatTime(m.created_at);
+                row.appendChild(bubble); row.appendChild(time);
+                box.appendChild(row);
+            });
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function chatKeydown(e) {
+            if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) {
+                e.preventDefault();
+                sendChatMessage();
+            }
+        }
+
+        async function sendChatMessage() {
+            if (!chat || chatSending) return;
+            const ta = document.getElementById('chat-input');
+            const text = ta.value.trim();
+            if (!text) return;
+            const btn = document.getElementById('chat-send-btn');
+            chatSending = true; btn.disabled = true;
+            const wasRequest = !chat.isFriend && (!chat.conv || chat.conv.status !== 'accepted');
+            try {
+                const { error } = await sb.rpc('send_message', { p_to: chat.otherId, p_body: text });
+                if (error) throw error;
+                ta.value = '';
+                await loadChatState();
+                if (wasRequest && chat && chat.conv && chat.conv.status === 'pending') showToast('메시지 요청을 보냈어요.');
+                refreshBadges();
+            } catch (err) {
+                showModal(friendlyError(err));
+                try { await loadChatState(); } catch (_) { /* 무시 */ }
+            } finally {
+                chatSending = false; btn.disabled = false;
+            }
+        }
+
+        async function respondConversation(accept) {
+            if (!chat || !chat.conv) return;
+            try {
+                const { data, error } = await sb.from('conversations').update({ status: accept ? 'accepted' : 'declined' })
+                    .eq('id', chat.conv.id).select('id');
+                if (error) throw error;
+                if (!data || data.length === 0) throw new Error('처리할 수 없는 요청이에요.');
+                if (accept) {
+                    showToast('메시지 요청을 수락했어요.');
+                    await loadChatState();
+                } else {
+                    showToast('메시지 요청을 거절했어요.');
+                    await openMessages('requests');
+                }
+                refreshBadges();
+            } catch (err) {
+                showModal(friendlyError(err));
+            }
+        }
+
+        function chatBack() {
+            if (chat && chat.from === 'portfolio') openPortfolio(chat.otherId);
+            else openMessages();
+        }
+
+        function openChatUserProfile() {
+            if (chat) openPortfolio(chat.otherId);
+        }
+
         // ====== 시작 ======
         window.onload = async function() {
             const card = document.getElementById('main-card');
@@ -1242,7 +2052,13 @@
             }
 
             sb.auth.onAuthStateChange((event) => {
+                if (event === 'PASSWORD_RECOVERY') {
+                    recoveryMode = true;
+                    switchView('newpw');
+                    return;
+                }
                 if (event === 'SIGNED_OUT' && currentUser) {
+                    stopPolling(); stopChatPolling();
                     currentUser = null; myPortfolio = null; exploreData = [];
                     switchView('login');
                 }
@@ -1250,11 +2066,25 @@
 
             try {
                 const { data } = await sb.auth.getSession();
-                if (data && data.session) {
-                    currentUser = userFromAuth(data.session.user);
+                const session = data && data.session;
+                if (RECOVERY_FROM_URL) {
+                    history.replaceState(null, '', window.location.pathname + window.location.search);
+                    if (session) {
+                        recoveryMode = true;
+                        switchView('newpw');
+                    } else {
+                        switchView('login');
+                        showModal('재설정 링크가 만료되었거나 올바르지 않아요. 비밀번호 찾기를 다시 진행해주세요.');
+                    }
+                } else if (session) {
+                    currentUser = userFromAuth(session.user);
                     await checkUserSession();
                 } else {
                     switchView('login');
+                }
+                if (LINK_ERROR_FROM_URL && !RECOVERY_FROM_URL) {
+                    history.replaceState(null, '', window.location.pathname + window.location.search);
+                    showModal('링크가 만료되었거나 이미 사용되었어요. 비밀번호 찾기를 다시 진행해주세요.');
                 }
             } catch (err) {
                 switchView('login');
