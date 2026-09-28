@@ -9,8 +9,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Noto Sans KR', sans-serif;
-            /* Balanced 70% lavender & 30% pink gradient background */
-            background: linear-gradient(135deg, #e9d5ff 0%, #d8b4fe 40%, #f472b6 100%), linear-gradient(135deg, #c084fc 0%, #fbcfe8 100%);
+            background: linear-gradient(135deg, #d8b4fe 0%, #c084fc 40%, #f472b6 100%), linear-gradient(135deg, #a855f7 0%, #fbcfe8 100%);
             background-blend-mode: overlay;
             color: #6b21a8;
             min-height: 100vh;
@@ -27,10 +26,10 @@
             pointer-events: none; overflow: hidden; z-index: 0;
         }
         .bubble {
-            position: absolute; bottom: -120px;
+            position: absolute; bottom: -140px;
             background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.95), rgba(216, 180, 254, 0.45));
             border-radius: 50%;
-            box-shadow: inset 0 0 22px rgba(255, 255, 255, 0.85), 0 0 18px rgba(168, 85, 247, 0.28);
+            box-shadow: inset 0 0 25px rgba(255, 255, 255, 0.85), 0 0 20px rgba(168, 85, 247, 0.28);
             animation: floatUp 8s infinite ease-in-out; opacity: 0.78;
         }
         @keyframes floatUp {
@@ -38,15 +37,6 @@
             20% { opacity: 0.78; }
             80% { opacity: 0.78; }
             100% { transform: translateY(-115vh) translateX(70px) scale(1.18); opacity: 0; }
-        }
-
-        .pop-particle {
-            position: fixed; border-radius: 50%; pointer-events: none; z-index: 2000;
-            animation: popOut 0.9s forwards ease-out;
-        }
-        @keyframes popOut {
-            0% { transform: translate(0, 0) scale(1); opacity: 1; }
-            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
         }
 
         .top-nav {
@@ -138,17 +128,11 @@
         .section-box h3 { font-size: 15px; color: #7e22ce; margin-bottom: 8px; }
         .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
         .tag { background: #f3e8ff; color: #7e22ce; padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 500; border: 1px solid #e9d5ff; }
-        
-        .level-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 6px; }
-        .level-btn {
-            background: #faf5ff; border: 1px solid #d8b4fe; color: #7e22ce; padding: 8px 4px;
-            border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; text-align: center;
-            transition: all 0.2s;
-        }
-        .level-btn.active {
-            background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%); color: white; border-color: #a855f7;
-            box-shadow: 0 2px 8px rgba(168, 85, 247, 0.3);
-        }
+
+        .skill-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; }
+        .skill-row input { flex: 2; }
+        .skill-row select { flex: 1; padding: 12px; background-color: #faf5ff; border: 1px solid #f3e8ff; border-radius: 12px; color: #7e22ce; font-weight: 600; font-size: 13px; outline: none; }
+        .skill-remove-btn { background: #fee2e2; color: #ef4444; border: none; border-radius: 8px; padding: 10px 12px; font-size: 13px; cursor: pointer; font-weight: 600; }
     </style>
 </head>
 <body>
@@ -159,7 +143,7 @@
         <div class="nav-logo" onclick="goHome()">
             <div class="nav-logo-icon">
                 <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15 30C15 27.2386 17.2386 25 20 25H42L52 35H80C82.7614 35 85 37.2386 85 40V75C85 77.7614 82.7614 80 80 80H20C17.2386 80 15 77.7614 15 75V30Z" fill="#F3E8FF" stroke="#C084FC" stroke-width="4"/>
+                    <path d="M15 30C15 27.2386 17.2386 25 20 25H42L52 35H80C82.7614 35 85 37.2386 85 40V75C85 77.7614 82.7614 80 80 80H20C17.2386 15 15 17.7614 15 75V30Z" fill="#F3E8FF" stroke="#C084FC" stroke-width="4"/>
                     <circle cx="50" cy="57" r="18" fill="white" stroke="#D8B4FE" stroke-width="3"/>
                     <path d="M40 54C45 50 55 50 60 54" stroke="#C084FC" stroke-width="2.5" stroke-linecap="round"/>
                 </svg>
@@ -218,390 +202,262 @@
                 </div>
                 <div class="form-group">
                     <label>비밀번호</label>
-                    <input type="password" id="signup-pw" placeholder="영문, 숫자, 특수문자 조합" required>
-                    <div class="hint">영문, 숫자, 특수문자 포함 9~15자</div>
+                    <input type="password" id="signup-pw" placeholder="비밀번호 입력" required>
                 </div>
                 <div class="form-group">
                     <label>이름</label>
                     <input type="text" id="signup-name" placeholder="이름을 입력하세요" required>
                 </div>
                 <button type="submit" class="btn btn-primary">가입 완료하기</button>
+                <button type="button" class="btn btn-secondary" onclick="switchView('login')" style="margin-top: 8px;">로그인으로 돌아가기</button>
             </form>
-            <button type="button" class="btn btn-secondary" onclick="switchView('login')" style="margin-top: 10px;">로그인으로 돌아가기</button>
         </div>
 
-        <!-- Explore Home Section (Default after login) -->
-        <div id="explore-home-section" class="hidden" style="text-align: center;">
-            <div style="margin-top: 10px; margin-bottom: 24px;">
-                <h2 id="explore-welcome-title" style="font-size: 22px; color: #6b21a8; margin-bottom: 6px;">커리어 탐색 아카이브 🔍</h2>
-                <p style="color: #9333ea; font-size: 13px;">다른 사용자의 커리어를 검색하거나 우측 상단 프로필에서 내 포트폴리오를 관리해보세요!</p>
+        <!-- Home Section -->
+        <div id="home-section" class="hidden">
+            <div style="text-align: center; margin-bottom: 24px;">
+                <h2 style="font-size: 22px; font-weight: 700; color: #6b21a8; margin-bottom: 6px;">커리어 검색 아카이브</h2>
+                <p style="font-size: 13px; color: #9333ea;">찾고 싶은 기술, 키워드, 이름을 검색해보세요.</p>
             </div>
-            <div class="form-group" style="position: relative; margin-bottom: 4px;">
-                <span style="position: absolute; left: 16px; top: 38%; transform: translateY(-50%); font-size: 16px; pointer-events: none; z-index: 2;">🔍</span>
-                <input type="text" id="search-input" placeholder="쉼표(,)로 구분하여 검색어 입력 (예: 프론트엔드, React, 김)" oninput="handleSearch(this.value)" style="padding-left: 44px;">
+            <div class="form-group">
+                <div style="display: flex; gap: 8px;">
+                    <input type="text" id="search-query" placeholder="예: 프론트엔드, React, 김철수 (쉼표로 여러 단어 구분)" style="flex:1;">
+                    <button type="button" class="btn btn-accent" style="width: auto; padding: 12px 20px;" onclick="searchPortfolios()">검색</button>
+                </div>
+                <div class="hint" style="margin-top: 6px;">* 쉼표(,)로 구분된 모든 검색어가 포함된 포트폴리오만 검색됩니다.</div>
             </div>
-            <div style="font-size: 11px; color: #a855f7; margin-top: 8px; margin-bottom: 16px; text-align: left; padding-left: 4px;">
-                * 쉼표(,)로 구분된 모든 검색어가 포함된 포트폴리오만 검색됩니다.
+            <div id="search-results" style="margin-top: 20px; max-height: 380px; overflow-y: auto;">
+                <div style="font-size: 13px; color: #9333ea; text-align: center; padding: 20px;">검색어를 입력하고 검색 버튼을 눌러주세요.</div>
             </div>
-            <div id="search-results-container" style="max-height: 220px; overflow-y: auto; text-align: left; margin-top: 12px;"></div>
-            <button type="button" class="btn btn-secondary" onclick="handleLogout()" style="margin-top: 16px;">로그아웃</button>
-        </div>
-
-        <!-- Welcome Portfolio Section (For users with no portfolio yet) -->
-        <div id="welcome-portfolio-section" class="hidden" style="text-align: center;">
-            <h2 id="welcome-title" style="font-size: 22px; color: #6b21a8; margin-bottom: 10px;">환영합니다! 🎉</h2>
-            <p style="color: #9333ea; margin-bottom: 24px; font-size: 14px;">아직 등록된 포트폴리오가 없습니다. 나만의 커리어를 채워보세요!</p>
-            <button type="button" class="btn btn-accent" onclick="openPortfolioFormWithBubbleEffect()" style="padding: 16px;">✨ 포트폴리오 생성하기</button>
-            <button type="button" class="btn btn-secondary" onclick="handleLogout()" style="margin-top: 12px;">로그아웃</button>
         </div>
 
         <!-- Portfolio Form Section -->
-        <div id="portfolio-form-section" class="hidden">
-            <h2 style="font-size: 20px; color: #6b21a8; margin-bottom: 16px; text-align: center;">📝 커리어 포트폴리오 작성</h2>
-            <form onsubmit="handleSavePortfolio(event)">
-                <div class="form-group">
-                    <label>프로필 사진 (컴퓨터 파일 선택)</label>
-                    <input type="file" id="pf-image-file" accept="image/*" onchange="previewImageFile(event)">
-                    <input type="hidden" id="pf-image-base64">
-                    <div style="margin-top: 8px; display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 12px; color: #9333ea;">또는 아바타 이모지 선택:</span>
-                        <select id="pf-emoji-select" onchange="selectEmojiAvatar(this.value)" style="width: auto; padding: 6px 10px;">
-                            <option value="">이모지 선택</option>
-                            <option value="🥟">🥟 만두</option>
-                            <option value="🐱">🐱 고양이</option>
-                            <option value="🐶">🐶 강아지</option>
-                            <option value="🦊">🦊 여우</option>
-                            <option value="🐼">🐼 판다</option>
-                            <option value="⭐">⭐ 별</option>
-                        </select>
-                    </div>
-                </div>
+        <div id="portfolio-form-section" class="card wide hidden" style="margin: 0; box-shadow: none; background: transparent; padding: 0;">
+            <div style="text-align: center; margin-bottom: 24px;">
+                <h2 style="font-size: 22px; font-weight: 700; color: #6b21a8;" id="pf-form-title">커리어 포트폴리오 작성</h2>
+            </div>
+            <form onsubmit="handlePortfolioSubmit(event)">
                 <div class="form-group">
                     <label>이름</label>
-                    <input type="text" id="pf-name" required>
+                    <input type="text" id="pf-name" required readonly style="background-color: #f3e8ff; cursor: not-allowed;">
+                    <div class="hint">회원 가입 시 등록된 이름입니다.</div>
                 </div>
+
                 <div class="form-group">
-                    <label>포지션</label>
-                    <input type="text" id="pf-job" placeholder="예: 프론트엔드 개발자" required>
-                </div>
-                <div class="form-group">
-                    <label>연락처</label>
-                    <input type="text" id="pf-contact" required>
-                </div>
-                <div class="form-group">
-                    <label>한줄 소개</label>
-                    <input type="text" id="pf-intro" required>
-                </div>
-                <div class="form-group">
-                    <label>보유 기술 (직무 역량 / 스킬명)</label>
-                    <input type="text" id="pf-skills" placeholder="예: JavaScript, React, UI/UX 디자인 등" required>
-                </div>
-                <div class="form-group">
-                    <label>보유 기술 숙련도 수준 (Lv.1 ~ Lv.10)</label>
-                    <div class="level-grid" id="skill-level-grid">
-                        <!-- Levels 1 to 10 generated via JS -->
+                    <label>프로필 사진</label>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                        <div id="pf-current-img-preview" style="width: 52px; height: 52px; border-radius: 50%; overflow: hidden; border: 2px solid #d8b4fe; background: #faf5ff; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0;">🥟</div>
+                        <div style="flex: 1;">
+                            <input type="file" id="pf-image" accept="image/*" onchange="previewImage(event)">
+                            <div class="hint" id="pf-img-status">등록된 프로필 사진이 있습니다. 변경하려면 새 파일을 선택하세요.</div>
+                        </div>
                     </div>
-                    <input type="hidden" id="pf-skill-level" value="5">
                 </div>
+
                 <div class="form-group">
-                    <label>경력 사항</label>
-                    <textarea id="pf-experience"></textarea>
+                    <label>한 줄 소개</label>
+                    <input type="text" id="pf-bio" placeholder="예: 사용자 경험을 최우선으로 생각하는 프론트엔드 개발자 김물만두입니다.">
                 </div>
+
                 <div class="form-group">
-                    <label>학력 및 교육</label>
-                    <textarea id="pf-education"></textarea>
+                    <label>💡 보유 기술 및 숙련도</label>
+                    <div style="font-size: 12px; color: #9333ea; margin-bottom: 8px;">보유하신 기술과 숙련도(Lv.1 입문자 ~ Lv.10 전문가)를 각각 추가해주세요.</div>
+                    <div id="skill-rows-container"></div>
+                    <button type="button" class="btn btn-secondary" onclick="addSkillRow()" style="margin-top: 4px; padding: 8px; font-size: 13px;">+ 기술 추가하기</button>
                 </div>
+
                 <div class="form-group">
-                    <label>프로젝트</label>
-                    <textarea id="pf-projects"></textarea>
+                    <label>🚀 핵심 역량 및 전문성 (Core Competencies)</label>
+                    <textarea id="pf-core" placeholder="본인의 주력 기술, 도메인 지식, 핵심 강점을 기재하세요."></textarea>
                 </div>
+
                 <div class="form-group">
-                    <label>자격증 및 전문 수료증</label>
-                    <textarea id="pf-certificates" placeholder="취득한 자격증이나 이수한 전문 교육 과정을 적어주세요"></textarea>
+                    <label>🔍 주요 문제 해결 사례 (Troubleshooting)</label>
+                    <textarea id="pf-problem" placeholder="마주했던 기술적 난관과 이를 해결한 과정(Situation-Task-Action-Result)을 적어주세요."></textarea>
                 </div>
+
                 <div class="form-group">
-                    <label>수상 및 대외활동 내역</label>
-                    <textarea id="pf-awards" placeholder="공모전, 해커톤 수상 내역 및 대외 활동 내역을 적어주세요"></textarea>
+                    <label>🌟 오픈소스 기여 및 활동 (Open Source & Community)</label>
+                    <textarea id="pf-opensource" placeholder="GitHub 기여, 기술 블로그 운영, 스터디 리드 등 협업/공유 활동을 적어주세요."></textarea>
                 </div>
+
                 <div class="form-group">
-                    <label>특이사항</label>
-                    <textarea id="pf-notes" placeholder="기타 특이사항을 적어주세요"></textarea>
+                    <label>📜 자격증 및 전문 수료증 (Certificates & Courses)</label>
+                    <textarea id="pf-certs" placeholder="취득한 자격증이나 부트캠프 수료증 내역을 적어주세요."></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">저장하기</button>
-                <button type="button" class="btn btn-secondary" onclick="cancelPortfolioForm()" style="margin-top: 6px;">취소</button>
+
+                <div class="form-group">
+                    <label>🏆 수상 및 대외활동 내역 (Awards & Activities)</label>
+                    <textarea id="pf-awards" placeholder="해커톤 입상, 공모전 수상 및 대외활동 내역을 적어주세요."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>🤝 일하는 방식 및 협업 철학 (Working Style)</label>
+                    <textarea id="pf-style" placeholder="소통 방식, 코드 리뷰 문화에 대한 생각 등을 적어주세요."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>✍️ 인사이트 & 기술 블로그 (Articles & Insights)</label>
+                    <textarea id="pf-insights" placeholder="작성한 기술 아티클 링크나 배운 점을 기록한 포스팅 요약을 적어주세요."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>🎯 향후 커리어 목표 및 비전 (Career Goals)</label>
+                    <textarea id="pf-goals" placeholder="단기 및 장기 커리어 로드맵을 적어주세요."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>🧪 사이드 프로젝트 & 실험실 (Side Projects)</label>
+                    <textarea id="pf-side" placeholder="개인적으로 만들어본 토이 프로젝트나 미니 앱을 소개해주세요."></textarea>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="button" class="btn btn-secondary" onclick="goHome()">취소</button>
+                    <button type="submit" class="btn btn-primary" style="margin-top:0;">저장하기</button>
+                </div>
             </form>
         </div>
 
         <!-- Portfolio View Section -->
-        <div id="portfolio-view-section" class="hidden portfolio-view">
-            <div class="portfolio-header">
-                <div class="profile-flex">
-                    <img id="view-profile-img" src="" alt="" class="profile-img-preview" style="display:none;">
-                    <div id="view-profile-emoji-fallback" style="display:none; font-size:45px; width:70px; height:70px; display:flex; align-items:center; justify-content:center; background:#faf5ff; border:2px solid #d8b4fe; border-radius:50%;"></div>
-                    <div>
-                        <h2 id="view-name"></h2>
-                        <div id="view-job" style="color:#a855f7; font-weight:600; margin-top:2px;"></div>
-                        <div id="view-intro" style="color:#64748b; font-size:13px; margin-top:4px;"></div>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-secondary" onclick="goHome()" style="width:auto; padding:8px 14px;">🏠 홈으로</button>
-            </div>
-            <div class="section-box"><h3>📞 연락처</h3><p id="view-contact"></p></div>
-            <div class="section-box">
-                <h3>💡 기술 스택 & 보유 기술</h3>
-                <div style="font-size: 13px; color: #7e22ce; font-weight: 600; margin-bottom: 6px;" id="view-skill-level-text">숙련도: Lv.5</div>
-                <div class="tag-list" id="view-skills-tags"></div>
-            </div>
-            <div class="section-box"><h3>💼 경력 사항</h3><p id="view-experience"></p></div>
-            <div class="section-box"><h3>🎓 학력 및 교육</h3><p id="view-education"></p></div>
-            <div class="section-box"><h3>🚀 프로젝트</h3><p id="view-projects"></p></div>
-            <div class="section-box"><h3>📜 자격증 및 전문 수료증</h3><p id="view-certificates"></p></div>
-            <div class="section-box"><h3>🏆 수상 및 대외활동 내역</h3><p id="view-awards"></p></div>
-            <div class="section-box"><h3>⭐ 특이사항</h3><p id="view-notes"></p></div>
-            
-            <!-- Comments Section -->
-            <div class="section-box" style="margin-top: 24px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                    <h3 style="margin-bottom:0;">💬 동료 코멘트 & 추천사</h3>
-                    <button type="button" id="open-comment-btn" class="btn btn-accent hidden" onclick="openCommentModal()" style="width: auto; padding: 6px 14px; font-size: 13px;">코멘트 달기</button>
-                </div>
-                <div id="view-comments-list" style="display: flex; flex-direction: column; gap: 8px;"></div>
-            </div>
-
-            <button type="button" id="view-edit-btn" class="btn btn-secondary hidden" onclick="openPortfolioForm()" style="margin-top:10px;">✏️ 포트폴리오 수정하기</button>
-        </div>
-    </div>
-
-    <!-- Comment Modal -->
-    <div class="modal-overlay" id="comment-modal">
-        <div class="modal-card" style="max-width: 400px; text-align: left;">
-            <h3 style="color: #6b21a8; font-size: 16px; margin-bottom: 12px;">동료 코멘트 남기기</h3>
-            <div class="form-group" style="margin-bottom: 12px;">
-                <textarea id="comment-input" placeholder="함께 일했던 경험이나 추천 한마디를 남겨주세요!" style="min-height: 100px;"></textarea>
-            </div>
-            <div style="display: flex; gap: 8px;">
-                <button type="button" class="btn btn-primary" onclick="submitComment()" style="margin-top:0;">등록하기</button>
-                <button type="button" class="btn btn-secondary" onclick="closeCommentModal()" style="margin-top:0;">취소</button>
+        <div id="portfolio-view-section" class="card wide hidden" style="margin: 0; box-shadow: none; background: transparent; padding: 0;">
+            <div id="portfolio-view-container"></div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button type="button" class="btn btn-secondary" onclick="goHome()" style="max-width: 200px; margin: 0 auto;">홈으로 돌아가기</button>
             </div>
         </div>
     </div>
 
+    <!-- Custom Modal -->
     <div class="modal-overlay" id="custom-modal">
         <div class="modal-card">
-            <div class="modal-message" id="modal-msg"></div>
+            <div class="modal-message" id="modal-message">알림 메시지</div>
             <button class="modal-btn" onclick="closeModal()">확인</button>
         </div>
     </div>
 
     <script>
-        let currentViewingUserId = null;
+        let currentUser = null;
+        let usersData = JSON.parse(localStorage.getItem('mulmandu_users') || '{}');
+        let portfoliosData = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
+        let commentsData = JSON.parse(localStorage.getItem('mulmandu_comments') || '{}');
+        let currentEditingSkills = []; // [{name: '코딩', level: 1}, ...]
 
-        function initBubbles() {
+        function saveToStorage() {
+            localStorage.setItem('mulmandu_users', JSON.stringify(usersData));
+            localStorage.setItem('mulmandu_portfolios', JSON.stringify(portfoliosData));
+            localStorage.setItem('mulmandu_comments', JSON.stringify(commentsData));
+        }
+
+        // Generate floating bubbles
+        window.onload = function() {
             const container = document.getElementById('bubble-container');
-            container.innerHTML = '';
-            for (let i = 0; i < 20; i++) {
+            for(let i=0; i<15; i++) {
                 const bubble = document.createElement('div');
-                bubble.classList.add('bubble');
-                const size = Math.random() * 80 + 45;
-                bubble.style.width = `${size}px`;
-                bubble.style.height = `${size}px`;
-                bubble.style.left = `${Math.random() * 100}%`;
-                bubble.style.animationDuration = `${Math.random() * 6 + 7}s`;
-                bubble.style.animationDelay = `${Math.random() * 5}s`;
+                bubble.className = 'bubble';
+                const size = Math.random() * 60 + 20;
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+                bubble.style.left = Math.random() * 100 + 'vw';
+                bubble.style.animationDuration = (Math.random() * 6 + 6) + 's';
+                bubble.style.animationDelay = (Math.random() * 5) + 's';
                 container.appendChild(bubble);
             }
-        }
 
-        function initSkillLevelButtons(selectedLevel = 5) {
-            const grid = document.getElementById('skill-level-grid');
-            grid.innerHTML = '';
-            const labels = {
-                1: 'Lv.1 입문자',
-                2: 'Lv.2 초급',
-                3: 'Lv.3 수습',
-                4: 'Lv.4 중하',
-                5: 'Lv.5 중급',
-                6: 'Lv.6 중상',
-                7: 'Lv.7 고급',
-                8: 'Lv.8 숙련',
-                9: 'Lv.9 마스터',
-                10: 'Lv.10 전문가'
-            };
-            for (let i = 1; i <= 10; i++) {
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = `level-btn ${i === Number(selectedLevel) ? 'active' : ''}`;
-                btn.innerText = `Lv.${i}`;
-                btn.title = labels[i];
-                btn.onclick = () => {
-                    document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    document.getElementById('pf-skill-level').value = i;
-                };
-                grid.appendChild(btn);
+            // Check remember me
+            const rememberedId = localStorage.getItem('mulmandu_remember_id');
+            const rememberedPw = localStorage.getItem('mulmandu_remember_pw');
+            if(rememberedId && rememberedPw) {
+                document.getElementById('login-id').value = rememberedId;
+                document.getElementById('login-pw').value = rememberedPw;
+                document.getElementById('remember-me').checked = true;
             }
-            document.getElementById('pf-skill-level').value = selectedLevel;
-        }
+        };
 
-        function triggerFullScreenBubbleBurst() {
-            for (let i = 0; i < 100; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('pop-particle');
-                const size = Math.random() * 24 + 10;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${window.innerWidth / 2}px`;
-                particle.style.top = `${window.innerHeight / 2}px`;
-                
-                const colors = ['#d8b4fe', '#c084fc', '#a855f7', '#f472b6', '#fbcfe8', '#ffffff'];
-                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                
-                const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * (Math.max(window.innerWidth, window.innerHeight) * 0.75) + 50;
-                const tx = Math.cos(angle) * distance;
-                const ty = Math.sin(angle) * distance;
-                
-                particle.style.setProperty('--tx', `${tx}px`);
-                particle.style.setProperty('--ty', `${ty}px`);
-                
-                document.body.appendChild(particle);
-                setTimeout(() => particle.remove(), 900);
-            }
-        }
-
-        function triggerCardBubbleBurst(event) {
-            const clientX = event ? event.clientX : window.innerWidth / 2;
-            const clientY = event ? event.clientY : window.innerHeight / 2;
-            
-            for (let i = 0; i < 35; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('pop-particle');
-                const size = Math.random() * 18 + 8;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${clientX}px`;
-                particle.style.top = `${clientY}px`;
-                
-                const colors = ['#d8b4fe', '#c084fc', '#a855f7', '#f472b6', '#ffffff'];
-                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                
-                const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * 220 + 50;
-                const tx = Math.cos(angle) * distance;
-                const ty = Math.sin(angle) * distance;
-                
-                particle.style.setProperty('--tx', `${tx}px`);
-                particle.style.setProperty('--ty', `${ty}px`);
-                
-                document.body.appendChild(particle);
-                setTimeout(() => particle.remove(), 800);
-            }
-        }
-
-        function previewImageFile(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('pf-image-base64').value = e.target.result;
-                    document.getElementById('pf-emoji-select').value = "";
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function selectEmojiAvatar(emoji) {
-            if (emoji) {
-                document.getElementById('pf-image-base64').value = emoji;
-                document.getElementById('pf-image-file').value = "";
-            }
-        }
-
-        function goHome() {
-            const user = localStorage.getItem('mulmandu_logged_in');
-            if (user) {
-                const parsedUser = JSON.parse(user);
-                updateTopNavProfile(parsedUser);
-                switchView('explore');
-                loadExploreList('');
-                document.getElementById('search-input').value = '';
-            } else {
-                switchView('login');
-            }
-        }
-
-        function viewMyPortfolio() {
-            const user = JSON.parse(localStorage.getItem('mulmandu_logged_in') || '{}');
-            const portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
-            if (portfolios[user.id]) {
-                renderPortfolio(portfolios[user.id], user.id);
-                switchView('portfolio-view');
-            } else {
-                document.getElementById('welcome-title').innerText = `${user.name} 님 환영합니다! 🎉`;
-                switchView('welcome');
-            }
-        }
-
-        function showModal(msg, cb) {
-            document.getElementById('modal-msg').innerText = msg;
+        function showMessage(msg) {
+            document.getElementById('modal-message').innerText = msg;
             document.getElementById('custom-modal').classList.add('active');
-            window.modalCallback = cb;
         }
 
         function closeModal() {
             document.getElementById('custom-modal').classList.remove('active');
-            if (window.modalCallback) { window.modalCallback(); window.modalCallback = null; }
         }
 
-        function updateTopNavProfile(user) {
-            const navProfile = document.getElementById('nav-profile-container');
-            const navMyPfBtn = document.getElementById('nav-my-pf-btn');
-            if (!user) {
-                navProfile.classList.add('hidden');
-                navMyPfBtn.classList.add('hidden');
+        function switchView(viewName) {
+            document.getElementById('login-section').classList.add('hidden');
+            document.getElementById('signup-section').classList.add('hidden');
+            document.getElementById('home-section').classList.add('hidden');
+            document.getElementById('portfolio-form-section').classList.add('hidden');
+            document.getElementById('portfolio-view-section').classList.add('hidden');
+            document.getElementById('main-card').classList.remove('wide');
+
+            if(viewName === 'login') document.getElementById('login-section').classList.remove('hidden');
+            if(viewName === 'signup') document.getElementById('signup-section').classList.remove('hidden');
+            if(viewName === 'home') {
+                document.getElementById('home-section').classList.remove('hidden');
+                document.getElementById('nav-my-pf-btn').classList.remove('hidden');
+                document.getElementById('nav-profile-container').classList.remove('hidden');
+                updateNavProfile();
+            }
+            if(viewName === 'form') {
+                document.getElementById('portfolio-form-section').classList.remove('hidden');
+                document.getElementById('main-card').classList.add('wide');
+            }
+            if(viewName === 'view') {
+                document.getElementById('portfolio-view-section').classList.remove('hidden');
+                document.getElementById('main-card').classList.add('wide');
+            }
+        }
+
+        function updateNavProfile() {
+            if(!currentUser || !portfoliosData[currentUser]) return;
+            const pf = portfoliosData[currentUser];
+            const emojiEl = document.getElementById('nav-profile-emoji');
+            const imgEl = document.getElementById('nav-profile-img');
+            if(pf.image) {
+                imgEl.src = pf.image;
+                imgEl.style.display = 'block';
+                emojiEl.style.display = 'none';
+            } else {
+                imgEl.style.display = 'none';
+                emojiEl.style.display = 'block';
+            }
+        }
+
+        let tempUploadedImage = '';
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    tempUploadedImage = e.target.result;
+                    document.getElementById('pf-current-img-preview').innerHTML = `<img src="${tempUploadedImage}" style="width:100%; height:100%; object-fit:cover;">`;
+                    document.getElementById('pf-img-status').innerText = '새로운 프로필 사진이 선택되었습니다.';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const id = document.getElementById('login-id').value.trim();
+            const pw = document.getElementById('login-pw').value.trim();
+            const remember = document.getElementById('remember-me').checked;
+
+            if(!usersData[id] || usersData[id].pw !== pw) {
+                showMessage('아이디 또는 비밀번호가 올바르지 않습니다.');
                 return;
             }
-            navProfile.classList.remove('hidden');
-            navMyPfBtn.classList.remove('hidden');
 
-            const portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
-            const p = portfolios[user.id];
-            const imgEl = document.getElementById('nav-profile-img');
-            const emojiEl = document.getElementById('nav-profile-emoji');
-            
-            if (p && p.image) {
-                if (p.image.startsWith('data:')) {
-                    imgEl.src = p.image;
-                    imgEl.style.display = 'block';
-                    emojiEl.style.display = 'none';
-                } else {
-                    emojiEl.innerText = p.image;
-                    emojiEl.style.display = 'block';
-                    imgEl.style.display = 'none';
-                }
+            currentUser = id;
+            if(remember) {
+                localStorage.setItem('mulmandu_remember_id', id);
+                localStorage.setItem('mulmandu_remember_pw', pw);
             } else {
-                emojiEl.innerText = '🥟';
-                emojiEl.style.display = 'block';
-                imgEl.style.display = 'none';
+                localStorage.removeItem('mulmandu_remember_id');
+                localStorage.removeItem('mulmandu_remember_pw');
             }
-        }
 
-        function switchView(name) {
-            ['login-section', 'signup-section', 'explore-home-section', 'welcome-portfolio-section', 'portfolio-form-section', 'portfolio-view-section'].forEach(id => {
-                document.getElementById(id).classList.add('hidden');
-            });
-            const card = document.getElementById('main-card');
-            card.classList.remove('wide');
-            
-            if (name === 'login') document.getElementById('login-section').classList.remove('hidden');
-            else if (name === 'signup') document.getElementById('signup-section').classList.remove('hidden');
-            else if (name === 'explore') document.getElementById('explore-home-section').classList.remove('hidden');
-            else if (name === 'welcome') document.getElementById('welcome-portfolio-section').classList.remove('hidden');
-            else if (name === 'form') { document.getElementById('portfolio-form-section').classList.remove('hidden'); card.classList.add('wide'); }
-            else if (name === 'portfolio-view') { document.getElementById('portfolio-view-section').classList.remove('hidden'); card.classList.add('wide'); }
-            
-            const user = localStorage.getItem('mulmandu_logged_in');
-            updateTopNavProfile(user ? JSON.parse(user) : null);
+            switchView('home');
         }
 
         function handleSignup(e) {
@@ -609,375 +465,328 @@
             const id = document.getElementById('signup-id').value.trim();
             const pw = document.getElementById('signup-pw').value.trim();
             const name = document.getElementById('signup-name').value.trim();
-            if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{9,15}$/.test(id)) {
-                showModal('아이디는 영문, 숫자 조합 9~15자여야 합니다.'); return;
-            }
-            if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+\\\|\[\]{};:\'",.<>/?])[A-Za-z\d!@#$%^&*()\-_=+\\\|\[\]{};:\'",.<>/?]{9,15}$/.test(pw)) {
-                showModal('비밀번호는 영문, 숫자, 특수문자 포함 9~15자여야 합니다.'); return;
-            }
-            let users = JSON.parse(localStorage.getItem('mulmandu_users') || '[]');
-            if (users.some(u => u.id === id)) { showModal('이미 존재하는 아이디입니다.'); return; }
-            users.push({ id, pw, name });
-            localStorage.setItem('mulmandu_users', JSON.stringify(users));
-            showModal('회원가입 완료! 로그인해주세요.', () => switchView('login'));
-        }
 
-        function handleLogin(e) {
-            e.preventDefault();
-            const id = document.getElementById('login-id').value.trim();
-            const pw = document.getElementById('login-pw').value.trim();
-            const rememberMe = document.getElementById('remember-me').checked;
-
-            const users = JSON.parse(localStorage.getItem('mulmandu_users') || '[]');
-            const user = users.find(u => u.id === id && u.pw === pw);
-            if (!user) { showModal('아이디 또는 비밀번호가 틀렸습니다.'); return; }
-
-            if (rememberMe) {
-                localStorage.setItem('mulmandu_saved_credentials', JSON.stringify({ id, pw }));
-            } else {
-                localStorage.removeItem('mulmandu_saved_credentials');
-            }
-
-            localStorage.setItem('mulmandu_logged_in', JSON.stringify(user));
-            checkUserSession(user);
-        }
-
-        function checkUserSession(user) {
-            updateTopNavProfile(user);
-            const portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
-            if (portfolios[user.id]) {
-                document.getElementById('explore-welcome-title').innerText = `${user.name} 님 환영합니다! 🔍`;
-                switchView('explore');
-                loadExploreList('');
-                document.getElementById('search-input').value = '';
-            } else {
-                document.getElementById('welcome-title').innerText = `${user.name} 님 환영합니다! 🎉`;
-                switchView('welcome');
-            }
-        }
-
-        function loadExploreList(keyword) {
-            handleSearch(keyword);
-        }
-
-        function handleSearch(keyword) {
-            const portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
-            const users = JSON.parse(localStorage.getItem('mulmandu_users') || '[]');
-            const container = document.getElementById('search-results-container');
-            container.innerHTML = '';
-            
-            if (!keyword || keyword.trim() === '') {
-                container.innerHTML = `<div style="text-align: center; color: #a855f7; font-size: 13px; padding: 20px;">검색어를 입력하면 조건에 맞는 포트폴리오가 표시됩니다.</div>`;
+            if(usersData[id]) {
+                showMessage('이미 존재하는 아이디입니다.');
                 return;
             }
 
-            const terms = keyword.split(',').map(t => t.trim().toLowerCase()).filter(t => t.length > 0);
-            if (terms.length === 0) {
-                container.innerHTML = `<div style="text-align: center; color: #a855f7; font-size: 13px; padding: 20px;">검색어를 입력해주세요.</div>`;
-                return;
-            }
+            usersData[id] = { pw, name };
+            saveToStorage();
+            currentUser = id;
 
-            let list = [];
-            for (let uid in portfolios) {
-                const p = portfolios[uid];
-                const u = users.find(x => x.id === uid);
-                const searchableText = [
-                    u ? u.name : '',
-                    p.name, p.job, p.contact, p.intro, p.skills,
-                    p.experience, p.education, p.projects, p.certificates, p.awards, p.notes
-                ].join(' ').toLowerCase();
+            portfoliosData[currentUser] = {
+                name: name,
+                image: '',
+                bio: '',
+                core: '',
+                problem: '',
+                openSource: '',
+                certs: '',
+                awards: '',
+                style: '',
+                insights: '',
+                goals: '',
+                side: '',
+                skills: []
+            };
+            saveToStorage();
 
-                const matchesAll = terms.every(term => searchableText.includes(term));
-                if (matchesAll) {
-                    list.push({ uid, p, name: u ? u.name : p.name });
-                }
-            }
-
-            if (list.length === 0) {
-                container.innerHTML = `<div style="text-align: center; color: #9333ea; font-size: 13px; padding: 20px;">검색 결과가 없습니다.</div>`;
-                return;
-            }
-
-            list.forEach(item => {
-                const cardEl = document.createElement('div');
-                cardEl.style.cssText = "background: #ffffff; border: 1px solid #f3e8ff; border-radius: 12px; padding: 14px 18px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: transform 0.2s;";
-                cardEl.onmouseover = () => cardEl.style.transform = 'scale(1.01)';
-                cardEl.onmouseout = () => cardEl.style.transform = 'scale(1)';
-                cardEl.onclick = () => {
-                    renderPortfolio(item.p, item.uid);
-                    switchView('portfolio-view');
-                };
-
-                let avatarHtml = item.p.image && item.p.image.startsWith('data:') 
-                    ? `<img src="${item.p.image}" style="width:40px; height:40px; border-radius:50%; object-fit:cover; border:1px solid #d8b4fe;">`
-                    : `<div style="width:40px; height:40px; border-radius:50%; background:#faf5ff; border:1px solid #d8b4fe; display:flex; align-items:center; justify-content:center; font-size:20px;">${item.p.image || '🥟'}</div>`;
-
-                cardEl.innerHTML = `
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        ${avatarHtml}
-                        <div>
-                            <div style="font-weight: 700; color: #6b21a8; font-size: 15px;">${item.p.name}</div>
-                            <div style="font-size: 12px; color: #a855f7;">${item.p.job} | ${item.p.intro}</div>
-                        </div>
-                    </div>
-                    <span style="font-size: 12px; color: #7e22ce; font-weight: 600; background: #f3e8ff; padding: 4px 10px; border-radius: 8px;">포트폴리오 보기 &rarr;</span>
-                `;
-                container.appendChild(cardEl);
-            });
-        }
-
-        function openPortfolioFormWithBubbleEffect() {
-            const user = JSON.parse(localStorage.getItem('mulmandu_logged_in') || '{}');
-            const portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
-            
-            if (portfolios[user.id]) {
-                openPortfolioForm();
-                return;
-            }
-
-            document.getElementById('pf-image-base64').value = '';
-            document.getElementById('pf-image-file').value = '';
-            document.getElementById('pf-emoji-select').value = '';
-            document.getElementById('pf-name').value = user.name || '';
-            document.getElementById('pf-job').value = '';
-            document.getElementById('pf-contact').value = '';
-            document.getElementById('pf-intro').value = '';
-            document.getElementById('pf-skills').value = '';
-            initSkillLevelButtons(5);
-            document.getElementById('pf-experience').value = '';
-            document.getElementById('pf-education').value = '';
-            document.getElementById('pf-projects').value = '';
-            document.getElementById('pf-certificates').value = '';
-            document.getElementById('pf-awards').value = '';
-            document.getElementById('pf-notes').value = '';
-            
-            switchView('form');
+            showMessage('회원가입이 완료되었습니다! 포트폴리오를 작성해보세요.');
+            openPortfolioForm();
         }
 
         function openPortfolioForm() {
-            const user = JSON.parse(localStorage.getItem('mulmandu_logged_in'));
-            if (!user) { switchView('login'); return; }
-            const portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
-            const p = portfolios[user.id];
-            if (p) {
-                document.getElementById('pf-image-base64').value = p.image || '';
-                document.getElementById('pf-image-file').value = '';
-                document.getElementById('pf-emoji-select').value = '';
-                document.getElementById('pf-name').value = p.name || user.name || '';
-                document.getElementById('pf-job').value = p.job || '';
-                document.getElementById('pf-contact').value = p.contact || '';
-                document.getElementById('pf-intro').value = p.intro || '';
-                document.getElementById('pf-skills').value = p.skills || '';
-                initSkillLevelButtons(p.skillLevel || 5);
-                document.getElementById('pf-experience').value = p.experience || '';
-                document.getElementById('pf-education').value = p.education || '';
-                document.getElementById('pf-projects').value = p.projects || '';
-                document.getElementById('pf-certificates').value = p.certificates || '';
-                document.getElementById('pf-awards').value = p.awards || '';
-                document.getElementById('pf-notes').value = p.notes || '';
+            document.getElementById('pf-form-title').innerText = '커리어 포트폴리오 작성';
+            const pf = portfoliosData[currentUser] || { name: usersData[currentUser].name };
+            
+            document.getElementById('pf-name').value = pf.name || usersData[currentUser].name;
+            document.getElementById('pf-bio').value = pf.bio || '';
+            document.getElementById('pf-core').value = pf.core || '';
+            document.getElementById('pf-problem').value = pf.problem || '';
+            document.getElementById('pf-opensource').value = pf.openSource || '';
+            document.getElementById('pf-certs').value = pf.certs || '';
+            document.getElementById('pf-awards').value = pf.awards || '';
+            document.getElementById('pf-style').value = pf.style || '';
+            document.getElementById('pf-insights').value = pf.insights || '';
+            document.getElementById('pf-goals').value = pf.goals || '';
+            document.getElementById('pf-side').value = pf.side || '';
+
+            tempUploadedImage = pf.image || '';
+            if(tempUploadedImage) {
+                document.getElementById('pf-current-img-preview').innerHTML = `<img src="${tempUploadedImage}" style="width:100%; height:100%; object-fit:cover;">`;
+                document.getElementById('pf-img-status').innerText = '기존 프로필 사진이 등록되어 있습니다. 변경하려면 새 파일을 선택하세요.';
             } else {
-                document.getElementById('pf-image-base64').value = '';
-                document.getElementById('pf-image-file').value = '';
-                document.getElementById('pf-emoji-select').value = '';
-                document.getElementById('pf-name').value = user.name || '';
-                document.getElementById('pf-job').value = '';
-                document.getElementById('pf-contact').value = '';
-                document.getElementById('pf-intro').value = '';
-                document.getElementById('pf-skills').value = '';
-                initSkillLevelButtons(5);
-                document.getElementById('pf-experience').value = '';
-                document.getElementById('pf-education').value = '';
-                document.getElementById('pf-projects').value = '';
-                document.getElementById('pf-certificates').value = '';
-                document.getElementById('pf-awards').value = '';
-                document.getElementById('pf-notes').value = '';
+                document.getElementById('pf-current-img-preview').innerHTML = '🥟';
+                document.getElementById('pf-img-status').innerText = '등록된 프로필 사진이 없습니다.';
             }
+            document.getElementById('pf-image').value = '';
+
+            currentEditingSkills = pf.skills ? JSON.parse(JSON.stringify(pf.skills)) : [];
+            renderSkillRows();
+
             switchView('form');
         }
 
-        function cancelPortfolioForm() {
-            const user = JSON.parse(localStorage.getItem('mulmandu_logged_in') || '{}');
-            const portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
-            if (portfolios[user.id]) {
-                renderPortfolio(portfolios[user.id], user.id);
-                switchView('portfolio-view');
-            } else {
-                goHome();
+        function renderSkillRows() {
+            const container = document.getElementById('skill-rows-container');
+            container.innerHTML = '';
+            if(currentEditingSkills.length === 0) {
+                container.innerHTML = '<div style="font-size:13px; color:#9333ea; margin-bottom:8px;">등록된 보유 기술이 없습니다. 아래 버튼을 눌러 추가하세요.</div>';
+                return;
             }
+            currentEditingSkills.forEach((skill, index) => {
+                const row = document.createElement('div');
+                row.className = 'skill-row';
+                
+                let optionsHtml = '';
+                for(let i=1; i<=10; i++) {
+                    optionsHtml += `<option value="${i}" ${skill.level === i ? 'selected' : ''}>Lv.${i} (${getLevelDesc(i)})</option>`;
+                }
+
+                row.innerHTML = `
+                    <input type="text" value="${skill.name}" placeholder="기술명 (예: 코딩, React)" oninput="updateSkillName(${index}, this.value)">
+                    <select onchange="updateSkillLevel(${index}, this.value)">${optionsHtml}</select>
+                    <button type="button" class="skill-remove-btn" onclick="removeSkillRow(${index})">삭제</button>
+                `;
+                container.appendChild(row);
+            });
         }
 
-        function handleSavePortfolio(e) {
+        function getLevelDesc(lvl) {
+            if(lvl === 1) return '입문자';
+            if(lvl === 5) return '중급자';
+            if(lvl === 10) return '전문가';
+            return `Lv.${lvl}`;
+        }
+
+        function addSkillRow() {
+            currentEditingSkills.push({ name: '', level: 1 });
+            renderSkillRows();
+        }
+
+        function updateSkillName(index, val) {
+            currentEditingSkills[index].name = val;
+        }
+
+        function updateSkillLevel(index, val) {
+            currentEditingSkills[index].level = parseInt(val);
+        }
+
+        function removeSkillRow(index) {
+            currentEditingSkills.splice(index, 1);
+            renderSkillRows();
+        }
+
+        function handlePortfolioSubmit(e) {
             e.preventDefault();
-            const user = JSON.parse(localStorage.getItem('mulmandu_logged_in'));
-            let portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
-            const isFirstTime = !portfolios[user.id];
+            const name = document.getElementById('pf-name').value;
+            const bio = document.getElementById('pf-bio').value;
+            const core = document.getElementById('pf-core').value;
+            const problem = document.getElementById('pf-problem').value;
+            const openSource = document.getElementById('pf-opensource').value;
+            const certs = document.getElementById('pf-certs').value;
+            const awards = document.getElementById('pf-awards').value;
+            const style = document.getElementById('pf-style').value;
+            const insights = document.getElementById('pf-insights').value;
+            const goals = document.getElementById('pf-goals').value;
+            const side = document.getElementById('pf-side').value;
 
-            const existingImage = portfolios[user.id]?.image || '🥟';
-            const existingComments = portfolios[user.id]?.comments || [];
-            const newImage = document.getElementById('pf-image-base64').value.trim() || existingImage;
-            
-            const data = {
-                image: newImage,
-                name: document.getElementById('pf-name').value.trim(),
-                job: document.getElementById('pf-job').value.trim(),
-                contact: document.getElementById('pf-contact').value.trim(),
-                intro: document.getElementById('pf-intro').value.trim(),
-                skills: document.getElementById('pf-skills').value.trim(),
-                skillLevel: Number(document.getElementById('pf-skill-level').value) || 5,
-                experience: document.getElementById('pf-experience').value.trim(),
-                education: document.getElementById('pf-education').value.trim(),
-                projects: document.getElementById('pf-projects').value.trim(),
-                certificates: document.getElementById('pf-certificates').value.trim(),
-                awards: document.getElementById('pf-awards').value.trim(),
-                notes: document.getElementById('pf-notes').value.trim(),
-                comments: existingComments
+            portfoliosData[currentUser] = {
+                name,
+                image: tempUploadedImage,
+                bio,
+                core,
+                problem,
+                openSource,
+                certs,
+                awards,
+                style,
+                insights,
+                goals,
+                side,
+                skills: currentEditingSkills.filter(s => s.name.trim() !== '')
             };
-            portfolios[user.id] = data;
-            localStorage.setItem('mulmandu_portfolios', JSON.stringify(portfolios));
-            updateTopNavProfile(user);
-            
-            if (isFirstTime) {
-                triggerFullScreenBubbleBurst();
-            } else {
-                triggerCardBubbleBurst(e);
-            }
-
-            showModal('포트폴리오가 성공적으로 저장되었습니다! 🎉', () => { renderPortfolio(data, user.id); switchView('portfolio-view'); });
+            saveToStorage();
+            showMessage('포트폴리오가 성공적으로 저장되었습니다!');
+            viewMyPortfolio();
         }
 
-        function renderPortfolio(p, ownerUid) {
-            currentViewingUserId = ownerUid;
-            const currentUser = JSON.parse(localStorage.getItem('mulmandu_logged_in') || '{}');
-            const editBtn = document.getElementById('view-edit-btn');
-            const commentBtn = document.getElementById('open-comment-btn');
-            
-            if (ownerUid && ownerUid === currentUser.id) {
-                editBtn.classList.remove('hidden');
-                commentBtn.classList.add('hidden');
-            } else {
-                editBtn.classList.add('hidden');
-                commentBtn.classList.remove('hidden');
-            }
+        function viewMyPortfolio() {
+            viewPortfolioDetail(currentUser);
+        }
 
-            const img = document.getElementById('view-profile-img');
-            const emojiFallback = document.getElementById('view-profile-emoji-fallback');
-            if (p.image) {
-                if (p.image.startsWith('data:')) {
-                    img.src = p.image; img.style.display = 'block';
-                    emojiFallback.style.display = 'none';
-                } else {
-                    emojiFallback.innerText = p.image;
-                    emojiFallback.style.display = 'flex';
-                    img.style.display = 'none';
-                }
-            } else {
-                emojiFallback.innerText = '🥟';
-                emojiFallback.style.display = 'flex';
-                img.style.display = 'none';
+        function viewPortfolioDetail(userIdKey) {
+            const pf = portfoliosData[userIdKey];
+            if(!pf) {
+                showMessage('작성된 포트폴리오가 없습니다.');
+                return;
             }
-            document.getElementById('view-name').innerText = p.name;
-            document.getElementById('view-job').innerText = p.job;
-            document.getElementById('view-intro').innerText = p.intro;
-            document.getElementById('view-contact').innerText = p.contact;
-            document.getElementById('view-experience').innerText = p.experience || '미입력';
-            document.getElementById('view-education').innerText = p.education || '미입력';
-            document.getElementById('view-projects').innerText = p.projects || '미입력';
-            document.getElementById('view-certificates').innerText = p.certificates || '미입력';
-            document.getElementById('view-awards').innerText = p.awards || '미입력';
-            document.getElementById('view-notes').innerText = p.notes || '미입력';
+            const isOwner = (userIdKey === currentUser);
             
-            const levelNames = {
-                1: 'Lv.1 입문자', 2: 'Lv.2 초급', 3: 'Lv.3 수습', 4: 'Lv.4 중하', 5: 'Lv.5 중급',
-                6: 'Lv.6 중상', 7: 'Lv.7 고급', 8: 'Lv.8 숙련', 9: 'Lv.9 마스터', 10: 'Lv.10 전문가'
-            };
-            const sLevel = p.skillLevel || 5;
-            document.getElementById('view-skill-level-text').innerText = `숙련도: ${levelNames[sLevel] || ('Lv.' + sLevel)}`;
+            let html = `
+                <div class="portfolio-view">
+                    <div class="portfolio-header">
+                        <div class="profile-flex">
+                            ${pf.image ? `<img src="${pf.image}" class="profile-img-preview">` : `<div class="profile-img-preview" style="display:flex;align-items:center;justify-content:center;font-size:32px;">🥟</div>`}
+                            <div>
+                                <h2>${pf.name}님의 포트폴리오</h2>
+                                <p style="font-size: 13px; color: #9333ea; margin-top: 4px;">${pf.bio || '등록된 한 줄 소개가 없습니다.'}</p>
+                            </div>
+                        </div>
+                        <div>
+                            ${isOwner ? `<button class="btn btn-accent" onclick="openPortfolioForm()" style="padding: 8px 16px; font-size: 13px;">포트폴리오 수정하기</button>` : ''}
+                        </div>
+                    </div>
+            `;
 
-            const tags = document.getElementById('view-skills-tags');
-            tags.innerHTML = '';
-            if (p.skills) {
-                p.skills.split(',').forEach(s => {
-                    const tag = document.createElement('span');
-                    tag.className = 'tag'; tag.innerText = s.trim();
-                    tags.appendChild(tag);
+            if(pf.skills && pf.skills.length > 0) {
+                html += `<div class="section-box"><h3>💡 보유 기술</h3><div class="tag-list">`;
+                pf.skills.forEach(s => {
+                    html += `<span class="tag">${s.name} (Lv.${s.level})</span>`;
                 });
+                html += `</div></div>`;
             }
 
-            const commentsList = document.getElementById('view-comments-list');
-            commentsList.innerHTML = '';
-            if (p.comments && p.comments.length > 0) {
-                p.comments.forEach(c => {
-                    const cEl = document.createElement('div');
-                    cEl.style.cssText = "background: #ffffff; border: 1px solid #f3e8ff; border-radius: 10px; padding: 10px 14px; font-size: 13px;";
-                    cEl.innerHTML = `
-                        <div style="font-weight: 700; color: #7e22ce; margin-bottom: 2px;">${c.authorName}</div>
-                        <div style="color: #4a5568; line-height: 1.4;">${c.text}</div>
+            if(pf.core) html += `<div class="section-box"><h3>🚀 핵심 역량 및 전문성</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.core}</p></div>`;
+            if(pf.problem) html += `<div class="section-box"><h3>🔍 주요 문제 해결 사례</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.problem}</p></div>`;
+            if(pf.openSource) html += `<div class="section-box"><h3>🌟 오픈소스 기여 및 활동</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.openSource}</p></div>`;
+            if(pf.certs) html += `<div class="section-box"><h3>📜 자격증 및 전문 수료증</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.certs}</p></div>`;
+            if(pf.awards) html += `<div class="section-box"><h3>🏆 수상 및 대외활동 내역</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.awards}</p></div>`;
+            if(pf.style) html += `<div class="section-box"><h3>🤝 일하는 방식 및 협업 철학</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.style}</p></div>`;
+            if(pf.insights) html += `<div class="section-box"><h3>✍️ 인사이트 & 기술 블로그</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.insights}</p></div>`;
+            if(pf.goals) html += `<div class="section-box"><h3>🎯 향후 커리어 목표 및 비전</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.goals}</p></div>`;
+            if(pf.side) html += `<div class="section-box"><h3>🧪 사이드 프로젝트 & 실험실</h3><p style="font-size:14px; color:#4a5568; white-space:pre-wrap;">${pf.side}</p></div>`;
+
+            // Comments section
+            html += `
+                <div class="section-box" style="margin-top:24px;">
+                    <h3>💬 동료 코멘트 & 피드백</h3>
+                    <div id="comments-list-${userIdKey}" style="margin-bottom: 16px;">
+            `;
+
+            const userComments = commentsData[userIdKey] || [];
+            if(userComments.length === 0) {
+                html += `<p style="font-size: 13px; color: #9333ea;">아직 남겨진 코멘트가 없습니다.</p>`;
+            } else {
+                userComments.forEach(c => {
+                    html += `
+                        <div style="background: #ffffff; border: 1px solid #f3e8ff; border-radius: 12px; padding: 12px; margin-bottom: 8px;">
+                            <div style="font-size: 12px; font-weight: 700; color: #7e22ce; margin-bottom: 4px;">${c.authorName} (${c.authorId})</div>
+                            <div style="font-size: 13px; color: #4a5568; white-space: pre-wrap;">${c.text}</div>
+                        </div>
                     `;
-                    commentsList.appendChild(cEl);
                 });
-            } else {
-                commentsList.innerHTML = `<div style="font-size: 13px; color: #9333ea; opacity: 0.8;">작성된 코멘트가 없습니다. 첫 코멘트를 남겨보세요!</div>`;
             }
+
+            html += `
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                        <input type="text" id="new-comment-text" placeholder="이 동료에게 따뜻한 코멘트를 남겨보세요!" style="flex:1; padding:10px 14px; background:#fff; border:1px solid #d8b4fe; border-radius:10px; font-size:13px; outline:none;">
+                        <button type="button" class="btn btn-accent" style="width: auto; padding: 10px 18px; font-size: 13px;" onclick="addComment('${userIdKey}')">코멘트 달기</button>
+                    </div>
+                </div>
+            </div>
+            `;
+
+            document.getElementById('portfolio-view-container').innerHTML = html;
+            switchView('view');
         }
 
-        function openCommentModal() {
-            document.getElementById('comment-input').value = '';
-            document.getElementById('comment-modal').classList.add('active');
+        function addComment(targetUserId) {
+            const inputEl = document.getElementById('new-comment-text');
+            const text = inputEl.value.trim();
+            if(!text) {
+                showMessage('코멘트 내용을 입력해주세요.');
+                return;
+            }
+            if(!commentsData[targetUserId]) commentsData[targetUserId] = [];
+            commentsData[targetUserId].push({
+                authorId: currentUser,
+                authorName: usersData[currentUser].name,
+                text: text,
+                date: new Date().toISOString()
+            });
+            saveToStorage();
+            viewPortfolioDetail(targetUserId);
         }
 
-        function closeCommentModal() {
-            document.getElementById('comment-modal').classList.remove('active');
-        }
+        function searchPortfolios() {
+            const queryVal = document.getElementById('search-query').value.trim();
+            const resultsDiv = document.getElementById('search-results');
+            resultsDiv.innerHTML = '';
 
-        function submitComment() {
-            const text = document.getElementById('comment-input').value.trim();
-            if (!text) { showModal('코멘트 내용을 입력해주세요.'); return; }
-            
-            const currentUser = JSON.parse(localStorage.getItem('mulmandu_logged_in') || '{}');
-            let portfolios = JSON.parse(localStorage.getItem('mulmandu_portfolios') || '{}');
-            
-            if (portfolios[currentViewingUserId]) {
-                if (!portfolios[currentViewingUserId].comments) {
-                    portfolios[currentViewingUserId].comments = [];
+            if(!queryVal) {
+                resultsDiv.innerHTML = '<div style="font-size: 13px; color: #9333ea; text-align: center;">검색어를 입력해주세요.</div>';
+                return;
+            }
+
+            const keywords = queryVal.split(',').map(k => k.trim().toLowerCase()).filter(k => k.length > 0);
+            if(keywords.length === 0) {
+                resultsDiv.innerHTML = '<div style="font-size: 13px; color: #9333ea; text-align: center;">올바른 검색어를 입력해주세요.</div>';
+                return;
+            }
+
+            let matchedUsers = [];
+
+            Object.keys(portfoliosData).forEach(uid => {
+                const pf = portfoliosData[uid];
+                let fullText = [
+                    pf.name,
+                    pf.bio,
+                    pf.core,
+                    pf.problem,
+                    pf.openSource,
+                    pf.certs,
+                    pf.awards,
+                    pf.style,
+                    pf.insights,
+                    pf.goals,
+                    pf.side,
+                    ...(pf.skills ? pf.skills.map(s => `${s.name} lv.${s.level}`) : [])
+                ].join(' ').toLowerCase();
+
+                const matchAll = keywords.every(kw => fullText.includes(kw));
+                if(matchAll) {
+                    matchedUsers.push({ uid, pf });
                 }
-                portfolios[currentViewingUserId].comments.push({
-                    authorId: currentUser.id,
-                    authorName: currentUser.name || '동료',
-                    text: text
-                });
-                localStorage.setItem('mulmandu_portfolios', JSON.stringify(portfolios));
-                closeCommentModal();
-                showModal('코멘트가 성공적으로 등록되었습니다! 🎉', () => {
-                    renderPortfolio(portfolios[currentViewingUserId], currentViewingUserId);
-                });
-            }
-        }
+            });
 
-        function handleLogout() {
-            localStorage.removeItem('mulmandu_logged_in');
-            switchView('login');
-        }
-
-        window.onload = function() {
-            initBubbles();
-            initSkillLevelButtons(5);
-            const savedCreds = JSON.parse(localStorage.getItem('mulmandu_saved_credentials') || 'null');
-            if (savedCreds) {
-                document.getElementById('login-id').value = savedCreds.id || '';
-                document.getElementById('login-pw').value = savedCreds.pw || '';
-                document.getElementById('remember-me').checked = true;
+            if(matchedUsers.length === 0) {
+                resultsDiv.innerHTML = '<div style="font-size: 13px; color: #9333ea; text-align: center;">검색 결과가 없습니다.</div>';
+                return;
             }
 
-            const user = localStorage.getItem('mulmandu_logged_in');
-            if (user) {
-                const parsedUser = JSON.parse(user);
-                updateTopNavProfile(parsedUser);
-                switchView('explore');
-                loadExploreList('');
-            } else {
+            matchedUsers.forEach(item => {
+                const card = document.createElement('div');
+                card.style.cssText = "background: #ffffff; border: 1px solid #f3e8ff; border-radius: 14px; padding: 14px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: transform 0.2s;";
+                card.onmouseover = () => card.style.transform = "scale(1.01)";
+                card.onmouseout = () => card.style.transform = "scale(1)";
+                card.onclick = () => viewPortfolioDetail(item.uid);
+
+                card.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        ${item.pf.image ? `<img src="${item.pf.image}" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 1px solid #d8b4fe;">` : `<div style="width: 45px; height: 45px; border-radius: 50%; background: #faf5ff; border: 1px solid #d8b4fe; display: flex; align-items: center; justify-content: center; font-size: 20px;">🥟</div>`}
+                        <div>
+                            <div style="font-size: 15px; font-weight: 700; color: #6b21a8;">${item.pf.name}</div>
+                            <div style="font-size: 12px; color: #9333ea; margin-top: 2px;">${item.pf.bio || '소개글이 없습니다.'}</div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" style="padding: 6px 14px; font-size: 12px; width: auto; margin:0;">포트폴리오 보기</button>
+                    </div>
+                `;
+                resultsDiv.appendChild(card);
+            });
+        }
+
+        function goHome() {
+            if(!currentUser) {
                 switchView('login');
+                return;
             }
-        };
+            switchView('home');
+        }
     </script>
 </body>
 </html>
