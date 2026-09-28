@@ -244,12 +244,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label>프로필 사진</label>
+                    <label>프로필 사진 (로컬 최적화 가이드 적용)</label>
                     <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
                         <div id="pf-current-img-preview" style="width: 52px; height: 52px; border-radius: 50%; overflow: hidden; border: 2px solid #d8b4fe; background: #faf5ff; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0;">🥟</div>
                         <div style="flex: 1;">
                             <input type="file" id="pf-image" accept="image/*" onchange="previewImage(event)">
-                            <div class="hint" id="pf-img-status">등록된 프로필 사진이 있습니다. 변경하려면 새 파일을 선택하세요.</div>
+                            <div class="hint" id="pf-img-status">로컬 환경(LocalStorage) 용량 최적화를 위해 작은 크기의 이미지를 권장합니다.</div>
                         </div>
                     </div>
                 </div>
@@ -348,9 +348,17 @@
         let currentEditingSkills = [];
 
         function saveToStorage() {
-            localStorage.setItem('mulmandu_users', JSON.stringify(usersData));
-            localStorage.setItem('mulmandu_portfolios', JSON.stringify(portfoliosData));
-            localStorage.setItem('mulmandu_comments', JSON.stringify(commentsData));
+            try {
+                localStorage.setItem('mulmandu_users', JSON.stringify(usersData));
+                localStorage.setItem('mulmandu_portfolios', JSON.stringify(portfoliosData));
+                localStorage.setItem('mulmandu_comments', JSON.stringify(commentsData));
+            } catch (e) {
+                if (e.name === 'QuotaExceededError') {
+                    showMessage('로컬 스토리지 용량이 초과되었습니다! 프로필 이미지 크기를 줄이거나 텍스트를 간결하게 입력해주세요.');
+                } else {
+                    showMessage('데이터 저장 중 오류가 발생했습니다.');
+                }
+            }
         }
 
         window.onload = function() {
@@ -430,6 +438,11 @@
         function previewImage(event) {
             const file = event.target.files[0];
             if(file) {
+                // 용량 체크 안내 (대략 1MB 이상 시 경고)
+                if(file.size > 1024 * 1024) {
+                    showMessage('⚠️ 주의: 1MB 이상의 큰 파일은 로컬 스토리지(localStorage) 용량을 초과하여 저장에 실패할 수 있습니다. 가급적 작은 이미지를 선택해주세요.');
+                }
+
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     tempUploadedImage = e.target.result;
@@ -668,7 +681,7 @@
 
             html += `
                 <div class="section-box" style="margin-top:24px;">
-                    <h3>💬 동료 코멘트 & 피드백</h3>
+                    <h3>💬 동료 코멘트 & 피드백 (로컬 저장소 기반)</h3>
                     <div id="comments-list-${userIdKey}" style="margin-bottom: 16px;">
             `;
 
@@ -766,7 +779,7 @@
             }
 
             matchedUsers.forEach(item => {
-                const card = document.createElement('div');
+                const card = document.embedElement ? document.createElement('div') : document.createElement('div');
                 card.style.cssText = "background: #ffffff; border: 1px solid #f3e8ff; border-radius: 14px; padding: 14px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: transform 0.2s;";
                 card.onmouseover = () => card.style.transform = "scale(1.01)";
                 card.onmouseout = () => card.style.transform = "scale(1)";
