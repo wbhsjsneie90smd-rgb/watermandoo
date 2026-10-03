@@ -214,15 +214,19 @@
         .chat-input-row textarea:focus { border-color: #a855f7; background: #ffffff; }
         .chat-input-row button { width: auto; padding: 0 18px; height: 44px; margin: 0; }
         @media (max-width: 480px) {
-            .top-nav { padding: 10px 12px; }
-            .nav-logo { font-size: 17px; white-space: nowrap; gap: 4px; }
-            .nav-logo-icon { width: 30px; height: 30px; }
-            .nav-logo-icon svg { width: 30px; height: 30px; }
-            .nav-right-area { gap: 8px; }
-            .nav-my-portfolio-btn { white-space: nowrap; padding: 6px 10px; font-size: 12px; }
-            .nav-icon-btn { width: 36px; height: 36px; }
-            .nav-profile-btn { width: 38px; height: 38px; }
-            .card { padding: 26px 22px; }
+            .top-nav { padding: 8px 10px; }
+            .nav-logo { font-size: 15px; white-space: nowrap; gap: 3px; }
+            .nav-logo-icon { width: 26px; height: 26px; }
+            .nav-logo-icon svg { width: 26px; height: 26px; }
+            .nav-right-area { gap: 4px; }
+            .nav-my-portfolio-btn { white-space: nowrap; padding: 5px 8px; font-size: 11px; }
+            .nav-icon-btn { width: 30px; height: 30px; }
+            .nav-icon-btn svg { width: 16px; height: 16px; }
+            .nav-profile-btn { width: 32px; height: 32px; }
+            .card { padding: 26px 16px; }
+        }
+        @media (max-width: 360px) {
+            .nav-my-portfolio-btn { display: none; }
         }
         .comment-actions { display: flex; gap: 10px; margin-top: 6px; }
         .comment-actions button { background: none; border: none; padding: 0; font-size: 12px; color: #9333ea; cursor: pointer; text-decoration: underline; opacity: 0.85; }
@@ -236,6 +240,44 @@
 
         .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); background: rgba(76, 29, 149, 0.92); color: #ffffff; padding: 10px 18px; border-radius: 20px; font-size: 13px; z-index: 1500; opacity: 0; pointer-events: none; transition: all 0.3s ease; max-width: 88vw; text-align: center; }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        /* ===== Phase 4 ===== */
+        .chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+        .chip { background: #ffffff; color: #7e22ce; border: 1px solid #e9d5ff; padding: 5px 12px; border-radius: 14px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .chip.active { background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%); color: #ffffff; border-color: #a855f7; }
+        .cat-tag { display: inline-block; background: #fdf2f8; color: #db2777; border: 1px solid #fbcfe8; padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; margin-left: 6px; }
+
+        .notif-wrapper { position: relative; }
+        .notif-panel { position: fixed; top: 60px; right: 12px; left: auto; width: min(320px, calc(100vw - 24px)); max-height: 70vh; overflow-y: auto; background: #ffffff; border: 1px solid #f3e8ff; border-radius: 16px; box-shadow: 0 12px 30px rgba(147, 51, 234, 0.2); padding: 10px; z-index: 200; display: none; }
+        .notif-panel.open { display: block; }
+        .notif-item { display: flex; gap: 10px; padding: 10px; border-radius: 10px; cursor: pointer; align-items: flex-start; }
+        .notif-item:hover { background: #faf5ff; }
+        .notif-item.unread { background: #f3e8ff; }
+        .notif-item .notif-emoji { font-size: 18px; flex-shrink: 0; }
+        .notif-item .notif-text { font-size: 12.5px; color: #4a5568; line-height: 1.4; }
+        .notif-item .notif-time { font-size: 10px; color: #a78bfa; margin-top: 2px; }
+        .notif-empty { text-align: center; color: #a855f7; font-size: 12.5px; padding: 20px 10px; }
+        .notif-panel-header { display: flex; justify-content: space-between; align-items: center; padding: 4px 6px 8px; border-bottom: 1px solid #f3e8ff; margin-bottom: 4px; }
+        .notif-panel-header h4 { font-size: 13px; color: #6b21a8; }
+        .notif-panel-header button { background: none; border: none; color: #9333ea; font-size: 11px; cursor: pointer; text-decoration: underline; }
+
+        .reply-box { margin-left: 24px; margin-top: 6px; padding-left: 10px; border-left: 2px solid #f3e8ff; display: flex; flex-direction: column; gap: 6px; }
+        .reply-compose { margin-left: 24px; margin-top: 6px; display: flex; gap: 6px; }
+        .reply-compose textarea { flex: 1; min-height: 44px; padding: 6px 10px; border: 1px solid #e9d5ff; border-radius: 8px; background: #faf5ff; font-size: 12.5px; font-family: inherit; resize: vertical; outline: none; }
+        .reply-compose textarea:focus { border-color: #a855f7; background: #ffffff; }
+        .comment-like-btn { background: none; border: none; padding: 0; font-size: 12px; color: #db2777; cursor: pointer; }
+        .comment-like-btn.liked { font-weight: 700; }
+
+        .admin-stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 18px; }
+        .admin-stat-card { background: #faf5ff; border: 1px solid #f3e8ff; border-radius: 12px; padding: 12px 14px; text-align: center; }
+        .admin-stat-card .num { font-size: 20px; font-weight: 700; color: #6b21a8; }
+        .admin-stat-card .label { font-size: 11px; color: #9333ea; margin-top: 2px; }
+        .report-card { background: #ffffff; border: 1px solid #f3e8ff; border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; }
+        .report-card .report-meta { font-size: 11px; color: #a78bfa; margin-top: 4px; }
+        .report-card .report-actions { display: flex; gap: 6px; margin-top: 8px; }
+        .report-card .report-actions button { padding: 5px 12px; font-size: 12px; }
+        .suspended-badge { display: inline-block; background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; padding: 2px 8px; border-radius: 8px; font-size: 11px; font-weight: 700; margin-left: 6px; }
+        #suspended-notice { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; border-radius: 12px; padding: 10px 14px; font-size: 13px; margin-bottom: 14px; }
     </style>
 </head>
 <body>
@@ -254,6 +296,22 @@
             <div><span class="mul">물</span><span class="mandu">만두</span></div>
         </div>
         <div class="nav-right-area">
+            <button id="nav-admin-btn" class="nav-icon-btn hidden" onclick="openAdminPanel()" title="관리자" aria-label="관리자">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+            </button>
+            <div class="notif-wrapper">
+                <button id="nav-bell-btn" class="nav-icon-btn hidden" onclick="toggleNotifPanel()" title="알림" aria-label="알림">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    <span id="nav-notif-badge" class="badge hidden">0</span>
+                </button>
+                <div id="notif-panel" class="notif-panel">
+                    <div class="notif-panel-header">
+                        <h4>알림</h4>
+                        <button type="button" onclick="markAllNotifsRead()">모두 읽음</button>
+                    </div>
+                    <div id="notif-list"></div>
+                </div>
+            </div>
             <button id="nav-msg-btn" class="nav-icon-btn hidden" onclick="openMessages()" title="메시지" aria-label="메시지">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                 <span id="nav-msg-badge" class="badge hidden">0</span>
@@ -369,6 +427,7 @@
                 <button type="button" id="tab-friends" class="tab-btn" onclick="switchHomeTab('friends')">👥 친구 <span id="friends-tab-badge" class="badge-inline hidden">0</span></button>
             </div>
             <div id="explore-panel">
+            <div id="explore-category-chips" class="chip-row"></div>
             <div class="form-group" style="position: relative; margin-bottom: 4px;">
                 <span style="position: absolute; left: 16px; top: 38%; transform: translateY(-50%); font-size: 16px; pointer-events: none; z-index: 2;">🔍</span>
                 <input type="text" id="search-input" placeholder="쉼표(,)로 구분하여 검색어 입력 (예: 프론트엔드, React, 김)" oninput="handleSearch(this.value)" style="padding-left: 44px;">
@@ -379,6 +438,7 @@
             <div id="search-results-container" style="max-height: 320px; overflow-y: auto; text-align: left; margin-top: 12px;"></div>
             </div>
             <div id="friends-panel" class="hidden">
+                <div id="friends-category-chips" class="chip-row"></div>
                 <div class="form-group" style="margin-bottom: 12px;">
                     <input type="text" id="friends-search-input" placeholder="친구 포트폴리오 검색 (쉼표로 구분)" oninput="renderFriends()">
                 </div>
@@ -461,6 +521,20 @@
                     <input type="text" id="pf-job" placeholder="예: 프론트엔드 개발자" required>
                 </div>
                 <div class="form-group">
+                    <label>카테고리</label>
+                    <select id="pf-category">
+                        <option value="">선택 안 함</option>
+                        <option value="프론트엔드">프론트엔드</option>
+                        <option value="백엔드">백엔드</option>
+                        <option value="앱/모바일">앱/모바일</option>
+                        <option value="디자인">디자인</option>
+                        <option value="기획/PM">기획/PM</option>
+                        <option value="데이터/AI">데이터/AI</option>
+                        <option value="마케팅">마케팅</option>
+                        <option value="기타">기타</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label>연락처</label>
                     <input type="text" id="pf-contact" required>
                 </div>
@@ -517,6 +591,7 @@
                 </div>
                 <button type="button" class="btn btn-secondary" onclick="goHome()" style="width:auto; padding:8px 14px;">🏠 홈으로</button>
             </div>
+            <div id="suspended-notice" class="hidden">⚠️ 관리자에 의해 숨김(정지) 처리된 포트폴리오예요. 본인과 관리자에게만 보여요.</div>
             <div style="margin-bottom: 16px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
                 <button type="button" id="like-btn" class="like-btn" onclick="toggleLike()">🤍 좋아요 0</button>
                 <button type="button" id="msg-btn" class="pill-btn hidden" onclick="openChatFromPortfolio()" title="메시지 보내기">
@@ -525,6 +600,9 @@
                 </button>
                 <button type="button" id="friend-btn" class="pill-btn hidden" onclick="handleFriendClick()">👥 친구 추가</button>
                 <button type="button" id="friend-decline-btn" class="pill-btn danger hidden" onclick="declineFriendFromProfile()">거절</button>
+                <button type="button" id="share-btn" class="pill-btn" onclick="shareProfile()" title="프로필 공유 링크 복사">🔗 공유</button>
+                <button type="button" id="report-pf-btn" class="pill-btn danger hidden" onclick="openReportModal()">🚩 신고</button>
+                <button type="button" id="block-btn" class="pill-btn danger hidden" onclick="handleBlockClick()">🚫 차단</button>
             </div>
             <div class="section-box"><h3>📞 연락처</h3><p id="view-contact"></p></div>
             <div class="section-box">
@@ -548,6 +626,35 @@
             </div>
 
             <button type="button" id="view-edit-btn" class="btn btn-secondary hidden" onclick="openPortfolioForm()" style="margin-top:10px;">✏️ 포트폴리오 수정하기</button>
+        </div>
+
+        <!-- Admin Section -->
+        <div id="admin-section" class="hidden">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                <h2 style="font-size: 20px; color: #6b21a8;">🛡️ 관리자</h2>
+                <button type="button" class="btn btn-secondary" onclick="goHome()" style="width: auto; padding: 8px 14px;">🏠 홈으로</button>
+            </div>
+            <div id="admin-stats" class="admin-stat-grid"></div>
+            <div class="tab-row">
+                <button type="button" id="admintab-pending" class="tab-btn active" onclick="setAdminTab('pending')">대기중</button>
+                <button type="button" id="admintab-resolved" class="tab-btn" onclick="setAdminTab('resolved')">처리됨</button>
+                <button type="button" id="admintab-dismissed" class="tab-btn" onclick="setAdminTab('dismissed')">반려됨</button>
+            </div>
+            <div id="admin-reports-container" style="max-height: 420px; overflow-y: auto;"></div>
+        </div>
+    </div>
+
+    <!-- Report Modal -->
+    <div class="modal-overlay" id="report-modal">
+        <div class="modal-card" style="max-width: 400px; text-align: left;">
+            <h3 style="color: #6b21a8; font-size: 16px; margin-bottom: 12px;">신고하기</h3>
+            <div class="form-group" style="margin-bottom: 12px;">
+                <textarea id="report-input" placeholder="신고 사유를 적어주세요." style="min-height: 90px;"></textarea>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button type="button" class="btn btn-primary" onclick="submitReport()" style="margin-top:0;">신고 접수</button>
+                <button type="button" class="btn btn-secondary" onclick="closeReportModal()" style="margin-top:0;">취소</button>
+            </div>
         </div>
     </div>
 
@@ -613,6 +720,19 @@
         let chatTimer = null;
         let chatSending = false;
         let pollTimer = null;
+
+        // ====== Phase 4 상태 ======
+        const ADMIN_EMAIL = 'wbhsjsneie90smd@gmail.com';
+        const CATEGORIES = ['프론트엔드', '백엔드', '앱/모바일', '디자인', '기획/PM', '데이터/AI', '마케팅', '기타'];
+        let exploreCategory = '';
+        let friendsCategory = '';
+        let notifList = [];
+        let notifPanelOpen = false;
+        let blockedIds = new Set();
+        let adminTab = 'pending';
+        let adminReports = [];
+        let realtimeChannels = [];
+        let pendingSharedUid = null;
 
         function initBubbles() {
             const container = document.getElementById('bubble-container');
@@ -764,6 +884,7 @@
                 displayName: row.display_name || '',
                 name: row.name || '',
                 job: row.job || '',
+                category: row.category || '',
                 contact: row.contact || '',
                 intro: row.intro || '',
                 skills: row.skills || '',
@@ -776,8 +897,13 @@
                 notes: row.notes || '',
                 likeCount: row.like_count || 0,
                 commentCount: row.comment_count || 0,
+                isSuspended: !!row.is_suspended,
                 createdAt: row.created_at || ''
             };
+        }
+
+        function isAdminUser() {
+            return !!currentUser && currentUser.email === ADMIN_EMAIL;
         }
 
         function userFromAuth(u) {
@@ -800,6 +926,8 @@
             if (/must_accept/.test(msg)) return '받은 메시지 요청을 먼저 수락해주세요.';
             if (/invalid_message/.test(msg)) return '메시지는 1~2000자로 입력해주세요.';
             if (/invalid_recipient/.test(msg)) return '메시지를 보낼 수 없는 상대예요.';
+            if (/\bblocked\b/.test(msg)) return '차단 관계여서 메시지를 보낼 수 없어요.';
+            if (/not_authorized/.test(msg)) return '관리자만 할 수 있는 작업이에요.';
             if (/failed to fetch|networkerror|load failed/i.test(msg)) return '서버에 연결할 수 없어요. 인터넷 연결을 확인해주세요.';
             if (err && (err.code === '42501' || /row-level security/i.test(msg))) return '이 작업을 할 권한이 없습니다.';
             return '오류가 발생했어요: ' + msg;
@@ -917,15 +1045,21 @@
             const navProfile = document.getElementById('nav-profile-container');
             const navMyPfBtn = document.getElementById('nav-my-pf-btn');
             const navMsgBtn = document.getElementById('nav-msg-btn');
+            const navBellBtn = document.getElementById('nav-bell-btn');
+            const navAdminBtn = document.getElementById('nav-admin-btn');
             if (!currentUser) {
                 navProfile.classList.add('hidden');
                 navMyPfBtn.classList.add('hidden');
                 navMsgBtn.classList.add('hidden');
+                navBellBtn.classList.add('hidden');
+                navAdminBtn.classList.add('hidden');
                 return;
             }
             navProfile.classList.remove('hidden');
             navMyPfBtn.classList.remove('hidden');
             navMsgBtn.classList.remove('hidden');
+            navBellBtn.classList.remove('hidden');
+            navAdminBtn.classList.toggle('hidden', !isAdminUser());
 
             const imgEl = document.getElementById('nav-profile-img');
             const emojiEl = document.getElementById('nav-profile-emoji');
@@ -943,21 +1077,22 @@
 
         function switchView(name) {
             ['login-section', 'signup-section', 'reset-section', 'newpw-section', 'explore-home-section', 'welcome-portfolio-section',
-             'portfolio-form-section', 'portfolio-view-section', 'messages-section', 'chat-section'].forEach(id => {
+             'portfolio-form-section', 'portfolio-view-section', 'messages-section', 'chat-section', 'admin-section'].forEach(id => {
                 document.getElementById(id).classList.add('hidden');
             });
             const card = document.getElementById('main-card');
             card.classList.remove('wide');
             if (name !== 'chat') stopChatPolling();
+            closeNotifPanel();
 
             const map = {
                 'login': 'login-section', 'signup': 'signup-section', 'reset': 'reset-section', 'newpw': 'newpw-section',
                 'explore': 'explore-home-section', 'welcome': 'welcome-portfolio-section',
                 'form': 'portfolio-form-section', 'portfolio-view': 'portfolio-view-section',
-                'messages': 'messages-section', 'chat': 'chat-section'
+                'messages': 'messages-section', 'chat': 'chat-section', 'admin': 'admin-section'
             };
             if (map[name]) document.getElementById(map[name]).classList.remove('hidden');
-            if (name === 'form' || name === 'portfolio-view') card.classList.add('wide');
+            if (name === 'form' || name === 'portfolio-view' || name === 'admin') card.classList.add('wide');
 
             card.scrollTop = 0;
             window.scrollTo(0, 0);
@@ -1035,12 +1170,27 @@
                 myPortfolio = await fetchMyPortfolio();
                 updateTopNavProfile();
                 startPolling();
+                fetchBlockedIds();
+                subscribeRealtime();
                 if (myPortfolio) {
+                    if (pendingSharedUid) {
+                        const uidToOpen = pendingSharedUid;
+                        pendingSharedUid = null;
+                        setHomeTabUI('explore');
+                        buildCategoryChips();
+                        refreshBadges();
+                        loadExploreData();
+                        loadNotifications();
+                        openPortfolio(uidToOpen);
+                        return;
+                    }
                     document.getElementById('explore-welcome-title').innerText = `${currentUser.name} 님 환영합니다! 🔍`;
                     document.getElementById('search-input').value = '';
                     setHomeTabUI('explore');
+                    buildCategoryChips();
                     switchView('explore');
                     refreshBadges();
+                    loadNotifications();
                     await loadExploreData();
                 } else {
                     document.getElementById('welcome-title').innerText = `${currentUser.name} 님 환영합니다! 🎉`;
@@ -1055,10 +1205,12 @@
         async function handleLogout() {
             stopPolling();
             stopChatPolling();
+            unsubscribeRealtime();
             try { if (sb) await sb.auth.signOut(); } catch (err) { /* 무시 */ }
             currentUser = null; myPortfolio = null; exploreData = [];
             friendsRaw = []; friendItems = []; lastConvList = []; chat = null;
-            setBadge('nav-msg-badge', 0); setBadge('friends-tab-badge', 0);
+            notifList = []; blockedIds = new Set(); adminReports = [];
+            setBadge('nav-msg-badge', 0); setBadge('friends-tab-badge', 0); setBadge('nav-notif-badge', 0);
             document.getElementById('search-input').value = '';
             switchView('login');
         }
@@ -1068,9 +1220,11 @@
             if (!currentUser) { switchView('login'); return; }
             document.getElementById('search-input').value = '';
             setHomeTabUI('explore');
+            buildCategoryChips();
             switchView('explore');
             loadExploreData();
             refreshBadges();
+            loadNotifications();
         }
 
         async function loadExploreData() {
@@ -1101,13 +1255,15 @@
                 : `<div style="width:40px; height:40px; border-radius:50%; background:#faf5ff; border:1px solid #d8b4fe; display:flex; align-items:center; justify-content:center; font-size:20px;">${escapeHtml(item.p.image || '🥟')}</div>`;
 
             const rankHtml = rankLabel ? `<div class="rank-badge">${rankLabel}</div>` : '';
+            const catHtml = item.p.category ? `<span class="cat-tag">${escapeHtml(item.p.category)}</span>` : '';
+            const suspendedHtml = (isAdminUser() && item.p.isSuspended) ? `<span class="suspended-badge">정지됨</span>` : '';
 
             cardEl.innerHTML = `
                 <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
                     ${rankHtml}
                     ${avatarHtml}
                     <div style="min-width: 0;">
-                        <div style="font-weight: 700; color: #6b21a8; font-size: 15px;">${escapeHtml(item.p.name)}</div>
+                        <div style="font-weight: 700; color: #6b21a8; font-size: 15px;">${escapeHtml(item.p.name)}${catHtml}${suspendedHtml}</div>
                         <div style="font-size: 12px; color: #a855f7;">${escapeHtml(item.p.job)} | ${escapeHtml(item.p.intro)}</div>
                     </div>
                 </div>
@@ -1117,16 +1273,54 @@
         }
 
         function collectProfiles() {
-            const list = exploreData.map(p => ({
-                uid: p.uid, p, name: p.displayName || p.name, likes: p.likeCount, comments: p.commentCount
-            }));
+            const list = exploreData
+                .filter(p => !blockedIds.has(p.uid))
+                .map(p => ({
+                    uid: p.uid, p, name: p.displayName || p.name, likes: p.likeCount, comments: p.commentCount
+                }));
             // 좋아요 많은 순 → 같으면 코멘트 많은 순
             list.sort((a, b) => b.likes - a.likes || b.comments - a.comments);
             return list;
         }
 
-        function renderRanking(container) {
-            const list = collectProfiles().slice(0, 10);
+        // ====== 카테고리 칩 ======
+        function buildCategoryChips() {
+            renderExploreCategoryChips();
+            renderFriendsCategoryChips();
+        }
+
+        function renderExploreCategoryChips() {
+            const box = document.getElementById('explore-category-chips');
+            box.innerHTML = '';
+            const all = document.createElement('button');
+            all.type = 'button'; all.className = 'chip' + (exploreCategory === '' ? ' active' : ''); all.innerText = '전체';
+            all.onclick = () => { exploreCategory = ''; renderExploreCategoryChips(); handleSearch(document.getElementById('search-input').value); };
+            box.appendChild(all);
+            CATEGORIES.forEach(cat => {
+                const chip = document.createElement('button');
+                chip.type = 'button'; chip.className = 'chip' + (exploreCategory === cat ? ' active' : ''); chip.innerText = cat;
+                chip.onclick = () => { exploreCategory = cat; renderExploreCategoryChips(); handleSearch(document.getElementById('search-input').value); };
+                box.appendChild(chip);
+            });
+        }
+
+        function renderFriendsCategoryChips() {
+            const box = document.getElementById('friends-category-chips');
+            box.innerHTML = '';
+            const all = document.createElement('button');
+            all.type = 'button'; all.className = 'chip' + (friendsCategory === '' ? ' active' : ''); all.innerText = '전체';
+            all.onclick = () => { friendsCategory = ''; renderFriendsCategoryChips(); renderFriends(); };
+            box.appendChild(all);
+            CATEGORIES.forEach(cat => {
+                const chip = document.createElement('button');
+                chip.type = 'button'; chip.className = 'chip' + (friendsCategory === cat ? ' active' : ''); chip.innerText = cat;
+                chip.onclick = () => { friendsCategory = cat; renderFriendsCategoryChips(); renderFriends(); };
+                box.appendChild(chip);
+            });
+        }
+
+        function renderRanking(container, baseList) {
+            const list = (baseList || collectProfiles()).slice(0, 10);
             if (list.length === 0) {
                 container.innerHTML = `<div style="text-align: center; color: #a855f7; font-size: 13px; padding: 20px;">아직 등록된 포트폴리오가 없습니다.</div>`;
                 return;
@@ -1142,9 +1336,12 @@
             container.innerHTML = '';
 
             const terms = (keyword || '').split(',').map(t => t.trim().toLowerCase()).filter(t => t.length > 0);
-            if (terms.length === 0) { renderRanking(container); return; }
+            let list = collectProfiles();
+            if (exploreCategory) list = list.filter(item => item.p.category === exploreCategory);
 
-            const list = collectProfiles().filter(item => {
+            if (terms.length === 0) { renderRanking(container, list); return; }
+
+            list = list.filter(item => {
                 const p = item.p;
                 const searchableText = [
                     item.name, p.name, p.job, p.contact, p.intro, p.skills,
@@ -1170,6 +1367,7 @@
             showAvatarPreview(p && isPhoto(p.image) ? p.image : '');
             document.getElementById('pf-name').value = v('name') || (currentUser ? currentUser.name : '');
             document.getElementById('pf-job').value = v('job');
+            document.getElementById('pf-category').value = v('category');
             document.getElementById('pf-contact').value = v('contact');
             document.getElementById('pf-intro').value = v('intro');
             document.getElementById('pf-skills').value = v('skills');
@@ -1228,6 +1426,7 @@
                     image,
                     name: document.getElementById('pf-name').value.trim(),
                     job: document.getElementById('pf-job').value.trim(),
+                    category: document.getElementById('pf-category').value || null,
                     contact: document.getElementById('pf-contact').value.trim(),
                     intro: document.getElementById('pf-intro').value.trim(),
                     skills: skillsStr,
@@ -1277,7 +1476,7 @@
                     sb.from('portfolios').select('*').eq('user_id', uid).maybeSingle(),
                     sb.from('likes').select('*', { count: 'exact', head: true }).eq('portfolio_id', uid),
                     sb.from('likes').select('portfolio_id').eq('portfolio_id', uid).eq('user_id', currentUser.id).maybeSingle(),
-                    sb.from('comments').select('id, author_id, author_name, text, created_at').eq('portfolio_id', uid).order('created_at', { ascending: true }),
+                    sb.from('comments').select('id, author_id, author_name, text, created_at, updated_at, parent_id').eq('portfolio_id', uid).order('created_at', { ascending: true }),
                     sb.from('friendships').select('id, requester_id, addressee_id, status')
                         .or(`requester_id.eq.${uid},addressee_id.eq.${uid}`)
                 ]);
@@ -1285,10 +1484,23 @@
                 if (failed) throw failed.error;
                 if (!pf.data) { showModal('포트폴리오를 찾을 수 없어요.'); return; }
 
+                const commentRows = comments.data || [];
+                let likeCounts = {}, likedByMe = new Set();
+                const commentIds = commentRows.map(c => c.id);
+                if (commentIds.length > 0) {
+                    const { data: clRows, error: clErr } = await sb.from('comment_likes').select('comment_id, user_id').in('comment_id', commentIds);
+                    if (clErr) throw clErr;
+                    (clRows || []).forEach(r => {
+                        likeCounts[r.comment_id] = (likeCounts[r.comment_id] || 0) + 1;
+                        if (r.user_id === currentUser.id) likedByMe.add(r.comment_id);
+                    });
+                }
+                commentRows.forEach(c => { c.likeCount = likeCounts[c.id] || 0; c.likedByMe = likedByMe.has(c.id); });
+
                 renderPortfolio(normalizePortfolio(pf.data), uid, {
                     likeCount: likeCnt.count || 0,
                     liked: !!myLike.data,
-                    comments: comments.data || [],
+                    comments: commentRows,
                     friend: resolveFriendState(friendRes.data, uid)
                 });
                 switchView('portfolio-view');
@@ -1306,29 +1518,106 @@
             likeBtn.title = viewState.liked ? '좋아요 취소' : '좋아요';
         }
 
+        function buildCommentEl(c) {
+            const cEl = document.createElement('div');
+            cEl.style.cssText = "background: #ffffff; border: 1px solid #f3e8ff; border-radius: 10px; padding: 10px 14px; font-size: 13px;";
+            cEl.dataset.commentId = c.id;
+            const date = c.created_at ? new Date(c.created_at).toLocaleDateString('ko-KR') : '';
+            const editedMark = c.updated_at ? ' <span style="color:#c4a1f5;">(수정됨)</span>' : '';
+            const isMine = currentUser && c.author_id === currentUser.id;
+            const canModerate = isMine || isAdminUser();
+            cEl.innerHTML = `
+                <div style="font-weight: 700; color: #7e22ce; margin-bottom: 2px;">${escapeHtml(c.author_name)} <span style="font-weight: 400; color: #a78bfa; font-size: 11px; margin-left: 6px;">${escapeHtml(date)}${editedMark}</span></div>
+                <div class="comment-body" style="color: #4a5568; line-height: 1.4; white-space: pre-wrap;">${escapeHtml(c.text)}</div>
+                <div class="comment-actions">
+                    <button type="button" class="comment-like-btn${c.likedByMe ? ' liked' : ''}" onclick="toggleCommentLike(${c.id})">${c.likedByMe ? '❤️' : '🤍'} ${c.likeCount || 0}</button>
+                    ${currentUser ? `<button type="button" onclick="startReply(${c.id})">답글</button>` : ''}
+                    ${isMine ? `<button type="button" onclick="startEditComment(${c.id})">수정</button>` : ''}
+                    ${canModerate ? `<button type="button" onclick="deleteComment(${c.id})">삭제</button>` : ''}
+                </div>
+                <div class="reply-slot"></div>
+            `;
+            return cEl;
+        }
+
         function renderComments() {
             const commentsList = document.getElementById('view-comments-list');
             commentsList.innerHTML = '';
-            if (viewState.comments.length > 0) {
-                viewState.comments.forEach(c => {
-                    const cEl = document.createElement('div');
-                    cEl.style.cssText = "background: #ffffff; border: 1px solid #f3e8ff; border-radius: 10px; padding: 10px 14px; font-size: 13px;";
-                    cEl.dataset.commentId = c.id;
-                    const date = c.created_at ? new Date(c.created_at).toLocaleDateString('ko-KR') : '';
-                    const editedMark = c.updated_at ? ' <span style="color:#c4a1f5;">(수정됨)</span>' : '';
-                    const isMine = currentUser && c.author_id === currentUser.id;
-                    cEl.innerHTML = `
-                        <div style="font-weight: 700; color: #7e22ce; margin-bottom: 2px;">${escapeHtml(c.author_name)} <span style="font-weight: 400; color: #a78bfa; font-size: 11px; margin-left: 6px;">${escapeHtml(date)}${editedMark}</span></div>
-                        <div class="comment-body" style="color: #4a5568; line-height: 1.4; white-space: pre-wrap;">${escapeHtml(c.text)}</div>
-                        ${isMine ? `<div class="comment-actions">
-                            <button type="button" onclick="startEditComment(${c.id})">수정</button>
-                            <button type="button" onclick="deleteComment(${c.id})">삭제</button>
-                        </div>` : ''}
-                    `;
-                    commentsList.appendChild(cEl);
-                });
-            } else {
+            const all = viewState.comments;
+            const top = all.filter(c => !c.parent_id);
+            if (top.length === 0) {
                 commentsList.innerHTML = `<div style="font-size: 13px; color: #9333ea; opacity: 0.8;">작성된 코멘트가 없습니다. 첫 코멘트를 남겨보세요!</div>`;
+                return;
+            }
+            top.forEach(c => {
+                const cEl = buildCommentEl(c);
+                const replies = all.filter(r => r.parent_id === c.id);
+                if (replies.length > 0) {
+                    const box = document.createElement('div');
+                    box.className = 'reply-box';
+                    replies.forEach(r => box.appendChild(buildCommentEl(r)));
+                    cEl.querySelector('.reply-slot').appendChild(box);
+                }
+                commentsList.appendChild(cEl);
+            });
+        }
+
+        async function toggleCommentLike(id) {
+            if (!currentUser) return;
+            const c = viewState.comments.find(x => x.id === id);
+            if (!c) return;
+            const wasLiked = c.likedByMe;
+            c.likedByMe = !wasLiked;
+            c.likeCount = (c.likeCount || 0) + (wasLiked ? -1 : 1);
+            renderComments();
+            try {
+                if (wasLiked) {
+                    const { error } = await sb.from('comment_likes').delete().eq('comment_id', id).eq('user_id', currentUser.id);
+                    if (error) throw error;
+                } else {
+                    const { error } = await sb.from('comment_likes').insert({ comment_id: id });
+                    if (error && error.code !== '23505') throw error;
+                }
+            } catch (err) {
+                c.likedByMe = wasLiked;
+                c.likeCount = (c.likeCount || 0) + (wasLiked ? 1 : -1);
+                renderComments();
+                showModal(friendlyError(err));
+            }
+        }
+
+        function startReply(parentId) {
+            document.querySelectorAll('.reply-compose').forEach(el => el.remove());
+            const cEl = document.querySelector(`#view-comments-list [data-comment-id="${parentId}"]`);
+            if (!cEl) return;
+            const box = document.createElement('div');
+            box.className = 'reply-compose';
+            box.innerHTML = `
+                <textarea maxlength="1000" placeholder="답글을 입력하세요"></textarea>
+                <button type="button" class="pill-btn" style="padding:6px 12px; font-size:12px;" onclick="submitReply(${parentId}, this)">등록</button>
+            `;
+            cEl.querySelector('.reply-slot').appendChild(box);
+            box.querySelector('textarea').focus();
+        }
+
+        async function submitReply(parentId, btn) {
+            const box = btn.closest('.reply-compose');
+            const text = box.querySelector('textarea').value.trim();
+            if (!text) { showModal('답글 내용을 입력해주세요.'); return; }
+            btn.disabled = true;
+            try {
+                const { data, error } = await sb.from('comments')
+                    .insert({ portfolio_id: currentViewingUserId, author_name: currentUser.name || '동료', text, parent_id: parentId })
+                    .select('id, author_id, author_name, text, created_at, updated_at, parent_id').single();
+                if (error) throw error;
+                data.likeCount = 0; data.likedByMe = false;
+                viewState.comments.push(data);
+                renderComments();
+                showToast('답글을 등록했어요.');
+            } catch (err) {
+                showModal(friendlyError(err));
+            } finally {
+                btn.disabled = false;
             }
         }
 
@@ -1372,10 +1661,10 @@
             try {
                 const updated_at = new Date().toISOString();
                 const { data, error } = await sb.from('comments').update({ text, updated_at })
-                    .eq('id', id).select('id, author_id, author_name, text, created_at, updated_at').single();
+                    .eq('id', id).select('id, author_id, author_name, text, created_at, updated_at, parent_id').single();
                 if (error) throw error;
                 const idx = viewState.comments.findIndex(x => x.id === id);
-                if (idx >= 0) viewState.comments[idx] = data;
+                if (idx >= 0) viewState.comments[idx] = { ...viewState.comments[idx], ...data };
                 renderComments();
                 showToast('코멘트를 수정했어요.');
             } catch (err) {
@@ -1391,9 +1680,24 @@
 
         async function runDeleteComment(id) {
             try {
-                const { error } = await sb.from('comments').delete().eq('id', id);
-                if (error) throw error;
-                viewState.comments = viewState.comments.filter(x => x.id !== id);
+                const c = viewState.comments.find(x => x.id === id);
+                const isMine = c && currentUser && c.author_id === currentUser.id;
+                if (isMine) {
+                    const { error } = await sb.from('comments').delete().eq('id', id);
+                    if (error) throw error;
+                } else {
+                    const { error } = await sb.rpc('admin_delete_comment', { p_id: id });
+                    if (error) throw error;
+                }
+                const toRemove = new Set([id]);
+                let grew = true;
+                while (grew) {
+                    grew = false;
+                    viewState.comments.forEach(x => {
+                        if (x.parent_id && toRemove.has(x.parent_id) && !toRemove.has(x.id)) { toRemove.add(x.id); grew = true; }
+                    });
+                }
+                viewState.comments = viewState.comments.filter(x => !toRemove.has(x.id));
                 renderComments();
                 showToast('코멘트를 삭제했어요.');
             } catch (err) {
@@ -1407,13 +1711,22 @@
 
             const editBtn = document.getElementById('view-edit-btn');
             const commentBtn = document.getElementById('open-comment-btn');
-            if (currentUser && ownerUid === currentUser.id) {
+            const reportBtn = document.getElementById('report-pf-btn');
+            const blockBtn = document.getElementById('block-btn');
+            const isOwn = currentUser && ownerUid === currentUser.id;
+            if (isOwn) {
                 editBtn.classList.remove('hidden');
                 commentBtn.classList.add('hidden');
+                reportBtn.classList.add('hidden');
+                blockBtn.classList.add('hidden');
             } else {
                 editBtn.classList.add('hidden');
                 commentBtn.classList.remove('hidden');
+                reportBtn.classList.remove('hidden');
+                blockBtn.classList.remove('hidden');
+                blockBtn.innerText = blockedIds.has(ownerUid) ? '✅ 차단 해제' : '🚫 차단';
             }
+            document.getElementById('suspended-notice').classList.toggle('hidden', !p.isSuspended);
 
             updateLikeButton();
             updateFriendUI();
@@ -1507,8 +1820,9 @@
             try {
                 const { data, error } = await sb.from('comments')
                     .insert({ portfolio_id: currentViewingUserId, author_name: currentUser.name || '동료', text })
-                    .select('id, author_id, author_name, text, created_at').single();
+                    .select('id, author_id, author_name, text, created_at, updated_at, parent_id').single();
                 if (error) throw error;
+                data.likeCount = 0; data.likedByMe = false;
                 viewState.comments.push(data);
                 closeCommentModal();
                 renderComments();
@@ -1783,9 +2097,10 @@
                 const otherId = r.requester_id === me ? r.addressee_id : r.requester_id;
                 const p = friendItems.find(x => x.uid === otherId);
                 return p ? { uid: p.uid, p, likes: p.likeCount, name: p.displayName || p.name } : null;
-            }).filter(Boolean);
+            }).filter(Boolean).filter(item => !blockedIds.has(item.uid));
             friends.sort((a, b) => a.p.name.localeCompare(b.p.name, 'ko'));
             const totalFriends = friends.length;
+            if (friendsCategory) friends = friends.filter(item => item.p.category === friendsCategory);
             if (terms.length > 0) {
                 friends = friends.filter(item => {
                     const p = item.p;
@@ -2115,6 +2430,305 @@
             if (chat) openPortfolio(chat.otherId);
         }
 
+        // ====== 차단 ======
+        async function fetchBlockedIds() {
+            try {
+                const { data, error } = await sb.from('blocks').select('blocked_id').eq('blocker_id', currentUser.id);
+                if (error) throw error;
+                blockedIds = new Set((data || []).map(r => r.blocked_id));
+            } catch (_) { /* 조용히 무시 */ }
+        }
+
+        function handleBlockClick() {
+            if (!currentViewingUserId) return;
+            const already = blockedIds.has(currentViewingUserId);
+            showConfirm(already ? '차단을 해제할까요?' : '이 사용자를 차단할까요? 차단하면 서로 검색/친구/메시지가 제한돼요.',
+                () => runBlockOp(currentViewingUserId, !already));
+        }
+
+        async function runBlockOp(uid, block) {
+            try {
+                if (block) {
+                    const { error } = await sb.from('blocks').insert({ blocked_id: uid });
+                    if (error && error.code !== '23505') throw error;
+                    blockedIds.add(uid);
+                    // 차단과 동시에 친구 관계/대화 요청 상태를 정리
+                    try {
+                        await sb.from('friendships').delete()
+                            .or(`and(requester_id.eq.${currentUser.id},addressee_id.eq.${uid}),and(requester_id.eq.${uid},addressee_id.eq.${currentUser.id})`);
+                    } catch (_) { /* 무시 */ }
+                    showToast('차단했어요.');
+                } else {
+                    const { error } = await sb.from('blocks').delete().eq('blocker_id', currentUser.id).eq('blocked_id', uid);
+                    if (error) throw error;
+                    blockedIds.delete(uid);
+                    showToast('차단을 해제했어요.');
+                }
+                if (currentViewingUserId === uid) {
+                    document.getElementById('block-btn').innerText = blockedIds.has(uid) ? '✅ 차단 해제' : '🚫 차단';
+                }
+            } catch (err) {
+                showModal(friendlyError(err));
+            }
+        }
+
+        // ====== 신고 ======
+        function openReportModal() {
+            document.getElementById('report-input').value = '';
+            document.getElementById('report-modal').classList.add('active');
+        }
+        function closeReportModal() {
+            document.getElementById('report-modal').classList.remove('active');
+        }
+        async function submitReport() {
+            const reason = document.getElementById('report-input').value.trim();
+            if (!reason) { showModal('신고 사유를 입력해주세요.'); return; }
+            if (!currentViewingUserId) return;
+            try {
+                const { error } = await sb.from('reports').insert({ target_user_id: currentViewingUserId, reason });
+                if (error) throw error;
+                closeReportModal();
+                showModal('신고가 접수되었어요. 검토 후 처리할게요.');
+            } catch (err) {
+                showModal(friendlyError(err));
+            }
+        }
+
+        // ====== 프로필 공유 ======
+        function shareProfile() {
+            if (!currentViewingUserId) return;
+            const url = `${SITE_URL}?u=${currentViewingUserId}`;
+            const fallback = () => {
+                window.prompt('아래 링크를 복사하세요:', url);
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => showToast('프로필 링크를 복사했어요!')).catch(fallback);
+            } else {
+                fallback();
+            }
+        }
+
+        function checkSharedLink() {
+            try {
+                const params = new URLSearchParams(window.location.search);
+                const uid = params.get('u');
+                if (uid) pendingSharedUid = uid;
+            } catch (_) { /* 무시 */ }
+        }
+
+        // ====== 알림 ======
+        function notifEmoji(type) {
+            return { like: '❤️', comment: '💬', comment_reply: '↩️', comment_like: '👍', friend_request: '👥', friend_accept: '🤝', message: '✉️' }[type] || '🔔';
+        }
+        function notifLabel(n) {
+            const name = escapeHtml(n.actor_name || '누군가');
+            const map = {
+                like: `${name}님이 회원님의 포트폴리오를 좋아해요.`,
+                comment: `${name}님이 코멘트를 남겼어요: ${escapeHtml((n.body || '').slice(0, 40))}`,
+                comment_reply: `${name}님이 답글을 남겼어요: ${escapeHtml((n.body || '').slice(0, 40))}`,
+                comment_like: `${name}님이 회원님의 코멘트를 좋아해요.`,
+                friend_request: `${name}님이 친구 요청을 보냈어요.`,
+                friend_accept: `${name}님과 친구가 되었어요.`,
+                message: `${name}님이 메시지를 보냈어요.`
+            };
+            return map[n.type] || escapeHtml(n.body || '새 알림');
+        }
+
+        async function loadNotifications() {
+            if (!currentUser) return;
+            try {
+                const { data, error } = await sb.from('notifications').select('*').order('created_at', { ascending: false }).limit(30);
+                if (error) throw error;
+                notifList = data || [];
+                renderNotifList();
+                setBadge('nav-notif-badge', notifList.filter(n => !n.is_read).length);
+            } catch (_) { /* 조용히 무시 */ }
+        }
+
+        function renderNotifList() {
+            const box = document.getElementById('notif-list');
+            box.innerHTML = '';
+            if (notifList.length === 0) {
+                box.innerHTML = `<div class="notif-empty">아직 알림이 없어요.</div>`;
+                return;
+            }
+            notifList.forEach(n => {
+                const el = document.createElement('div');
+                el.className = 'notif-item' + (n.is_read ? '' : ' unread');
+                el.onclick = () => handleNotifClick(n);
+                el.innerHTML = `
+                    <div class="notif-emoji">${notifEmoji(n.type)}</div>
+                    <div>
+                        <div class="notif-text">${notifLabel(n)}</div>
+                        <div class="notif-time">${escapeHtml(formatTime(n.created_at))}</div>
+                    </div>`;
+                box.appendChild(el);
+            });
+        }
+
+        function toggleNotifPanel() {
+            notifPanelOpen ? closeNotifPanel() : openNotifPanel();
+        }
+        function openNotifPanel() {
+            notifPanelOpen = true;
+            document.getElementById('notif-panel').classList.add('open');
+            loadNotifications();
+        }
+        function closeNotifPanel() {
+            notifPanelOpen = false;
+            const el = document.getElementById('notif-panel');
+            if (el) el.classList.remove('open');
+        }
+        async function markAllNotifsRead() {
+            try {
+                await sb.rpc('mark_notifications_read');
+                notifList.forEach(n => n.is_read = true);
+                renderNotifList();
+                setBadge('nav-notif-badge', 0);
+            } catch (err) {
+                showModal(friendlyError(err));
+            }
+        }
+        function handleNotifClick(n) {
+            closeNotifPanel();
+            if (n.type === 'message') { openMessages(); return; }
+            if (n.type === 'friend_request' || n.type === 'friend_accept') { switchHomeToFriendsOrOpen(n); return; }
+            if (n.portfolio_id) { openPortfolio(n.portfolio_id); return; }
+        }
+        function switchHomeToFriendsOrOpen(n) {
+            if (!currentUser) return;
+            if (n.actor_id) { openPortfolio(n.actor_id); return; }
+            setHomeTabUI('friends');
+            switchView('explore');
+            loadFriends();
+        }
+
+        // ====== 실시간(Realtime) ======
+        function subscribeRealtime() {
+            unsubscribeRealtime();
+            if (!sb || !sb.channel || !currentUser) return;
+            try {
+                const ch1 = sb.channel('notif-' + currentUser.id)
+                    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'notifications', filter: `user_id=eq.${currentUser.id}` },
+                        () => { loadNotifications(); })
+                    .subscribe();
+                const ch2 = sb.channel('msg-' + currentUser.id)
+                    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' },
+                        () => { refreshBadges(); if (chat) loadChatState().catch(() => {}); })
+                    .subscribe();
+                realtimeChannels = [ch1, ch2];
+            } catch (_) { /* Realtime 미사용 환경이면 폴링으로 자연히 대체됨 */ }
+        }
+        function unsubscribeRealtime() {
+            try { realtimeChannels.forEach(ch => sb && sb.removeChannel && sb.removeChannel(ch)); } catch (_) { /* 무시 */ }
+            realtimeChannels = [];
+        }
+
+        // ====== 관리자 ======
+        function openAdminPanel() {
+            if (!isAdminUser()) return;
+            switchView('admin');
+            loadAdminStats();
+            setAdminTab('pending');
+        }
+
+        async function loadAdminStats() {
+            const box = document.getElementById('admin-stats');
+            try {
+                const { data, error } = await sb.rpc('admin_stats');
+                if (error) throw error;
+                const s = (data && data[0]) || {};
+                const cards = [
+                    ['총 가입자', s.total_users], ['총 포트폴리오', s.total_portfolios],
+                    ['총 코멘트', s.total_comments], ['총 좋아요', s.total_likes],
+                    ['대기중 신고', s.pending_reports], ['정지된 포트폴리오', s.suspended_portfolios]
+                ];
+                box.innerHTML = cards.map(([label, num]) => `
+                    <div class="admin-stat-card"><div class="num">${num ?? 0}</div><div class="label">${escapeHtml(label)}</div></div>
+                `).join('');
+            } catch (err) {
+                box.innerHTML = `<div style="grid-column: span 2; text-align:center; color:#9333ea; font-size:13px;">${escapeHtml(friendlyError(err))}</div>`;
+            }
+        }
+
+        function setAdminTab(tab) {
+            adminTab = tab;
+            ['pending', 'resolved', 'dismissed'].forEach(t => document.getElementById('admintab-' + t).classList.toggle('active', t === tab));
+            loadAdminReports();
+        }
+
+        async function loadAdminReports() {
+            const box = document.getElementById('admin-reports-container');
+            box.innerHTML = `<div style="text-align:center; color:#a855f7; font-size:13px; padding:20px;">불러오는 중...</div>`;
+            try {
+                const { data, error } = await sb.rpc('admin_list_reports', { p_status: adminTab });
+                if (error) throw error;
+                adminReports = data || [];
+                renderAdminReports();
+            } catch (err) {
+                box.innerHTML = `<div style="text-align:center; color:#9333ea; font-size:13px; padding:20px;">${escapeHtml(friendlyError(err))}</div>`;
+            }
+        }
+
+        function renderAdminReports() {
+            const box = document.getElementById('admin-reports-container');
+            box.innerHTML = '';
+            if (adminReports.length === 0) {
+                box.innerHTML = `<div style="text-align:center; color:#a855f7; font-size:13px; padding:20px;">해당하는 신고가 없어요.</div>`;
+                return;
+            }
+            adminReports.forEach(r => {
+                const card = document.createElement('div');
+                card.className = 'report-card';
+                const suspendedMark = r.target_suspended ? `<span class="suspended-badge">정지됨</span>` : '';
+                card.innerHTML = `
+                    <div style="font-weight:700; color:#6b21a8; font-size:13.5px;">신고 대상: <span style="cursor:pointer; text-decoration:underline;" onclick="openPortfolio('${r.target_user_id}')">${escapeHtml(r.target_name)}</span>${suspendedMark}</div>
+                    <div style="font-size:12.5px; color:#4a5568; margin-top:4px;">${escapeHtml(r.reason)}</div>
+                    <div class="report-meta">신고자: ${escapeHtml(r.reporter_name)} · ${escapeHtml(formatTime(r.created_at))}</div>
+                    <div class="report-actions"></div>
+                `;
+                const actions = card.querySelector('.report-actions');
+                if (r.status === 'pending') {
+                    const suspendBtn = document.createElement('button');
+                    suspendBtn.type = 'button'; suspendBtn.className = 'pill-btn danger';
+                    suspendBtn.innerText = r.target_suspended ? '정지 해제' : '포트폴리오 정지';
+                    suspendBtn.onclick = () => adminToggleSuspend(r.target_user_id, !r.target_suspended);
+                    const resolveBtn = document.createElement('button');
+                    resolveBtn.type = 'button'; resolveBtn.className = 'pill-btn on'; resolveBtn.innerText = '처리 완료';
+                    resolveBtn.onclick = () => adminResolveReport(r.id, 'resolved');
+                    const dismissBtn = document.createElement('button');
+                    dismissBtn.type = 'button'; dismissBtn.className = 'pill-btn'; dismissBtn.innerText = '반려';
+                    dismissBtn.onclick = () => adminResolveReport(r.id, 'dismissed');
+                    actions.appendChild(suspendBtn); actions.appendChild(resolveBtn); actions.appendChild(dismissBtn);
+                }
+                box.appendChild(card);
+            });
+        }
+
+        async function adminResolveReport(id, status) {
+            try {
+                const { error } = await sb.rpc('admin_resolve_report', { p_id: id, p_status: status });
+                if (error) throw error;
+                showToast(status === 'resolved' ? '처리 완료로 표시했어요.' : '반려했어요.');
+                loadAdminReports();
+                loadAdminStats();
+            } catch (err) {
+                showModal(friendlyError(err));
+            }
+        }
+
+        async function adminToggleSuspend(uid, suspend) {
+            try {
+                const { error } = await sb.rpc('admin_set_suspended', { p_user_id: uid, p_suspended: suspend });
+                if (error) throw error;
+                showToast(suspend ? '포트폴리오를 정지했어요.' : '정지를 해제했어요.');
+                loadAdminReports();
+                loadAdminStats();
+            } catch (err) {
+                showModal(friendlyError(err));
+            }
+        }
+
         // ====== 시작 ======
         window.onload = async function() {
             const card = document.getElementById('main-card');
@@ -2123,6 +2737,12 @@
             renderSkillLevelInputs('', {});
             applyInputLimits();
             cleanupLegacyStorage();
+            checkSharedLink();
+            document.addEventListener('click', (e) => {
+                if (!notifPanelOpen) return;
+                const wrapper = document.querySelector('.notif-wrapper');
+                if (wrapper && !wrapper.contains(e.target)) closeNotifPanel();
+            });
 
             const savedEmail = localStorage.getItem('mulmandu_saved_email');
             if (savedEmail) {
