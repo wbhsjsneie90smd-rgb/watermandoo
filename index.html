@@ -278,6 +278,10 @@
         .report-card .report-actions button { padding: 5px 12px; font-size: 12px; }
         .suspended-badge { display: inline-block; background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; padding: 2px 8px; border-radius: 8px; font-size: 11px; font-weight: 700; margin-left: 6px; }
         #suspended-notice { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; border-radius: 12px; padding: 10px 14px; font-size: 13px; margin-bottom: 14px; }
+        .realtime-status-bar { font-size: 12px; font-weight: 600; padding: 8px 12px; border-radius: 10px; margin-bottom: 14px; text-align: center; background: #faf5ff; color: #7e22ce; border: 1px solid #f3e8ff; }
+        .realtime-status-bar[data-state="connected"] { background: #f0fdf4; color: #15803d; border-color: #bbf7d0; }
+        .realtime-status-bar[data-state="error"] { background: #fef2f2; color: #b91c1c; border-color: #fecaca; }
+        .realtime-status-bar[data-state="connecting"] { background: #fffbeb; color: #b45309; border-color: #fde68a; }
     </style>
 </head>
 <body>
@@ -634,6 +638,7 @@
                 <h2 style="font-size: 20px; color: #6b21a8;">🛡️ 관리자</h2>
                 <button type="button" class="btn btn-secondary" onclick="goHome()" style="width: auto; padding: 8px 14px;">🏠 홈으로</button>
             </div>
+            <div id="realtime-status" class="realtime-status-bar" data-state="off"></div>
             <div id="admin-stats" class="admin-stat-grid"></div>
             <div class="tab-row">
                 <button type="button" id="admintab-pending" class="tab-btn active" onclick="setAdminTab('pending')">대기중</button>
@@ -732,6 +737,7 @@
         let adminTab = 'pending';
         let adminReports = [];
         let realtimeChannels = [];
+        let realtimeStatus = { notif: 'off', msg: 'off' };   // off / connecting / connected / error
         let pendingSharedUid = null;
 
         function initBubbles() {
@@ -2297,17 +2303,36 @@
             if (fr.error) throw fr.error;
             if (chat !== target) return;   // 그 사이 다른 대화로 이동함
 
+            const prevConvId = target.conv ? target.conv.id : null;
             target.conv = cv.data || null;
             target.isFriend = (fr.data || []).some(r => r.status === 'accepted');
-            if (target.conv) {
-                const { data, error } = await sb.from('messages').select('id, sender_id, body, created_at, read_at')
-                    .eq('conversation_id', target.conv.id).order('id', { ascending: true });
-                if (error) throw error;
-                if (chat !== target) return;
-                target.messages = data || [];
-                if (target.messages.some(m => m.sender_id !== me && !m.read_at)) markChatRead(target.conv.id);
-            } else {
+
+            if (!target.conv) {
                 target.messages = [];
+                renderChat();
+                return;
+            }
+
+            // 대화방이 바뀌었을 때만 전체를 불러오고, 그 외(폴링)에는
+            // 마지막으로 받은 메시지 이후(id 기준)만 가져와서 이어붙여요.
+            const isFreshConv = target.conv.id !== prevConvId;
+            const lastId = (!isFreshConv && target.messages.length > 0) ? target.messages[target.messages.length - 1].id : 0;
+
+            let q = sb.from('messages').select('id, sender_id, body, created_at, read_at')
+                .eq('conversation_id', target.conv.id).order('id', { ascending: true });
+            if (lastId > 0) q = q.gt('id', lastId);
+            const { data, error } = await q;
+            if (error) throw error;
+            if (chat !== target) return;
+
+            const rows = data || [];
+            target.messages = lastId > 0 ? target.messages.concat(rows) : rows;
+
+            const unread = target.messages.filter(m => m.sender_id !== me && !m.read_at);
+            if (unread.length > 0) {
+                const now = new Date().toISOString();
+                unread.forEach(m => { m.read_at = now; });   // 낙관적으로 먼저 반영해서 매 폴링마다 다시 호출되지 않게 함
+                markChatRead(target.conv.id);
             }
             renderChat();
         }
@@ -2604,6 +2629,37 @@
         }
 
         // ====== 실시간(Realtime) ======
+        // 연결 성공/실패 여부를 콘솔(F12 개발자도구)과 관리자 화면에서 바로 확인할 수 있도록
+        // .subscribe()의 상태 콜백을 읽어서 realtimeStatus에 기록해요.
+        function setRealtimeStatus(key, supabaseStatus, err) {
+            const mapped = supabaseStatus === 'SUBSCRIBED' ? 'connected'
+                : (supabaseStatus === 'CHANNEL_ERROR' || supabaseStatus === 'TIMED_OUT') ? 'error'
+                : supabaseStatus === 'CLOSED' ? 'off' : 'connecting';
+            realtimeStatus[key] = mapped;
+            const label = { notif: '알림', msg: '메시지' }[key] || key;
+            if (mapped === 'connected') {
+                console.log(`[Realtime] ${label} 채널 연결됨 (SUBSCRIBED) — 실시간 업데이트가 즉시 반영돼요.`);
+            } else if (mapped === 'error') {
+                console.warn(`[Realtime] ${label} 채널 연결 실패 (${supabaseStatus}). 자동 새로고침(폴링)으로 대체 동작해요.`, err || '');
+            } else {
+                console.log(`[Realtime] ${label} 채널 상태: ${supabaseStatus}`);
+            }
+            updateRealtimeStatusUI();
+        }
+
+        function updateRealtimeStatusUI() {
+            const el = document.getElementById('realtime-status');
+            if (!el) return;
+            const vals = Object.values(realtimeStatus);
+            let state, text;
+            if (vals.every(v => v === 'connected')) { state = 'connected'; text = '🟢 실시간 연결됨 (Realtime)'; }
+            else if (vals.some(v => v === 'error')) { state = 'error'; text = '🔴 실시간 연결 끊김 — 자동 새로고침(폴링)으로 동작 중'; }
+            else if (vals.some(v => v === 'connecting')) { state = 'connecting'; text = '🟡 실시간 연결 시도 중...'; }
+            else { state = 'off'; text = '⚪ 실시간 미사용 — 자동 새로고침(폴링)으로 동작 중'; }
+            el.textContent = text;
+            el.dataset.state = state;
+        }
+
         function subscribeRealtime() {
             unsubscribeRealtime();
             if (!sb || !sb.channel || !currentUser) return;
@@ -2611,23 +2667,30 @@
                 const ch1 = sb.channel('notif-' + currentUser.id)
                     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'notifications', filter: `user_id=eq.${currentUser.id}` },
                         () => { loadNotifications(); })
-                    .subscribe();
+                    .subscribe((status, err) => setRealtimeStatus('notif', status, err));
                 const ch2 = sb.channel('msg-' + currentUser.id)
                     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' },
                         () => { refreshBadges(); if (chat) loadChatState().catch(() => {}); })
-                    .subscribe();
+                    .subscribe((status, err) => setRealtimeStatus('msg', status, err));
                 realtimeChannels = [ch1, ch2];
-            } catch (_) { /* Realtime 미사용 환경이면 폴링으로 자연히 대체됨 */ }
+            } catch (err) {
+                console.warn('[Realtime] 연결을 시도할 수 없어요. 자동 새로고침(폴링)으로 대체 동작해요.', err);
+                realtimeStatus = { notif: 'error', msg: 'error' };
+                updateRealtimeStatusUI();
+            }
         }
         function unsubscribeRealtime() {
             try { realtimeChannels.forEach(ch => sb && sb.removeChannel && sb.removeChannel(ch)); } catch (_) { /* 무시 */ }
             realtimeChannels = [];
+            realtimeStatus = { notif: 'off', msg: 'off' };
+            updateRealtimeStatusUI();
         }
 
         // ====== 관리자 ======
         function openAdminPanel() {
             if (!isAdminUser()) return;
             switchView('admin');
+            updateRealtimeStatusUI();
             loadAdminStats();
             setAdminTab('pending');
         }
