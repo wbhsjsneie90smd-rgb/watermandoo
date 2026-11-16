@@ -12,7 +12,7 @@ stable
 security definer
 set search_path = public
 as $$
-  select coalesce(auth.jwt() ->> 'email', '') = 'wbhsjsneie90smd@gmail.com';
+  select coalesce(auth.jwt() ->> 'email', '') = 'YOUR_ADMIN_EMAIL@example.com';
 $$;
 revoke all on function public.is_admin() from public, anon;
 grant execute on function public.is_admin() to authenticated;
